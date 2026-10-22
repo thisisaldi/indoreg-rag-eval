@@ -73,7 +73,7 @@ Format: one entry per decision. Status is Accepted, Proposed, or Superseded. Add
   4. Coverage gate per document: N, missing numbers, duplicates, unresolved candidates.
 - Unresolved markers stay unresolved and are never guessed.
 - Methods are labeled confusion, catchword_swap (the swap rule; called reversed_swap in the spike report), tiebreak_later and gap_fill, and logged per document. Counts from scratch/segmentation_v2_report.md: PP 71/2019 confusion 12, catchword_swap 1, tiebreak_later 2, gap_fill 0; UU 27/2022 confusion 5, tiebreak_later 1, gap_fill 0; Permen Kominfo 20/2016 and UU 11/2008 no entries.
-- Consequences: The rules were developed on the same 4 files, so the coverage numbers are in-sample. Out-of-sample coverage must be measured on documents added later. text_quality (native or ocr) is recorded per document in the manifest; design.md 3.1 and FR-ING-2 do not list that field yet, so add it when T-03 builds the manifest. Segmentation correctness is not verified against page images (see ADR-009).
+- Consequences: The rules were developed on the same 4 files, so the coverage numbers are in-sample. Out-of-sample coverage must be measured on documents added later. text_quality (native or image_text_layer; "image_text_layer" because OCR origin is not confirmed, see ADR-009) is recorded per document in data/manifest.json; design.md 3.1 and FR-ING-2 do not list that field yet. Segmentation correctness is not verified against page images (see ADR-009).
 
 ## ADR-011: Pasal.id API as metadata source only
 - Status: Accepted (22 Oct 2026)
@@ -86,6 +86,12 @@ Format: one entry per decision. Status is Accepted, Proposed, or Superseded. Add
 - Context: UU 11/2008, PP 71/2019 and UU 27/2022 contain a Penjelasan section after the body that repeats article numbers (mostly "Cukup jelas."). Its heading is on page 26, 58 and 35 respectively; Permen Kominfo 20/2016 has none (source: scratch/extraction_report.md).
 - Decision: Index and label body articles only. The body ends at the Penjelasan boundary found by OCR-tolerant signals (heading garbled up to a few characters, "PASAL DEMI PASAL", numbering restart).
 - Consequences: Explanatory text is not searchable and queries answered only by a Penjelasan cannot be satisfied. State this in the README limitations. Revisit if error analysis shows many such misses.
+
+## ADR-013: Four-document corpus for v0.1
+- Status: Accepted (22 Oct 2026)
+- Context: T-03 asks for 10 to 15 regulations and the requirements assume at least 10 text-extractable ones. Four are in hand (ADR-009); together they hold 273 body articles by the segmentation spike (76 + 104 + 39 + 54, source: scratch/segmentation_v2_report.md, not verified against page images).
+- Decision: Build v0.1 on these 4 documents. Add more only if labeling (T-09 to T-11) or error analysis (T-21) shows a coverage gap, and measure segmentation coverage on any added document separately (ADR-010).
+- Consequences: T-03's "10 to 15" sub-task stays open by decision, not by omission. Results describe a 4-document corpus; the README and case study must say so. The requirements assumption "at least 10 text-extractable regulations" is not met.
 
 ---
 
