@@ -40,6 +40,7 @@ class _Strict(BaseModel):
 class PathsConfig(_Strict):
     raw: Path
     manifest: Path
+    dataset: Path
     processed: Path
     chunks: Path
     cache: Path
@@ -86,6 +87,20 @@ class SearchConfig(_Strict):
         return self
 
 
+class EvalConfig(_Strict):
+    retrievers: list[str] = Field(min_length=1)
+    splits: list[Literal["dev", "test"]] = Field(min_length=1)
+    recall_ks: list[PositiveInt] = Field(min_length=1)
+    ndcg_k: PositiveInt
+    depth: PositiveInt  # chunks retrieved per query before mapping to articles
+
+    @model_validator(mode="after")
+    def _depth_covers_k(self) -> "EvalConfig":
+        if self.depth < max(*self.recall_ks, self.ndcg_k):
+            raise ValueError("depth must be at least the largest k")
+        return self
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_prefix="INDOREG_", env_nested_delimiter="__", extra="forbid", frozen=True
@@ -96,6 +111,7 @@ class Settings(BaseSettings):
     logging: LoggingConfig
     retrieval: RetrievalConfig
     search: SearchConfig
+    eval: EvalConfig
 
     @classmethod
     def settings_customise_sources(
