@@ -45,7 +45,7 @@ make search Q="transfer data pribadi ke luar negeri"
 
 `make ingest` turns each PDF into cleaned text and article spans under `data/processed/` and one chunk per article in `data/chunks/article.jsonl` (both gitignored, as they contain regulation text). `make search` ranks articles with BM25 and prints the article, document, status and source link. The search is a demo of the pipeline, not a benchmarked result.
 
-Without `make` (for example on Windows), run the command after each `#`. `pip install -e .` also works in any Python 3.11+ environment. `make eval` and `make serve` arrive with T-14 and T-24.
+Without `make` (for example on Windows), run the command after each `#`. `pip install -e .` also works in any Python 3.11+ environment. `make eval` (`uv run python -m indoreg.eval.runner`) scores the configured retrievers on `eval/dataset.jsonl` and writes JSON and markdown results to `reports/results/`. `make serve` arrives with T-24.
 
 Configuration lives in `configs/default.yaml`; any key can be overridden with an `INDOREG_` environment variable, nested keys joined by `__` (for example `INDOREG_CHUNKING__FIXED__SIZE_CHARS=800`).
 

@@ -1,4 +1,4 @@
-.PHONY: install lint typecheck test ingest search eval serve
+.PHONY: install lint typecheck test ingest search eval eval-drafts serve
 
 install:
 	uv sync
@@ -21,7 +21,11 @@ search:
 	uv run python -m indoreg.search "$(Q)"
 
 eval:
-	@echo "not yet: eval runner arrives in T-14"; exit 1
+	uv run python -m indoreg.eval.runner
+
+# Unverified LLM drafts (ADR-014); results are marked UNVERIFIED and gitignored.
+eval-drafts:
+	uv run python -m indoreg.eval.runner --dataset eval/drafts/dataset_draft.jsonl --allow-drafts
 
 serve:
 	@echo "not yet: API arrives in T-24"; exit 1
