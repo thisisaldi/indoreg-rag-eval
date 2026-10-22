@@ -1,4 +1,4 @@
-.PHONY: install lint typecheck test ingest eval serve
+.PHONY: install lint typecheck test ingest search eval serve
 
 install:
 	uv sync
@@ -14,7 +14,11 @@ test:
 	uv run pytest
 
 ingest:
-	@echo "not yet: ingestion arrives in T-06/T-07"; exit 1
+	uv run python -m indoreg.ingest.pipeline
+
+# Usage: make search Q="transfer data pribadi ke luar negeri"
+search:
+	uv run python -m indoreg.search "$(Q)"
 
 eval:
 	@echo "not yet: eval runner arrives in T-14"; exit 1
