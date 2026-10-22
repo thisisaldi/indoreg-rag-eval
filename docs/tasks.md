@@ -84,8 +84,9 @@ Links: FR-CHK-1 to FR-CHK-3
 
 ### [ ] T-08 CI skeleton (Day 3, 0.5h)
 Links: BR7, NFR5, NFR6
-- [ ] GitHub Actions: install, ruff, type check, pytest
-- [ ] Cache pip
+- [x] GitHub Actions: install, ruff, type check, pytest (`.github/workflows/ci.yml`)
+- [x] Cache pip (uv cache via setup-uv, since the project uses uv)
+- Not yet verified: CI has not run on GitHub; tick T-08 after the first green run on main.
 - Acceptance: CI green on main, badge in README
 
 ---

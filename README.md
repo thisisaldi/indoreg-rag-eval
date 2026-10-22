@@ -1,5 +1,7 @@
 # IndoReg-RAG Eval
 
+[![CI](https://github.com/thisisaldi/indoreg-rag-eval/actions/workflows/ci.yml/badge.svg)](https://github.com/thisisaldi/indoreg-rag-eval/actions/workflows/ci.yml)
+
 An evaluation-first retrieval benchmark over Indonesian regulations. It compares BM25, dense, and hybrid retrieval on a manually labeled query set and serves the best configuration through a cited search API.
 
 Status: in development (target 4 Nov 2026).
