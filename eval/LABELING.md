@@ -1,6 +1,6 @@
 # Labeling guideline (v1)
 
-Status: DRAFT by Claude for Aldi's review (T-09). Approve or edit before labeling starts (T-10). The labels themselves are written and verified by Aldi only.
+Status: approved by Aldi on 22 Oct 2026 (T-09), before labeling started. Drafted by Claude. The labels themselves are written and verified by Aldi only.
 
 ## 1. Purpose
 
