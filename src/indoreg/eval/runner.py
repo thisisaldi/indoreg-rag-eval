@@ -29,6 +29,7 @@ from indoreg.schemas import Chunk
 from indoreg.search import load_chunks
 
 log = get_logger(__name__)
+NOT_VERIFIED = "not human-verified"  # source_note marker (ADR-015)
 
 
 def chunk_unit(chunk: Chunk) -> str | None:
@@ -124,6 +125,12 @@ def markdown(result: dict[str, Any]) -> str:
             "> not been verified yet (ADR-014). Do not cite them.",
             "",
         ]
+    elif not result["dataset"]["labels_human_verified"]:
+        lines += [
+            "> Labels were drafted and checked by an LLM,"
+            " not human-verified (ADR-015).",
+            "",
+        ]
     ds, git = result["dataset"], result["git"]
     dirty = " (dirty)" if git["dirty"] else ""
     lines += [
@@ -149,6 +156,7 @@ def run(settings: Settings, dataset_path: Path, allow_drafts: bool) -> dict[str,
     cfg = settings.eval
     queries = load_dataset(dataset_path, allow_drafts)
     drafts = any(q.draft_status is not None for q in queries)
+    human_verified = not any(NOT_VERIFIED in q.source_note for q in queries)
     chunks = load_chunks(settings)
     metric_keys = [*[f"recall@{k}" for k in cfg.recall_ks], "rr", f"ndcg@{cfg.ndcg_k}"]
     results: dict[str, dict[str, Any]] = {}
@@ -180,6 +188,7 @@ def run(settings: Settings, dataset_path: Path, allow_drafts: bool) -> dict[str,
             "sha256": hashlib.sha256(dataset_path.read_bytes()).hexdigest(),
             "queries": len(queries),
             "unverified_drafts": drafts,
+            "labels_human_verified": human_verified,
         },
         "chunks": len(chunks),
         "metric_keys": metric_keys,
