@@ -12,7 +12,9 @@ import yaml  # type: ignore[import-untyped]  # stubs (types-PyYAML) not a depend
 from pydantic import (
     BaseModel,
     ConfigDict,
+    Field,
     NonNegativeInt,
+    PositiveFloat,
     PositiveInt,
     ValidationError,
     model_validator,
@@ -64,6 +66,26 @@ class LoggingConfig(_Strict):
     log_query_text: bool
 
 
+class BM25Config(_Strict):
+    k1: PositiveFloat
+    b: float = Field(ge=0, le=1)
+
+
+class RetrievalConfig(_Strict):
+    bm25: BM25Config
+
+
+class SearchConfig(_Strict):
+    default_top_k: PositiveInt
+    max_top_k: PositiveInt
+
+    @model_validator(mode="after")
+    def _default_within_max(self) -> "SearchConfig":
+        if self.default_top_k > self.max_top_k:
+            raise ValueError("default_top_k must not exceed max_top_k")
+        return self
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_prefix="INDOREG_", env_nested_delimiter="__", extra="forbid", frozen=True
@@ -72,6 +94,8 @@ class Settings(BaseSettings):
     paths: PathsConfig
     chunking: ChunkingConfig
     logging: LoggingConfig
+    retrieval: RetrievalConfig
+    search: SearchConfig
 
     @classmethod
     def settings_customise_sources(
