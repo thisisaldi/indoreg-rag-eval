@@ -58,12 +58,12 @@ Links: FR-ING-1, FR-ING-3
 - Acceptance: chosen extractor recovers Pasal boundaries on both test documents
 - Output: decision note
 
-### [ ] T-05 Project scaffold (Day 3, 0.5h)
+### [x] T-05 Project scaffold (Day 3, 0.5h)
 Links: NFR1, NFR2, NFR3, NFR4
-- [ ] `pyproject.toml` with pinned deps and lockfile
-- [ ] Config module (pydantic settings, YAML plus env), no hardcoded paths
-- [ ] Logging module (JSON logs)
-- [ ] mypy or pyright config, pytest config
+- [x] `pyproject.toml` with pinned deps and lockfile (`uv.lock`, Python 3.12 pinned)
+- [x] Config module (pydantic settings, YAML plus env), no hardcoded paths
+- [x] Logging module (JSON logs)
+- [x] mypy or pyright config, pytest config (mypy strict on `src/`)
 - Acceptance: `pip install -e .` works in a clean env, `pytest` runs (even if empty)
 
 ### [ ] T-06 Ingestion pipeline (Day 3, 1h)
@@ -84,8 +84,9 @@ Links: FR-CHK-1 to FR-CHK-3
 
 ### [ ] T-08 CI skeleton (Day 3, 0.5h)
 Links: BR7, NFR5, NFR6
-- [ ] GitHub Actions: install, ruff, type check, pytest
-- [ ] Cache pip
+- [x] GitHub Actions: install, ruff, type check, pytest (`.github/workflows/ci.yml`)
+- [x] Cache pip (uv cache via setup-uv, since the project uses uv)
+- Not yet verified: CI has not run on GitHub; tick T-08 after the first green run on main.
 - Acceptance: CI green on main, badge in README
 
 ---
@@ -269,3 +270,4 @@ Links: BR5, BR8
 | Date | Done | Blockers | Next |
 |---|---|---|---|
 | 22 Oct 2026 | T-01 probes: pdfplumber extraction and OCR-tolerant segmentation spike on 4 PDFs, Pasal.id API probe. ADR-005, ADR-009 to ADR-012 recorded. Spec conflict on label granularity fixed (FR-EVAL-1, T-09, T-10). T-02 partly done: .gitignore, pre-commit config, README. | PyMuPDF blocked by application control (no extractor comparison). Page-image check pending (Aldi). License choice and public repo pending (Aldi). | Aldi's page-image check, then tick T-01. T-03 source manifest. |
+| 22 Oct 2026 | T-03 partly: data/manifest.json for 4 documents (hashes, titles, text_quality), scripts/check_manifest.py, ADR-013. T-05 done: uv project on Python 3.12, config (YAML + INDOREG_ env) and JSON logging modules, 13 tests, mypy strict and ruff clean, `pip install -e .` verified in a clean venv. | T-03: 13 manifest fields need source URLs, status and retrieval dates from Aldi. | T-06 ingestion pipeline after T-03 fields are filled. |

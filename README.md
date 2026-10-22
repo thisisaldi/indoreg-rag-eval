@@ -1,5 +1,7 @@
 # IndoReg-RAG Eval
 
+[![CI](https://github.com/thisisaldi/indoreg-rag-eval/actions/workflows/ci.yml/badge.svg)](https://github.com/thisisaldi/indoreg-rag-eval/actions/workflows/ci.yml)
+
 An evaluation-first retrieval benchmark over Indonesian regulations. It compares BM25, dense, and hybrid retrieval on a manually labeled query set and serves the best configuration through a cited search API.
 
 Status: in development (target 4 Nov 2026).
@@ -24,14 +26,18 @@ To be filled from files in `reports/results/` after the benchmark runs. No numbe
 
 ## Quickstart
 
-To be completed after T-05 and T-14.
+Requires [uv](https://docs.astral.sh/uv/). Python 3.12 is pinned in `.python-version`; uv installs it if missing.
 
 ```
-make install
-make ingest
-make eval
-make serve
+make install     # uv sync
+make lint        # uv run ruff check . && uv run ruff format --check .
+make typecheck   # uv run mypy
+make test        # uv run pytest
 ```
+
+Without `make` (for example on Windows), run the command after each `#`. `pip install -e .` also works in any Python 3.11+ environment. `make ingest`, `make eval` and `make serve` arrive with T-06, T-14 and T-24.
+
+Configuration lives in `configs/default.yaml`; any key can be overridden with an `INDOREG_` environment variable, nested keys joined by `__` (for example `INDOREG_CHUNKING__FIXED__SIZE_CHARS=800`).
 
 ## Repository layout
 
