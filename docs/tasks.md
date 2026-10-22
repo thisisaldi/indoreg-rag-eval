@@ -93,13 +93,13 @@ Links: BR7, NFR5, NFR6
 
 ## M2 Dataset (Day 4 to 5)
 
-### [ ] T-09 Labeling guideline (Day 4, 0.5h)
+### [x] T-09 Labeling guideline (Day 4, 0.5h)
 Links: FR-EVAL-1, FR-EVAL-2
-- [ ] Define relevance: which article counts as relevant, how to handle multi-article answers and graded relevance
-- [ ] Define the four query types with 2 examples each
-- [ ] Rule: at most 1 in 4 queries may be a near copy of passage text
+- [x] Define relevance: which article counts as relevant, how to handle multi-article answers and graded relevance
+- [x] Define the four query types with 2 examples each
+- [x] Rule: at most 1 in 4 queries may be a near copy of passage text
 - Acceptance: guideline in `eval/LABELING.md`, written before labeling starts
-- Status: draft written (relevance and grades, bias rules, four types with 2 examples each, near-copy rule, record format); tick after Aldi's review.
+- Status: approved by Aldi on 22 Oct 2026, before any labeling.
 
 ### [ ] T-10 Label queries 1 to 20 (Day 4, 2.5h)
 Links: FR-EVAL-1, FR-EVAL-2
