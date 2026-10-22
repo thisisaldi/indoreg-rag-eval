@@ -106,7 +106,7 @@ Links: FR-EVAL-1, FR-EVAL-2
 - [ ] Write realistic Indonesian queries from the persona's point of view
 - [ ] Label relevant articles (doc ID, article, grade), with the source passage reference
 - [ ] Include type tag per query
-- Acceptance: 20 queries in JSONL, each verified against the source text by you (not LLM-generated labels)
+- Acceptance: 20 queries in JSONL, each label verified against the source PDF by Aldi (LLM-drafted candidates allowed, ADR-014)
 
 ### [ ] T-11 Label to 40 and freeze split (Day 5, 1h)
 Links: FR-EVAL-1 to FR-EVAL-3
