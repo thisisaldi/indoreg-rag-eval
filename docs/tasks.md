@@ -133,13 +133,13 @@ Links: FR-RET-1, FR-RET-6, BR3
 - [ ] Indonesian-aware variant (stopwords, light stemming) if time permits
 - Acceptance: BM25 runs on both chunk strategies with identical query set
 
-### [ ] T-14 Eval runner CLI (Day 6, 0.5h)
+### [x] T-14 Eval runner CLI (Day 6, 0.5h)
 Links: FR-EVAL-6 to FR-EVAL-8, BR5
 - [x] One command runs configured retrievers on dev and test splits (`make eval`)
 - [x] Writes JSON results with config, git SHA, timestamp, latency per query
 - [x] Writes a markdown comparison table
 - Acceptance: one command reproduces baseline numbers, output JSON is stable across reruns
-- Status: runner done; metrics identical across reruns (tested). Tick T-14 once `eval/dataset.jsonl` holds verified labels and the first baseline result is committed. `make eval-drafts` runs on the unverified drafts (results marked UNVERIFIED, gitignored).
+- Status: done. First baseline on dataset-v1: `reports/results/20261022T105714Z-05b2e36.json` (clean commit; same metrics as an earlier run, only latency differs). Labels are LLM-checked, not human-verified (ADR-015); the table says so. `make eval-drafts` still runs on the drafts (marked UNVERIFIED, gitignored).
 - Finding from the draft run (not a result): chunk text carries no document title, so queries naming the law ("UU 27 Tahun 2022") cannot match it. Candidate experiment: index the title with the article text, measured on dev only.
 
 ### [ ] T-15 CI deterministic eval (Day 6, 0.25h)
