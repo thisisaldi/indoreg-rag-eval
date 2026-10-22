@@ -35,7 +35,17 @@ make typecheck   # uv run mypy
 make test        # uv run pytest
 ```
 
-Without `make` (for example on Windows), run the command after each `#`. `pip install -e .` also works in any Python 3.11+ environment. `make ingest`, `make eval` and `make serve` arrive with T-06, T-14 and T-24.
+Try it (needs the source PDFs in `data/raw/`, see `data/manifest.json`; they are not in the repo):
+
+```
+make ingest                                  # uv run python -m indoreg.ingest.pipeline
+make search Q="transfer data pribadi ke luar negeri"
+                                             # uv run python -m indoreg.search "..."
+```
+
+`make ingest` turns each PDF into cleaned text and article spans under `data/processed/` and one chunk per article in `data/chunks/article.jsonl` (both gitignored, as they contain regulation text). `make search` ranks articles with BM25 and prints the article, document, status and source link. The search is a demo of the pipeline, not a benchmarked result.
+
+Without `make` (for example on Windows), run the command after each `#`. `pip install -e .` also works in any Python 3.11+ environment. `make eval` and `make serve` arrive with T-14 and T-24.
 
 Configuration lives in `configs/default.yaml`; any key can be overridden with an `INDOREG_` environment variable, nested keys joined by `__` (for example `INDOREG_CHUNKING__FIXED__SIZE_CHARS=800`).
 

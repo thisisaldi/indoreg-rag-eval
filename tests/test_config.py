@@ -10,6 +10,8 @@ VALID = """
 paths: {raw: r, manifest: m.json, processed: p, chunks: c, cache: k, results: o}
 chunking: {fixed: {size_chars: 100, overlap_chars: 10}}
 logging: {level: INFO, log_query_text: false}
+retrieval: {bm25: {k1: 1.5, b: 0.75}}
+search: {default_top_k: 5, max_top_k: 20}
 """
 
 
