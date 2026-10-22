@@ -66,19 +66,19 @@ Links: NFR1, NFR2, NFR3, NFR4
 - [x] mypy or pyright config, pytest config (mypy strict on `src/`)
 - Acceptance: `pip install -e .` works in a clean env, `pytest` runs (even if empty)
 
-### [ ] T-06 Ingestion pipeline (Day 3, 1h)
+### [x] T-06 Ingestion pipeline (Day 3, 1h)
 Links: FR-ING-1 to FR-ING-4
-- [ ] Read manifest, extract text per page, normalize whitespace and header and footer noise
-- [ ] Log extraction failures with document ID and page, continue on error
-- [ ] Write processed text to `data/processed/` deterministically
-- [ ] Tests on a small fixture PDF or text sample
+- [x] Read manifest, extract text per page, normalize whitespace and header and footer noise
+- [x] Log extraction failures with document ID and page, continue on error
+- [x] Write processed text to `data/processed/` deterministically (byte-identical on rerun; also writes `<doc_id>.articles.json` spans, ADR-010)
+- [x] Tests on a small fixture PDF or text sample (synthetic OCR-like page text)
 - Acceptance: two runs produce identical output hashes, failures appear in the log not as crashes
 
 ### [ ] T-07 Chunkers (Day 3, 1h)
 Links: FR-CHK-1 to FR-CHK-3
-- [ ] Article-based chunker on Pasal markers, keep chapter (BAB) context
+- [ ] Article-based chunker on Pasal markers, keep chapter (BAB) context (chunker done; BAB context not yet, `chapter` is null)
 - [ ] Fixed-size overlapping chunker, size and overlap from config
-- [ ] Chunk schema: document ID, chunk ID, article number, offsets, source URL, text
+- [x] Chunk schema: document ID, chunk ID, article number, offsets, source URL, text
 - [ ] Tests for edge cases: missing markers, very long articles, ayat sub-items
 - Acceptance: every chunk links back to its document and offsets reconstruct the source text span
 
@@ -126,8 +126,8 @@ Links: FR-EVAL-4
 
 ### [ ] T-13 BM25 baseline (Day 6, 0.75h)
 Links: FR-RET-1, FR-RET-6, BR3
-- [ ] Shared `Retriever` interface (typed)
-- [ ] BM25 with basic tokenizer
+- [x] Shared `Retriever` interface (typed)
+- [x] BM25 with basic tokenizer (stdlib, no library; ADR-007 still open)
 - [ ] Indonesian-aware variant (stopwords, light stemming) if time permits
 - Acceptance: BM25 runs on both chunk strategies with identical query set
 
@@ -271,3 +271,4 @@ Links: BR5, BR8
 |---|---|---|---|
 | 22 Oct 2026 | T-01 probes: pdfplumber extraction and OCR-tolerant segmentation spike on 4 PDFs, Pasal.id API probe. ADR-005, ADR-009 to ADR-012 recorded. Spec conflict on label granularity fixed (FR-EVAL-1, T-09, T-10). T-02 partly done: .gitignore, pre-commit config, README. | PyMuPDF blocked by application control (no extractor comparison). Page-image check pending (Aldi). License choice and public repo pending (Aldi). | Aldi's page-image check, then tick T-01. T-03 source manifest. |
 | 22 Oct 2026 | T-03 partly: data/manifest.json for 4 documents (hashes, titles, text_quality), scripts/check_manifest.py, ADR-013. T-05 done: uv project on Python 3.12, config (YAML + INDOREG_ env) and JSON logging modules, 13 tests, mypy strict and ruff clean, `pip install -e .` verified in a clean venv. | T-03: 13 manifest fields need source URLs, status and retrieval dates from Aldi. | T-06 ingestion pipeline after T-03 fields are filled. |
+| 22 Oct 2026 | T-08 workflow written (not yet run on GitHub). T-06 done: pdfplumber extraction, noise filter and OCR-tolerant segmentation ported from the spike, 273 articles from 4 documents with offsets identical to the spike, deterministic outputs. T-07 article chunker and T-13 basic BM25 done; `make search` CLI for a first end-to-end demo. | T-01 page-image check and T-03 manifest fields still open; 3 documents show "not yet recorded" for status and source. | T-07 fixed-size chunker and BAB context; labeling (T-09 to T-11). |
