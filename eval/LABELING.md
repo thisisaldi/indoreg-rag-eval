@@ -1,6 +1,6 @@
 # Labeling guideline (v1)
 
-Status: approved by Aldi on 22 Oct 2026 (T-09), before labeling started. Drafted by Claude. Labels are verified by Aldi; LLM-drafted candidates are allowed under ADR-014 (amended 22 Oct 2026, rule 4.5).
+Status: approved by Aldi on 22 Oct 2026 (T-09), before labeling started. Drafted by Claude. Labels for dataset-v1 were drafted and checked by Claude, not human-verified (ADR-014, ADR-015; rule 4.5).
 
 ## 1. Purpose
 
@@ -34,7 +34,7 @@ Rules:
 2. Find the answer by reading the regulation itself: the BAB and Bagian headings, then the articles, in the PDF. **Do not use `make search` or any retriever in this repo to find labels**: labels found that way favour that retriever and inflate its score.
 3. Verify every label against the official PDF page, not the extracted text (the two image-based documents contain OCR errors). Record the PDF page in `source_note`.
 4. Optional, after labeling a query: run `make search` to look for articles you missed. Any article added this way must be marked `found_via_search` in `source_note`, so the bias can be counted later.
-5. LLM drafts (ADR-014): Claude may draft queries and candidate labels in `eval/drafts/`, from the regulation text and without any retriever. Every label of every drafted query is checked by Aldi on the PDF page before the query enters `eval/dataset.jsonl`. No other LLM use.
+5. LLM drafts (ADR-014): Claude may draft queries and candidate labels in `eval/drafts/`, from the regulation text and without any retriever. Under ADR-015 (22 Oct 2026, at Aldi's request) the check is done by Claude on the PDF page image or embedded text instead of by Aldi, and `source_note` says "not human-verified". No other LLM use.
 
 ## 5. Query types and mix (FR-EVAL-2)
 

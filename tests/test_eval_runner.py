@@ -119,6 +119,23 @@ def test_write_json_and_markdown(tmp_path: Path) -> None:
     assert saved["run_id"] == res["run_id"] and "git" in saved and "config" in saved
     md = path.with_suffix(".md").read_text(encoding="utf-8")
     assert "| bm25-basic | 2 |" in md and "MRR" in md and "UNVERIFIED" not in md
+    assert saved["dataset"]["labels_human_verified"] and "not human-verified" not in md
+
+
+def test_llm_checked_labels_are_disclosed(tmp_path: Path) -> None:
+    lines = [
+        query(
+            "q-1",
+            "transfer",
+            "dev",
+            [("1", 2)],
+            source_note="checked; not human-verified",
+        )
+    ]
+    settings = load_settings(setup(tmp_path, lines))
+    res = run(settings, settings.paths.dataset, False)
+    assert not res["dataset"]["labels_human_verified"]
+    assert "not human-verified (ADR-015)" in markdown(res)
 
 
 def test_drafts_need_flag_and_are_marked(tmp_path: Path) -> None:
