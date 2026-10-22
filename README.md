@@ -16,7 +16,7 @@ Compliance and policy analysts search regulations by paraphrase, not by article 
 
 - Ingestion and two chunking strategies (article-based, fixed overlap)
 - BM25, dense (multiple embedding models), and hybrid (reciprocal rank fusion) retrieval
-- A 40-query labeled dataset with a frozen test split
+- A 40-query labeled dataset with a frozen test split (queries and labels drafted by an LLM, every label verified by the author against the official PDF; see `docs/decisions.md` ADR-014)
 - Metrics: Recall@5, Recall@10, MRR, nDCG@10, latency p50 and p95, with bootstrap confidence intervals
 - A FastAPI `/search` endpoint with source citations, Docker image, and CI
 
