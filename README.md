@@ -47,6 +47,8 @@ See [docs/design.md](docs/design.md).
 
 ## Data and licensing
 
+The code in this repository is released under the [MIT License](LICENSE). The license does not cover the regulation texts or any third-party models, which have their own terms.
+
 All sources are public official regulations. Each source URL, retrieval date, and status is recorded in `data/manifest.json`. Raw regulation text (the downloaded PDFs) is not redistributed: `data/raw/` is gitignored, so download the files from the source URLs in the manifest. Check the source terms before redistributing any raw file.
 
 ## Limitations
