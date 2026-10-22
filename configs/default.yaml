@@ -1,0 +1,20 @@
+# Default configuration. Override any key with an INDOREG_ environment variable,
+# nested keys joined by "__", e.g. INDOREG_CHUNKING__FIXED__SIZE_CHARS=800.
+# Values are starting points, not decisions (design.md section 6).
+
+paths:
+  raw: data/raw
+  manifest: data/manifest.json
+  processed: data/processed
+  chunks: data/chunks
+  cache: data/cache
+  results: reports/results
+
+chunking:
+  fixed:
+    size_chars: 1200
+    overlap_chars: 200
+
+logging:
+  level: INFO
+  log_query_text: false

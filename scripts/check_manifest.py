@@ -1,4 +1,4 @@
-"""Check data/manifest.json: required fields present, allowed values, hashes match files.
+"""Check data/manifest.json: required fields, allowed values, file hashes.
 
 Usage: python scripts/check_manifest.py [--strict]
 Exit 1 on a missing key, bad value, missing file or hash mismatch.
@@ -56,7 +56,8 @@ def main() -> int:
         elif hashlib.sha256(path.read_bytes()).hexdigest() != e.get("sha256"):
             errors.append(f"{did}: sha256 mismatch")
     print(
-        f"{len(entries)} entries, {len(errors)} errors, {len(incomplete)} incomplete fields"
+        f"{len(entries)} entries, {len(errors)} errors, "
+        f"{len(incomplete)} incomplete fields"
     )
     for x in errors:
         print("ERROR", x)
