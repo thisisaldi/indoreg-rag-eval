@@ -115,10 +115,10 @@ Links: FR-EVAL-1 to FR-EVAL-3
 - [ ] Freeze the test split: commit, tag `dataset-v1`, do not tune on it
 - Acceptance: schema validation script passes, type mix within 5 points of target
 
-### [ ] T-12 Metrics module (Day 5, 0.5h)
+### [x] T-12 Metrics module (Day 5, 0.5h)
 Links: FR-EVAL-4
-- [ ] Recall@k, MRR, nDCG@10 with graded relevance support
-- [ ] Unit tests with hand-computed examples
+- [x] Recall@k, MRR, nDCG@10 with graded relevance support (`src/indoreg/eval/metrics.py`; per-query reciprocal rank, averaged into MRR by the runner)
+- [x] Unit tests with hand-computed examples (no relevant units raise an error; duplicate units count once at their best rank)
 - Acceptance: tests pass, edge cases covered (no relevant docs, ties, k larger than results)
 
 ---
