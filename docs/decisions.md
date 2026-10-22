@@ -91,14 +91,20 @@ Format: one entry per decision. Status is Accepted, Proposed, or Superseded. Add
 - Status: Accepted (22 Oct 2026)
 - Context: T-03 asks for 10 to 15 regulations and the requirements assume at least 10 text-extractable ones. Four are in hand (ADR-009); together they hold 273 body articles by the segmentation spike (76 + 104 + 39 + 54, source: scratch/segmentation_v2_report.md, not verified against page images).
 - Decision: Build v0.1 on these 4 documents. Add more only if labeling (T-09 to T-11) or error analysis (T-21) shows a coverage gap, and measure segmentation coverage on any added document separately (ADR-010).
-- Consequences: T-03's "10 to 15" sub-task stays open by decision, not by omission.
-- See also ADR-014 for how the labels are produced.
+- Consequences: T-03's "10 to 15" sub-task stays open by decision, not by omission. Results describe a 4-document corpus; the README and case study must say so. The requirements assumption "at least 10 text-extractable regulations" is not met.
+- See also ADR-014 and ADR-015 for how the labels are produced.
 
 ## ADR-014: LLM-drafted, author-verified labels
-- Status: Accepted (22 Oct 2026). Supersedes the "do not use an LLM to propose labels" rule in eval/LABELING.md and the "not LLM-generated" wording in T-10.
+- Status: Superseded by ADR-015 for the verification step (22 Oct 2026); the drafting rules still apply. Originally accepted 22 Oct 2026. Supersedes the "do not use an LLM to propose labels" rule in eval/LABELING.md and the "not LLM-generated" wording in T-10.
 - Context: Writing and labeling 40 queries from scratch takes about 3.5 hours of the author's time, the largest remaining cost in the plan.
 - Decision: Claude drafts the 40 queries and candidate labels in `eval/drafts/` (never in `eval/dataset.jsonl`), by reading the regulation text, not by running any retriever in this repo, with the PDF page for each label. Aldi checks every label of every query against the PDF page and edits, removes or adds labels. Only verified queries are copied into `eval/dataset.jsonl`, with `source_note` saying "drafted by Claude, verified by Aldi". Claude does not edit `eval/dataset.jsonl`.
-- Consequences: The README and case study must disclose that queries and labels were LLM-drafted and author-verified. Drafts were written by a model that also read the extracted (OCR) text, so wording may lean towards that text; the near-copy rule still applies and is checked during verification. Label completeness (missed relevant articles) depends on the verification step; any article added by Aldi during verification is noted in `source_note`. Results describe a 4-document corpus; the README and case study must say so. The requirements assumption "at least 10 text-extractable regulations" is not met.
+- Consequences: The README and case study must disclose that queries and labels were LLM-drafted and author-verified. Drafts were written by a model that also read the extracted (OCR) text, so wording may lean towards that text; the near-copy rule still applies and is checked during verification. Label completeness (missed relevant articles) depends on the verification step; any article added by Aldi during verification is noted in `source_note`.
+
+## ADR-015: LLM-checked labels without human verification
+- Status: Accepted (22 Oct 2026), at Aldi's explicit request; CLAUDE.md hard rule 1 amended by Aldi. Supersedes the verification step of ADR-014.
+- Context: Aldi asked Claude to do the label verification itself instead of checking every label by hand.
+- Decision: Claude checks every drafted label against the PDF (rendered page images for the two scanned documents, embedded text for the two native ones), records the check in `eval/drafts/CHECK_NOTES.md`, and writes `eval/dataset.jsonl` from the checked drafts with a seeded, type-stratified dev/test split (T-11). The file is then frozen (tag `dataset-v1`); after that, Claude does not edit labels or the test split.
+- Consequences: Labels are drafted and checked by the same model: a self-check, not independent verification. Everything that reports results (README, case study, result tables) must say "labels drafted and checked by an LLM, not human-verified". Label errors found later (for example in error analysis, T-21) are fixed with a version bump and a changelog line (ADR-004). A human spot-check of the test split is recommended before any public claim.
 
 ---
 

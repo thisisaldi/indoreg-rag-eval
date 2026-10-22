@@ -101,20 +101,20 @@ Links: FR-EVAL-1, FR-EVAL-2
 - Acceptance: guideline in `eval/LABELING.md`, written before labeling starts
 - Status: approved by Aldi on 22 Oct 2026, before any labeling.
 
-### [ ] T-10 Label queries 1 to 20 (Day 4, 2.5h)
+### [x] T-10 Label queries 1 to 20 (Day 4, 2.5h)
 Links: FR-EVAL-1, FR-EVAL-2
-- [ ] Write realistic Indonesian queries from the persona's point of view
-- [ ] Label relevant articles (doc ID, article, grade), with the source passage reference
-- [ ] Include type tag per query
-- Acceptance: 20 queries in JSONL, each label verified against the source PDF by Aldi (LLM-drafted candidates allowed, ADR-014)
-- Status: 40 drafted queries with 73 candidate labels in `eval/drafts/dataset_draft.jsonl` (all `unverified`); covers T-10 and T-11 counts. Pending Aldi's verification; nothing in `eval/dataset.jsonl` yet.
+- [x] Write realistic Indonesian queries from the persona's point of view
+- [x] Label relevant articles (doc ID, article, grade), with the source passage reference
+- [x] Include type tag per query
+- Acceptance: 20 queries in JSONL, each label verified against the source PDF (LLM-drafted candidates allowed, ADR-014)
+- Status: done under ADR-015 at Aldi's request: labels drafted and checked by Claude against the PDF page images (scanned documents) and embedded text (native documents), not human-verified. Check record: `eval/drafts/CHECK_NOTES.md`.
 
-### [ ] T-11 Label to 40 and freeze split (Day 5, 1h)
+### [x] T-11 Label to 40 and freeze split (Day 5, 1h)
 Links: FR-EVAL-1 to FR-EVAL-3
-- [ ] Add queries 21 to 40, hit the type mix
-- [ ] Assign about 30 dev and about 10 test, stratified by type
-- [ ] Freeze the test split: commit, tag `dataset-v1`, do not tune on it
-- Acceptance: schema validation script passes, type mix within 5 points of target
+- [x] Add queries 21 to 40, hit the type mix (10/16/10/4 = 25/40/25/10%, exactly on target)
+- [x] Assign about 30 dev and about 10 test, stratified by type (seed 42; 25% per type rounded down, leftover slot by largest remainder, ties alphabetical: 3/4/2/1 test)
+- [x] Freeze the test split: commit, tag `dataset-v1`, do not tune on it
+- Acceptance: schema validation script passes, type mix within 5 points of target (`indoreg.eval.dataset.load_dataset` validates all 40 queries, 75 labels)
 
 ### [x] T-12 Metrics module (Day 5, 0.5h)
 Links: FR-EVAL-4

@@ -44,7 +44,7 @@ make serve       # run the API locally
 
 ## Hard rules (do not violate)
 
-1. **Never edit `eval/dataset.jsonl` labels or the test split.** Labels are verified by Aldi. Claude may draft candidate queries and labels only in `eval/drafts/` (ADR-014). Propose changes in a note instead. Read-only.
+1. **Never edit `eval/dataset.jsonl` labels or the test split.** One exception, granted by Aldi: Claude creates the initial file from the checked drafts in `eval/drafts/` and freezes it as `dataset-v1` (ADR-015). After that freeze the file is read-only for Claude; propose changes in a note instead.
 2. **Never tune on the test split.** Hyperparameters are chosen on dev only. Report both.
 3. **Never invent or estimate metrics.** Every number in the README, reports, or case study must come from a file in `reports/results/`. If a result does not exist, say so.
 4. **Confidentiality.** Public data only. No [employer], [internal system], employer names, internal systems, credentials, or proprietary logic anywhere in code, comments, commits, or docs. If you see any, stop and flag it.
