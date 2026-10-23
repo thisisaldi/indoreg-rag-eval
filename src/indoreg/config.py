@@ -101,9 +101,17 @@ class SearchConfig(_Strict):
         return self
 
 
+class BootstrapConfig(_Strict):
+    iterations: PositiveInt
+    seed: int
+    confidence: float = Field(gt=0, lt=1)
+
+
 class EvalConfig(_Strict):
     retrievers: list[str] = Field(min_length=1)
     strategies: list[Strategy] = Field(min_length=1)
+    baseline: str  # "<retriever>/<strategy>" every run is compared with
+    bootstrap: BootstrapConfig
     splits: list[Literal["dev", "test"]] = Field(min_length=1)
     recall_ks: list[PositiveInt] = Field(min_length=1)
     ndcg_k: PositiveInt
@@ -113,6 +121,12 @@ class EvalConfig(_Strict):
     def _depth_covers_k(self) -> "EvalConfig":
         if self.depth < max(*self.recall_ks, self.ndcg_k):
             raise ValueError("depth must be at least the largest k")
+        name, _, strategy = self.baseline.partition("/")
+        if name not in self.retrievers or strategy not in self.strategies:
+            raise ValueError(
+                f"baseline {self.baseline!r} must be '<retriever>/<strategy>' from"
+                " eval.retrievers and eval.strategies"
+            )
         return self
 
 

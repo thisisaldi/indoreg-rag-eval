@@ -15,7 +15,8 @@ retrieval: {bm25: {k1: 1.5, b: 0.75},
   retrievers: {bm25-basic: {type: bm25, preprocess: basic, index_title: false}}}
 search: {default_top_k: 5, max_top_k: 20, retriever: bm25-basic,
   strategy: article}
-eval: {retrievers: [bm25-basic], strategies: [article],
+eval: {retrievers: [bm25-basic], strategies: [article], baseline: bm25-basic/article,
+  bootstrap: {iterations: 200, seed: 42, confidence: 0.95},
   splits: [dev, test], recall_ks: [5, 10], ndcg_k: 10,
   depth: 20}
 """
