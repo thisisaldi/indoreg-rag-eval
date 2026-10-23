@@ -38,9 +38,10 @@ Format: one entry per decision. Status is Accepted, Proposed, or Superseded. Add
 - Decision: TBD. Record model name and revision hash.
 
 ## ADR-007: BM25 library and Indonesian preprocessing
-- Status: Proposed (decide in T-13)
-- Candidates: rank_bm25, bm25s. Basic tokenizer vs stopwords plus light stemming.
-- Decision: TBD.
+- Status: Accepted (23 Oct 2026, T-13)
+- Context: Candidates were rank_bm25, bm25s, or a stdlib implementation; basic tokenizer vs stopwords plus light stemming. The corpus is 273 article chunks (188 fixed chunks), so scoring every chunk per query takes well under a millisecond.
+- Decision: Stdlib Okapi BM25 (`retrieval/bm25.py`, k1 1.5, b 0.75 from config), no new dependency. Three configured variants: `bm25-basic` (lowercase word tokens), `bm25-id` (Indonesian function words removed, enclitic -nya and particle -kah stripped when at least 4 letters remain), `bm25-id-title` (as bm25-id, with the document title indexed with each chunk, to let queries that name the law match it). No stemmer library (DI3): affix stripping on legal terms such as "pengendali" or "pemrosesan" risks merging distinct concepts, and Sastrawi would be a new dependency without a measured need.
+- Consequences: Variant choice is made on the dev split only, by nDCG@10 with bootstrap CIs (T-19); the test split is reported but not used to choose. A library can replace the implementation later if a measured latency problem appears.
 
 ## ADR-008: Image contents (baked vs mounted model and index)
 - Status: Proposed (decide in T-26)

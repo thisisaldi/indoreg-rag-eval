@@ -127,11 +127,12 @@ Links: FR-EVAL-4
 
 ## M3 Baselines (Day 6 to 8)
 
-### [ ] T-13 BM25 baseline (Day 6, 0.75h)
+### [x] T-13 BM25 baseline (Day 6, 0.75h)
 Links: FR-RET-1, FR-RET-6, BR3
 - [x] Shared `Retriever` interface (typed)
-- [x] BM25 with basic tokenizer (stdlib, no library; ADR-007 still open)
-- [ ] Indonesian-aware variant (stopwords, light stemming) if time permits
+- [x] BM25 with basic tokenizer (stdlib, no library; ADR-007)
+- [x] Indonesian-aware variant (stopwords, light stemming) if time permits (`bm25-id`: stopwords plus -nya/-kah stripping; also `bm25-id-title`, which indexes the law's title)
+- Verified: all three variants run on both chunk strategies with the same 40 queries. Committed numbers with CIs come with T-19.
 - Acceptance: BM25 runs on both chunk strategies with identical query set
 
 ### [x] T-14 Eval runner CLI (Day 6, 0.5h)

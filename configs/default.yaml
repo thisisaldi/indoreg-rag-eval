@@ -24,14 +24,20 @@ retrieval:
   bm25:
     k1: 1.5
     b: 0.75
+  # Named variants; eval and search refer to these names (design.md 4.3).
+  retrievers:
+    bm25-basic: {type: bm25, preprocess: basic, index_title: false}
+    bm25-id: {type: bm25, preprocess: id, index_title: false}
+    bm25-id-title: {type: bm25, preprocess: id, index_title: true}
 
 search:
   default_top_k: 5
   max_top_k: 20
+  retriever: bm25-basic
   strategy: article
 
 eval:
-  retrievers: [bm25-basic]
+  retrievers: [bm25-basic, bm25-id, bm25-id-title]
   strategies: [article, fixed]
   splits: [dev, test]
   recall_ks: [5, 10]

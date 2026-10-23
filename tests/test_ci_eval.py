@@ -30,8 +30,10 @@ paths: {{raw: r, manifest: m, dataset: {(FIXTURE / "dataset.jsonl").as_posix()},
   results: {(tmp_path / "out").as_posix()}}}
 chunking: {{fixed: {{size_chars: 100, overlap_chars: 10}}}}
 logging: {{level: WARNING, log_query_text: false}}
-retrieval: {{bm25: {{k1: 1.5, b: 0.75}}}}
-search: {{default_top_k: 5, max_top_k: 20, strategy: article}}
+retrieval: {{bm25: {{k1: 1.5, b: 0.75}},
+  retrievers: {{bm25-basic: {{type: bm25, preprocess: basic, index_title: false}}}}}}
+search: {{default_top_k: 5, max_top_k: 20, retriever: bm25-basic,
+  strategy: article}}
 eval: {{retrievers: [bm25-basic], strategies: [article], splits: [dev, test],
   recall_ks: [1, 3], ndcg_k: 3,
   depth: 5}}

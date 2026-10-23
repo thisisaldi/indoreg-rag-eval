@@ -72,8 +72,17 @@ class BM25Config(_Strict):
     b: float = Field(ge=0, le=1)
 
 
+class BM25Spec(_Strict):
+    """A named BM25 variant (design.md 4.3: a new variant is a config change)."""
+
+    type: Literal["bm25"]
+    preprocess: Literal["basic", "id"]
+    index_title: bool
+
+
 class RetrievalConfig(_Strict):
     bm25: BM25Config
+    retrievers: dict[str, BM25Spec] = Field(min_length=1)
 
 
 Strategy = Literal["article", "fixed"]
@@ -82,6 +91,7 @@ Strategy = Literal["article", "fixed"]
 class SearchConfig(_Strict):
     default_top_k: PositiveInt
     max_top_k: PositiveInt
+    retriever: str  # name in retrieval.retrievers
     strategy: Strategy  # chunk strategy served by search
 
     @model_validator(mode="after")
@@ -117,6 +127,18 @@ class Settings(BaseSettings):
     retrieval: RetrievalConfig
     search: SearchConfig
     eval: EvalConfig
+
+    @model_validator(mode="after")
+    def _retriever_names_exist(self) -> "Settings":
+        known = self.retrieval.retrievers
+        unknown = [
+            n for n in [*self.eval.retrievers, self.search.retriever] if n not in known
+        ]
+        if unknown:
+            raise ValueError(
+                f"retrievers not defined in retrieval.retrievers: {unknown}"
+            )
+        return self
 
     @classmethod
     def settings_customise_sources(
