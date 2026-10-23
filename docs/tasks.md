@@ -321,3 +321,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-27: latency script, two committed runs, `reports/latency.md` with method and cost note. | None. | T-28 CI builds the image (needs chunks without the PDFs). |
 | 23 Oct 2026 | T-28: CI image job with fixture corpus and smoke script; local smoke test passed. | CI result to confirm (Aldi, Actions tab). | T-35 Vercel deploy needs the serving decision; M6 packaging (T-29 to T-34). |
 | 23 Oct 2026 | T-28 closed: Aldi confirmed CI green with the image job. | Serving choice and label decisions with Aldi. | T-29 README. |
+| 23 Oct 2026 | Serving retriever set to hybrid (ADR-018, Aldi). Label proposals closed with no dataset change (Aldi delegated; `eval/LABEL_ISSUES.md`). | None. | T-29 README. |
