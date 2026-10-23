@@ -32,9 +32,11 @@ log = get_logger(__name__)
 NOT_VERIFIED = "not human-verified"  # source_note marker (ADR-015)
 
 
-def chunk_unit(chunk: Chunk) -> str | None:
-    """Article unit of a chunk (design.md 4.1); article chunks map one to one."""
-    return f"{chunk.doc_id}:{chunk.article}" if chunk.article else None
+def chunk_units(chunk: Chunk) -> list[str]:
+    """Article units of a chunk (design.md 4.1): one for an article chunk, every
+    overlapped article for a fixed chunk. Metrics dedupe units at best rank."""
+    arts = chunk.articles or ([chunk.article] if chunk.article else [])
+    return [f"{chunk.doc_id}:{a}" for a in arts]
 
 
 def percentile(values: Sequence[float], p: float) -> float:
@@ -51,13 +53,13 @@ def evaluate(
     ndcg_k: int,
     depth: int,
 ) -> list[dict[str, Any]]:
-    unit_of = {c.chunk_id: chunk_unit(c) for c in chunks}
+    units_of = {c.chunk_id: chunk_units(c) for c in chunks}
     rows = []
     for q in queries:
         t0 = time.perf_counter()
         hits = retriever.search(q.query, depth)
         latency_ms = (time.perf_counter() - t0) * 1000
-        ranking = [u for h in hits if (u := unit_of[h.chunk_id]) is not None]
+        ranking = list(dict.fromkeys(u for h in hits for u in units_of[h.chunk_id]))
         rows.append(
             {
                 "query_id": q.query_id,
@@ -157,22 +159,24 @@ def run(settings: Settings, dataset_path: Path, allow_drafts: bool) -> dict[str,
     queries = load_dataset(dataset_path, allow_drafts)
     drafts = any(q.draft_status is not None for q in queries)
     human_verified = not any(NOT_VERIFIED in q.source_note for q in queries)
-    chunks = load_chunks(settings)
     metric_keys = [*[f"recall@{k}" for k in cfg.recall_ks], "rr", f"ndcg@{cfg.ndcg_k}"]
-    results: dict[str, dict[str, Any]] = {}
-    for split in cfg.splits:
-        split_q = [q for q in queries if q.split == split]
-        results[split] = {}
+    results: dict[str, dict[str, Any]] = {split: {} for split in cfg.splits}
+    n_chunks: dict[str, int] = {}
+    for strategy in cfg.strategies:
+        chunks = load_chunks(settings, strategy)
+        n_chunks[strategy] = len(chunks)
         for name in cfg.retrievers:
             retriever = build_retriever(name, settings)
             retriever.build(chunks)
-            rows = evaluate(
-                retriever, chunks, split_q, cfg.recall_ks, cfg.ndcg_k, cfg.depth
-            )
-            results[split][name] = {
-                "summary": summarize(rows, metric_keys),
-                "queries": rows,
-            }
+            for split in cfg.splits:
+                split_q = [q for q in queries if q.split == split]
+                rows = evaluate(
+                    retriever, chunks, split_q, cfg.recall_ks, cfg.ndcg_k, cfg.depth
+                )
+                results[split][f"{name}/{strategy}"] = {
+                    "summary": summarize(rows, metric_keys),
+                    "queries": rows,
+                }
     now = datetime.now(UTC)
     git = git_state()
     run_id = now.strftime("%Y%m%dT%H%M%SZ") + f"-{git['sha'][:7]}"
@@ -190,7 +194,7 @@ def run(settings: Settings, dataset_path: Path, allow_drafts: bool) -> dict[str,
             "unverified_drafts": drafts,
             "labels_human_verified": human_verified,
         },
-        "chunks": len(chunks),
+        "chunks": n_chunks,
         "metric_keys": metric_keys,
         "results": results,
     }

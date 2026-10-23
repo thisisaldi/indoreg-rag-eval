@@ -21,6 +21,31 @@ TOKEN = re.compile(r"([0-9OlITSB](?: ?[0-9OlITSB]){0,3})([A-Z])?(?![A-Za-z0-9])"
 PURE_NUM = re.compile(r"^([0-9OlITSB](?: ?[0-9OlITSB]){0,3})([A-Z])?$")
 PENJ = re.compile(r"PENJE.{0,3}ASAN")
 PDP = re.compile(r"(?i)PASAL\s*DEMI\s*PASAL")
+# Chapter heading, tolerant of "BABVIII", lowercase OCR ("BAB xII") and l/1 read
+# for I; a bare "BAB" takes its numeral from the line after or before ("Ix" / "BAB").
+BAB = re.compile(r"^BAB\s*([IVXLCDMivxlcdm1]+)\s*$")
+BAB_BARE = re.compile(r"^BAB\s*$")
+ROMAN = re.compile(r"^([IVXLCDMivxlcdm1]+)\s*$")
+
+
+def _roman(token: str) -> str:
+    return token.replace("l", "I").replace("1", "I").upper()
+
+
+def chapter_lines(texts: list[str], end: int) -> list[tuple[int, str]]:
+    """(line index, "BAB <roman>") for every chapter heading before `end`."""
+    out = []
+    for i, t in enumerate(texts[:end]):
+        if m := BAB.match(t):
+            out.append((i, f"BAB {_roman(m.group(1))}"))
+        elif BAB_BARE.match(t):
+            for j in (i + 1, i - 1):
+                if 0 <= j < len(texts) and (m := ROMAN.match(texts[j])):
+                    out.append((i, f"BAB {_roman(m.group(1))}"))
+                    break
+    return out
+
+
 MAX_ARTICLE = 300
 HEADER_ZONE, FOOTER_ZONE = 6, 3  # lines checked for repeated headers/footers
 CATCHWORD_ZONE = 3  # last lines of a page where catchwords sit
@@ -97,7 +122,9 @@ def clean_pages(pages: list[str]) -> list[Line]:
                 if zone(i, k) and not STAMP.match(ln) and not CATCH.search(ln)
             }
         )
-    repeated = {k for k, c in seen.items() if c > len(pages) / 2}
+    # A running header must repeat on at least 2 pages; on a 1-page text every
+    # line would otherwise count as "repeated" and be dropped.
+    repeated = {k for k, c in seen.items() if c >= 2 and c > len(pages) / 2}
     out: list[Line] = []
     for i, ls in enumerate(plines):
         for k, ln in enumerate(ls):
@@ -344,6 +371,7 @@ def segment(pages: list[str], doc_id: str) -> Segmentation:
     accepted, unresolved = gap_fill(accepted, unresolved)
     last_start = accepted[-1].cand.start_idx if accepted else 0
     close = closing_index(texts, end, last_start)
+    chapters = chapter_lines(texts, end)
     spans: list[ArticleSpan] = []
     methods: Counter[str] = Counter()
     for j, a in enumerate(accepted):
@@ -363,6 +391,9 @@ def segment(pages: list[str], doc_id: str) -> Segmentation:
                 char_end=offsets[e_line] if e_line < len(offsets) else len(text),
                 method=method,
                 marker_raw=a.cand.raw,
+                chapter=next(
+                    (lab for i, lab in reversed(chapters) if i < s_line), None
+                ),
             )
         )
     last = max((a.key[0] for a in accepted), default=0)

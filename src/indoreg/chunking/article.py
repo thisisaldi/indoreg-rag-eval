@@ -14,7 +14,8 @@ def article_chunks(
             title=entry.title,
             strategy="article",
             article=s.article,
-            chapter=None,  # BAB detection not implemented yet
+            chapter=s.chapter,
+            articles=[s.article],
             char_start=s.char_start,
             char_end=s.char_end,
             text=text[s.char_start : s.char_end],

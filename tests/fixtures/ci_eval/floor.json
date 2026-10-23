@@ -1,6 +1,6 @@
 {
  "dev": {
-  "bm25-basic": {
+  "bm25-basic/article": {
    "ndcg@3": 0.9652469314257119,
    "recall@1": 0.9,
    "recall@3": 0.9,
@@ -8,7 +8,7 @@
   }
  },
  "test": {
-  "bm25-basic": {
+  "bm25-basic/article": {
    "ndcg@3": 0.6666666666666666,
    "recall@1": 0.6666666666666666,
    "recall@3": 0.6666666666666666,

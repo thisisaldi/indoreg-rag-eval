@@ -20,8 +20,8 @@ DISCLAIMER = (
 PREVIEW_CHARS = 400
 
 
-def load_chunks(settings: Settings) -> list[Chunk]:
-    path = settings.paths.chunks / "article.jsonl"
+def load_chunks(settings: Settings, strategy: str) -> list[Chunk]:
+    path = settings.paths.chunks / f"{strategy}.jsonl"
     if not path.is_file():
         raise FileNotFoundError(f"{path} not found; run the ingest step first")
     lines = path.read_text(encoding="utf-8").splitlines()
@@ -66,7 +66,7 @@ def main(argv: list[str] | None = None) -> int:
     if not args.query.strip():
         parser.error("query must not be empty")
     try:
-        chunks = load_chunks(settings)
+        chunks = load_chunks(settings, settings.search.strategy)
     except FileNotFoundError as e:
         sys.stderr.write(f"{e}\n")
         return 1
