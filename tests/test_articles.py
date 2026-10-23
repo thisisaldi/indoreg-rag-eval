@@ -81,3 +81,18 @@ def test_clean_duplicate_on_next_page_wins_by_later_tiebreak() -> None:
     ]
     by = {s.article: s for s in segment(pages, "doc").spans}
     assert by["3"].page == 2 and by["3"].method == "tiebreak_later"
+
+
+def test_section_heading_ends_the_previous_article() -> None:
+    pages = [
+        "Pasal 1\nIsi pasal satu.\nBagian Kedua\nTransfer ke Luar Negeri\n"
+        "Pasal 2\nIsi pasal dua.\nBAB II\nASAS\nPasal 3\nIsi pasal tiga.\n"
+        "Paragraf I\nJudul\nPasal 4\nIsi pasal empat merujuk\nBAB I lagi.\n"
+    ]
+    seg = segment(pages, "doc")
+    body = {s.article: seg.text[s.char_start : s.char_end] for s in seg.spans}
+    assert body["1"] == "Pasal 1\nIsi pasal satu.\n"
+    assert body["2"] == "Pasal 2\nIsi pasal dua.\n"
+    assert body["3"] == "Pasal 3\nIsi pasal tiga.\n"
+    assert "BAB I lagi." in body["4"]  # not a heading: text follows on the line
+    assert [s.chapter for s in seg.spans] == [None, None, "BAB II", "BAB II"]
