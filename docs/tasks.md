@@ -142,11 +142,11 @@ Links: FR-EVAL-6 to FR-EVAL-8, BR5
 - Status: done. First baseline on dataset-v1: `reports/results/20261022T105714Z-05b2e36.json` (clean commit; same metrics as an earlier run, only latency differs). Labels are LLM-checked, not human-verified (ADR-015); the table says so. `make eval-drafts` still runs on the drafts (marked UNVERIFIED, gitignored).
 - Finding from the draft run (not a result): chunk text carries no document title, so queries naming the law ("UU 27 Tahun 2022") cannot match it. Candidate experiment: index the title with the article text, measured on dev only.
 
-### [ ] T-15 CI deterministic eval (Day 6, 0.25h)
+### [x] T-15 CI deterministic eval (Day 6, 0.25h)
 Links: BR7, NFR6
-- [ ] Small fixture corpus and 5 to 10 query fixture
-- [ ] CI runs eval on the fixture and fails if metrics drop below a recorded floor
-- Acceptance: a deliberate bug in BM25 makes CI fail
+- [x] Small fixture corpus and 5 to 10 query fixture (`tests/fixtures/ci_eval/`: 2 fictional regulations, 12 articles, 8 queries; no real legal text)
+- [x] CI runs eval on the fixture and fails if metrics drop below a recorded floor (`tests/test_ci_eval.py`, floor in `floor.json`, runs with pytest in CI)
+- Acceptance: a deliberate bug in BM25 makes CI fail (verified 23 Oct 2026: reversing the BM25 sort order dropped dev recall@1 from 0.90 to 0.00 and the test failed; reverted)
 
 ### [ ] T-16 Dense retrieval, model 1 (Day 7, 1.5h)
 Links: FR-RET-2, BR3
