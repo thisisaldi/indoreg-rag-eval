@@ -257,7 +257,10 @@ def run(settings: Settings, dataset_path: Path, allow_drafts: bool) -> dict[str,
         "config": settings.model_dump(mode="json"),
         "dataset": {
             "path": dataset_path.as_posix(),
-            "sha256": hashlib.sha256(dataset_path.read_bytes()).hexdigest(),
+            # LF-normalised, so a Windows CRLF checkout hashes like the commit.
+            "sha256": hashlib.sha256(
+                dataset_path.read_bytes().replace(b"\r\n", b"\n")
+            ).hexdigest(),
             "queries": len(queries),
             "unverified_drafts": drafts,
             "labels_human_verified": human_verified,
