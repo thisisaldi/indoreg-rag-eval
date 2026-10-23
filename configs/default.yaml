@@ -39,6 +39,15 @@ retrieval:
       passage_prefix: "passage: "
       max_seq_length: 512
       batch_size: 16
+    dense-e5-base:
+      type: dense
+      model: intfloat/multilingual-e5-base
+      revision: d128750597153bb5987e10b1c3493a34e5a4502a
+      onnx_file: onnx/model_qint8_avx512_vnni.onnx
+      query_prefix: "query: "
+      passage_prefix: "passage: "
+      max_seq_length: 512
+      batch_size: 16
 
 search:
   default_top_k: 5
@@ -47,7 +56,7 @@ search:
   strategy: article
 
 eval:
-  retrievers: [bm25-basic, bm25-id, bm25-id-title, dense-e5-small]
+  retrievers: [bm25-basic, bm25-id, bm25-id-title, dense-e5-small, dense-e5-base]
   strategies: [article, fixed]
   baseline: bm25-basic/article
   bootstrap: {iterations: 1000, seed: 42, confidence: 0.95}
