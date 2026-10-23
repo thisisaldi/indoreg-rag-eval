@@ -241,10 +241,10 @@ Links: NFR2, NFR3
 - Tests: 4 more in `tests/test_api.py` (93 in total).
 - Acceptance: a log line per request with request ID and latency, bad config exits with a clear error
 
-### [ ] T-26 Dockerfile (Day 12, 0.5h)
+### [x] T-26 Dockerfile (Day 12, 0.5h)
 Links: BR6
-- [ ] Multi-stage or slim image, non-root user, models and index baked in or mounted (decide and document)
-- Acceptance: `docker run` serves `/search` locally
+- [x] Multi-stage or slim image, non-root user, models and index baked in or mounted (decide and document): baked, ADR-008; `Dockerfile`, `.dockerignore`
+- Acceptance: `docker run` serves `/search` locally. Checked 23 Oct 2026 for two builds: default config (bm25-basic, 546 MB) and a temporary config serving `hybrid` (767 MB); `/health` and `/search` answered, the process runs as `app`, and the hybrid image built its index and searched with `--network none`. Latency is T-27.
 
 ### [ ] T-27 Latency benchmark (Day 12, 0.5h)
 Links: NFR7, FR-EVAL-8
@@ -315,3 +315,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-23: clean-clone reproduction exact (`reports/results/20261023T080406Z-a67e1de`), tag `v0.1-benchmark`. | Serving choice, q-022/q-033 and q-021 decisions with Aldi. | M5: T-24 FastAPI service (needs fastapi, ask first). |
 | 23 Oct 2026 | T-24: FastAPI `/search` and `/health`, config-driven limits, 12 API tests, `make serve`. | Serving retriever still bm25-basic (config) until Aldi decides. | T-25 request IDs, JSON request logs, fail-fast config. |
 | 23 Oct 2026 | T-25: request IDs, JSON request and search logs (no query text by default), 500 without trace, fail-fast config. | None. | T-26 Dockerfile (ADR-008 baked vs mounted). |
+| 23 Oct 2026 | T-26: Dockerfile with baked model and embeddings (ADR-008), checked for bm25-basic and hybrid, offline run works. | Docker build needs data/chunks (gitignored): CI must ingest or use fixtures (T-28). | T-27 latency benchmark. |
