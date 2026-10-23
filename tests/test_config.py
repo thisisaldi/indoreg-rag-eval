@@ -11,8 +11,10 @@ paths: {raw: r, manifest: m.json, dataset: d.jsonl, processed: p, chunks: c, cac
   results: o}
 chunking: {fixed: {size_chars: 100, overlap_chars: 10}}
 logging: {level: INFO, log_query_text: false}
-retrieval: {bm25: {k1: 1.5, b: 0.75}}
-search: {default_top_k: 5, max_top_k: 20, strategy: article}
+retrieval: {bm25: {k1: 1.5, b: 0.75},
+  retrievers: {bm25-basic: {type: bm25, preprocess: basic, index_title: false}}}
+search: {default_top_k: 5, max_top_k: 20, retriever: bm25-basic,
+  strategy: article}
 eval: {retrievers: [bm25-basic], strategies: [article],
   splits: [dev, test], recall_ks: [5, 10], ndcg_k: 10,
   depth: 20}

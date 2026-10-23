@@ -1,4 +1,4 @@
-"""Command-line search over the ingested articles (BM25).
+"""Command-line search over the ingested chunks with the configured retriever.
 
 Run: python -m indoreg.search "your question" [--top-k N] [--config PATH]
 Needs the chunks written by `python -m indoreg.ingest.pipeline`.
@@ -10,7 +10,7 @@ import textwrap
 from pathlib import Path
 
 from indoreg.config import Settings, load_settings
-from indoreg.retrieval.bm25 import BM25Retriever
+from indoreg.retrieval.registry import build_retriever
 from indoreg.schemas import Chunk
 
 DISCLAIMER = (
@@ -29,12 +29,11 @@ def load_chunks(settings: Settings, strategy: str) -> list[Chunk]:
 
 
 def render(query: str, chunks: list[Chunk], settings: Settings, top_k: int) -> str:
-    cfg = settings.retrieval.bm25
-    bm25 = BM25Retriever("bm25-basic", k1=cfg.k1, b=cfg.b)
-    bm25.build(chunks)
+    retriever = build_retriever(settings.search.retriever, settings)
+    retriever.build(chunks)
     by_id = {c.chunk_id: c for c in chunks}
-    hits = bm25.search(query, top_k)
-    out = [f'Query: "{query}"  ({len(chunks)} articles indexed, BM25)', ""]
+    hits = retriever.search(query, top_k)
+    out = [f'Query: "{query}"  ({len(chunks)} chunks indexed, {retriever.name})', ""]
     if not hits:
         out.append("No article matched any query word.")
     for h in hits:
