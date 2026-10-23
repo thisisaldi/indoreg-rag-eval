@@ -266,7 +266,7 @@ Links: BR5, BR8
 - [ ] 3 interview talking points (one on a decision, one on a failure, one on a tradeoff)
 
 ### [ ] T-34 Confidentiality audit and next-project brief (Day 14, 0.75h)
-- [ ] Search repo, history, and docs for any [employer], [internal system], internal names, credentials, or proprietary logic
+- [ ] Search repo, history, and docs for any employer or internal-system names, credentials, or proprietary logic
 - [ ] Confirm all data is public and sources are cited
 - [ ] Write a one-page brief for the next project (generation layer with faithfulness evals, or a retrieval bias and safety audit)
 - Acceptance: audit checklist signed off, brief committed

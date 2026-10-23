@@ -94,7 +94,7 @@ Primary persona: a compliance analyst who needs the exact article and its source
 
 ## 6. Constraints and confidentiality
 
-- Public data only. No [employer] or [internal system] data, names, schemas, or logic anywhere in the repo, commits, or write-ups.
+- Public data only. No employer or internal-system data, names, schemas, or logic anywhere in the repo, commits, or write-ups.
 - Respect source terms. Check JDIH terms before any automated download. Default to manual download with URLs recorded in the manifest.
 - Time budget: about 27 hours (1.5h weekdays, 3h weekends).
 - Single repository, no extra infrastructure unless a measured problem requires it.
