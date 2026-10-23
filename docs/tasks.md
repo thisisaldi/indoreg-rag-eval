@@ -42,14 +42,14 @@ Links: BR5, NFR4, NFR9
 - Status: repo exists with docs, license, pre-commit; it is PRIVATE as of 23 Oct 2026 (Aldi), so "public" is not met. T-02 stays open until Aldi makes it public.
 - Output: initial commit
 
-### [ ] T-03 Source collection and manifest (Day 2, 1h)
+### [x] T-03 Source collection and manifest (Day 2, 1h)
 Links: BR2, FR-ING-2
-- [ ] Collect 10 to 15 official regulations (UU PDP, PP, Permen, related)
-- [ ] Check source terms before any automated download, otherwise manual
-- [ ] Build `data/manifest.json` with ID, title, number, year, status, URL, retrieved date, filename, SHA-256
-- [ ] Mark status (in force, amended, revoked, unknown) with a source for each claim
+- [x] Collect 10 to 15 official regulations (UU PDP, PP, Permen, related) (4 by decision, ADR-013)
+- [x] Check source terms before any automated download, otherwise manual (all 4 downloaded manually by Aldi)
+- [x] Build `data/manifest.json` with ID, title, number, year, status, URL, retrieved date, filename, SHA-256
+- [x] Mark status (in force, amended, revoked, unknown) with a source for each claim
 - Acceptance: every manifest entry has all fields, hashes match files
-- Status 23 Oct 2026: hashes match; PP 71/2019 complete (peraturan.bpk.go.id, status Berlaku, retrieved 2026-10-22, per Aldi). Still null: UU 27/2022 retrieved_on; Permen Kominfo 20/2016 and UU 11/2008 status, status_source, source_url, retrieved_on (9 fields). `scripts/check_manifest.py --strict` fails until they are filled.
+- Status 23 Oct 2026: done. All 4 entries complete (`scripts/check_manifest.py --strict` passes): PDFs retrieved by Aldi 2026-10-22 from peraturan.bpk.go.id; statuses read from the BPK detail pages (UU 27/2022 and Permen 20/2016 in_force; PP 71/2019 in_force per Aldi; UU 11/2008 `amended`: BPK lists UU 19/2016 and UU 1/2024 as amendments and a partial revocation by UU 1/2023 (KUHP); the corpus text is the original 2008 text). BPK shows no amendment data ("Belum Tersedia") for UU 27/2022 and the Permen, which is not proof there are none.
 - Output: `data/manifest.json`
 
 ### [ ] T-04 Extraction spike (Day 2, 0.5h)
@@ -194,6 +194,7 @@ Links: Definition of done
 - [ ] Document at least 5 failures (target 10), each with query, expected, retrieved, and cause tag
 - [ ] Cause tags: extraction error, vocabulary gap, chunk boundary, multi-article answer, superseded regulation, label error
 - [ ] Fix label errors found (and re-freeze with a version bump, noted in changelog)
+- Known input: dataset-v1 labels UU 11/2008 articles BPK lists as partly revoked by UU 1/2023: q-022 (test; Pasal 46 grade 2, Pasal 30 grade 1) and q-033 (dev; Pasal 31 and 47, both grade 2). Their source_note already says the labels follow the corpus text. Decide here whether to keep, mark `superseded regulation`, or replace them (version bump per ADR-004); Claude does not edit the dataset.
 - Acceptance: `reports/error_analysis.md` committed
 
 ### [ ] T-22 Reranker (stretch) (Day 10, 1h)
