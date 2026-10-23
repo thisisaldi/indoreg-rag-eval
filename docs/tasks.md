@@ -270,9 +270,10 @@ Links: BR7
 
 ## M6 Packaging (Day 13 to 14)
 
-### [ ] T-29 README (Day 13, 0.5h)
+### [x] T-29 README (Day 13, 0.5h)
 Links: BR5, BR8
-- [ ] Problem, results table (copied from result files), quickstart, API example, limitations, legal disclaimer
+- [x] Problem, results table (copied from result files), quickstart, API example, limitations, legal disclaimer (tables from `reports/results/20261023T074949Z-ed9dbfc.md`; API example is a real response; the LLM-label disclosure is at the top)
+- Acceptance check: the reproduce steps were followed in T-23 (clean clone); not tried by someone else.
 - Acceptance: a stranger can reproduce the benchmark from the README alone
 
 ### [ ] T-30 Architecture diagram (Day 13, 0.25h)
@@ -322,3 +323,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-28: CI image job with fixture corpus and smoke script; local smoke test passed. | CI result to confirm (Aldi, Actions tab). | T-35 Vercel deploy needs the serving decision; M6 packaging (T-29 to T-34). |
 | 23 Oct 2026 | T-28 closed: Aldi confirmed CI green with the image job. | Serving choice and label decisions with Aldi. | T-29 README. |
 | 23 Oct 2026 | Serving retriever set to hybrid (ADR-018, Aldi). Label proposals closed with no dataset change (Aldi delegated; `eval/LABEL_ISSUES.md`). | None. | T-29 README. |
+| 23 Oct 2026 | T-29: README with results (dev and test, CIs), paired findings, reproduce steps, API and Docker usage, limitations. Also fixed a test that broke when the serving retriever changed (pushed red once, fixed in 7784ed2). | None. | T-30 architecture diagram. |
