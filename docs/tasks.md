@@ -192,12 +192,12 @@ Links: BR3
 - [ ] Optional extras (overlap sizes) only if ahead (skipped: not ahead; an overlap sweep would be tuning, dev only)
 - Acceptance: controlled comparison with CIs and a one-paragraph interpretation
 
-### [ ] T-21 Error analysis (Day 10, 1.5h)
+### [x] T-21 Error analysis (Day 10, 1.5h)
 Links: Definition of done
-- [ ] List the worst-performing queries for the best config
-- [ ] Document at least 5 failures (target 10), each with query, expected, retrieved, and cause tag
-- [ ] Cause tags: extraction error, vocabulary gap, chunk boundary, multi-article answer, superseded regulation, label error
-- [ ] Fix label errors found (and re-freeze with a version bump, noted in changelog)
+- [x] List the worst-performing queries for the best config (`scripts/worst_queries.py`; output `reports/results/20261023T073624Z-a0d608d.worst-dev.txt`; dev only, see the report for why)
+- [x] Document at least 5 failures (target 10), each with query, expected, retrieved, and cause tag (10 in `reports/error_analysis.md`)
+- [x] Cause tags: extraction error, vocabulary gap, chunk boundary, multi-article answer, superseded regulation, label error (plus "other" for fusion and number collision)
+- [ ] Fix label errors found (and re-freeze with a version bump, noted in changelog): none found; one low-confidence missing label and the q-022/q-033 decision are proposed in `eval/LABEL_ISSUES.md` for Aldi (Claude does not edit the frozen dataset)
 - Known input: dataset-v1 labels UU 11/2008 articles BPK lists as partly revoked by UU 1/2023: q-022 (test; Pasal 46 grade 2, Pasal 30 grade 1) and q-033 (dev; Pasal 31 and 47, both grade 2). Their source_note already says the labels follow the corpus text. Decide here whether to keep, mark `superseded regulation`, or replace them (version bump per ADR-004); Claude does not edit the dataset.
 - Acceptance: `reports/error_analysis.md` committed
 
@@ -297,3 +297,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-16: torch blocked by Application Control and too big for Vercel Hobby, so dense runs on onnxruntime (ADR-016, approved by Aldi); model 1 multilingual-e5-small int8 ONNX (ADR-006). Results `reports/results/20261023T072143Z-28cc2a8`. Added T-35 (Vercel deploy). | Portfolio origin for CORS needed by T-35. BGE-M3 does not fit this machine's memory. | T-17 second model. |
 | 23 Oct 2026 | T-17: `dense-e5-base` added by config; `eval.pairs` for direct paired comparisons (1 test). Clean cold run `reports/results/20261023T073208Z-cfff220` (embedding from scratch reproduced the cached metrics exactly). e5-small chosen for hybrid on dev (ADR-006). | None. | T-18 hybrid RRF, k and depth tuned on dev only. |
 | 23 Oct 2026 | T-18: hybrid RRF retriever (6 tests); dev-only grid `reports/results/20261023T073543Z-a07f39f` kept k 60 / depth 50; full run `reports/results/20261023T073624Z-a0d608d`. Hybrid beats bm25-basic and dense-e5-small on dev, not established against bm25-id-title. | Serving choice (bm25-id-title vs hybrid) needs Aldi, see T-18. | T-20 is done; next T-21 error analysis. |
+| 23 Oct 2026 | T-21: error analysis of hybrid/article on dev (10 failures; vocabulary gap 7, multi-article 4, chunk boundary 2, extraction 2, superseded 1, label error 0). Found section headings at the end of 76 of 273 article spans. `eval/LABEL_ISSUES.md` proposals. | Aldi: q-022/q-033 decision and the q-021 label proposal; serving choice from T-18. | T-22 reranker (stretch) or skip; heading fix as a dev experiment if wanted. |
