@@ -181,10 +181,10 @@ Links: BR4, FR-EVAL-5
 - Dev reading of that file (test split not used for choices): `bm25-id/article` improves Recall@10 over `bm25-basic/article` (+0.065, CI +0.01 to +0.14, 6/1/23); `bm25-id-title/article` gains on MRR and nDCG@10 are not established (CIs include 0); fixed chunks lose to article chunks on MRR and nDCG@10 for all three variants (CIs exclude 0). Labels are LLM-checked, not human-verified (ADR-015).
 - Acceptance: every comparison table shows CIs, seed fixed, tests cover the bootstrap function
 
-### [ ] T-20 Chunking ablation (Day 9, 0.75h)
+### [x] T-20 Chunking ablation (Day 9, 0.75h)
 Links: BR3
-- [ ] Article-based vs fixed-size, same retriever, same queries
-- [ ] Optional extras (overlap sizes) only if ahead
+- [x] Article-based vs fixed-size, same retriever, same queries (the runner now pairs each retriever's fixed run with its own article run; `reports/chunking_ablation.md`, from `reports/results/20261023T065417Z-0cb8d5c`)
+- [ ] Optional extras (overlap sizes) only if ahead (skipped: not ahead; an overlap sweep would be tuning, dev only)
 - Acceptance: controlled comparison with CIs and a one-paragraph interpretation
 
 ### [ ] T-21 Error analysis (Day 10, 1.5h)
@@ -281,3 +281,4 @@ Links: BR5, BR8
 | 22 Oct 2026 | T-03 partly: data/manifest.json for 4 documents (hashes, titles, text_quality), scripts/check_manifest.py, ADR-013. T-05 done: uv project on Python 3.12, config (YAML + INDOREG_ env) and JSON logging modules, 13 tests, mypy strict and ruff clean, `pip install -e .` verified in a clean venv. | T-03: 13 manifest fields need source URLs, status and retrieval dates from Aldi. | T-06 ingestion pipeline after T-03 fields are filled. |
 | 22 Oct 2026 | T-08 workflow written (not yet run on GitHub). T-06 done: pdfplumber extraction, noise filter and OCR-tolerant segmentation ported from the spike, 273 articles from 4 documents with offsets identical to the spike, deterministic outputs. T-07 article chunker and T-13 basic BM25 done; `make search` CLI for a first end-to-end demo. | T-01 page-image check and T-03 manifest fields still open; 3 documents show "not yet recorded" for status and source. | T-07 fixed-size chunker and BAB context; labeling (T-09 to T-11). |
 | 23 Oct 2026 | T-15 CI eval with floor; T-07 fixed chunker, chapter context, multi-article chunk mapping; T-13 Indonesian and title-indexing BM25 variants (ADR-007); T-19 bootstrap CIs and paired win/loss, dataset hash made line-ending independent. Results: `reports/results/20261023T025613Z-a20cbfe`. | Dense retrieval (T-16) needs sentence-transformers and torch; Windows Application Control may block their native libraries. T-01 page check and T-03 manifest fields still with Aldi. | T-20 chunking ablation write-up, then T-16. |
+| 23 Oct 2026 | T-20: per-retriever paired fixed-vs-article comparison in the runner (1 test), rerun on clean commit 0cb8d5c (metrics identical to the a20cbfe file, whose commit is no longer in history; that file is superseded by 20261023T065417Z-0cb8d5c), write-up in `reports/chunking_ablation.md`. | None. | T-16 dense retrieval: ask Aldi about sentence-transformers and torch first. |

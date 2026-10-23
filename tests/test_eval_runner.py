@@ -203,3 +203,26 @@ def test_summary_has_ci_and_compare_is_paired(tmp_path: Path) -> None:
     c = compare(results, "base", ["m"], boot)["dev"]["new"]["m"]
     assert c["win_loss"] == {"wins": 1, "losses": 0, "ties": 2}
     assert c["diff"]["mean"] == pytest.approx(1 / 3)
+
+
+def test_compare_strategies_pairs_each_retriever_with_itself() -> None:
+    from indoreg.config import BootstrapConfig
+    from indoreg.eval.runner import compare_strategies
+
+    def rows(*vals: float) -> dict:
+        return {"queries": [{"m": v} for v in vals]}
+
+    results = {
+        "dev": {
+            "a/article": rows(1.0, 1.0),
+            "b/article": rows(0.0, 0.0),
+            "a/fixed": rows(0.0, 1.0),
+            "b/fixed": rows(1.0, 0.0),
+        }
+    }
+    boot = BootstrapConfig(iterations=50, seed=1, confidence=0.95)
+    c = compare_strategies(results, ["a", "b"], ["article", "fixed"], ["m"], boot)
+    assert list(c["dev"]) == ["a/fixed", "b/fixed"]
+    assert c["dev"]["a/fixed"]["m"]["win_loss"] == {"wins": 0, "losses": 1, "ties": 1}
+    assert c["dev"]["b/fixed"]["m"]["win_loss"] == {"wins": 1, "losses": 0, "ties": 1}
+    assert c["dev"]["a/fixed"]["m"]["diff"]["mean"] == pytest.approx(-0.5)
