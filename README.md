@@ -47,6 +47,53 @@ What the paired comparisons show (difference [95% CI], per-query wins/losses/tie
 
 Latency (warm, in-process HTTP, this laptop): about 5 ms per query for BM25 and 18 ms for the hybrid at p50; cold start about 1 s for BM25 and 3 to 4 s with the model ([latency report](reports/latency.md)). Cash cost: none.
 
+## Architecture
+
+```mermaid
+flowchart TD
+    subgraph offline["Offline, deterministic (make ingest)"]
+        raw["data/raw/*.pdf<br/>+ data/manifest.json<br/>(source URL, status, SHA-256)"]
+        ingest["ingest: pdfplumber text,<br/>noise filter, OCR-tolerant<br/>Pasal segmentation (ADR-010)"]
+        processed["data/processed/<br/>doc.txt + doc.articles.json<br/>(article spans)"]
+        chunk["chunking:<br/>article | fixed 1200/200"]
+        chunks["data/chunks/<br/>article.jsonl, fixed.jsonl"]
+        raw --> ingest --> processed --> chunk --> chunks
+    end
+
+    subgraph retrieval["Retrievers (one Retriever protocol, built from config)"]
+        bm25["BM25<br/>basic | id | id-title<br/>(stdlib, ADR-007)"]
+        dense["Dense<br/>multilingual-e5 small | base<br/>int8 ONNX, numpy cosine<br/>(ADR-006, ADR-016)"]
+        cache[("data/cache/embeddings<br/>keyed by model + chunk text")]
+        hybrid["Hybrid RRF<br/>bm25-id-title + e5-small<br/>k 60, depth 50"]
+        dense <--> cache
+        bm25 --> hybrid
+        dense --> hybrid
+    end
+
+    chunks --> bm25
+    chunks --> dense
+
+    subgraph evaluation["Evaluation (make eval)"]
+        dataset["eval/dataset.jsonl<br/>40 queries, article labels<br/>dev 30 / test 10 (dataset-v1)"]
+        runner["eval runner: chunks to articles<br/>via spans, Recall@k, MRR, nDCG@10,<br/>bootstrap CIs, paired win/loss"]
+        results["reports/results/<br/>run.json + run.md"]
+        dataset --> runner --> results
+    end
+
+    subgraph serving["Serving (make serve, Docker, Vercel planned)"]
+        api["FastAPI<br/>POST /search, GET /health<br/>request IDs, JSON logs"]
+        client["client<br/>(portfolio site)"]
+        api -- "results with title, article,<br/>doc_status, source_url, disclaimer" --> client
+    end
+
+    bm25 --> runner
+    dense --> runner
+    hybrid --> runner
+    hybrid -- "served retriever (ADR-018)" --> api
+```
+
+Details in [reports/architecture.md](reports/architecture.md) and [docs/design.md](docs/design.md).
+
 ## Reproduce
 
 Requires [uv](https://docs.astral.sh/uv/); Python 3.12 is pinned and installed by uv if missing.

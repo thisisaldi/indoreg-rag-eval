@@ -276,8 +276,8 @@ Links: BR5, BR8
 - Acceptance check: the reproduce steps were followed in T-23 (clean clone); not tried by someone else.
 - Acceptance: a stranger can reproduce the benchmark from the README alone
 
-### [ ] T-30 Architecture diagram (Day 13, 0.25h)
-- [ ] Ingestion to chunking to indexes to retrievers to eval and API
+### [x] T-30 Architecture diagram (Day 13, 0.25h)
+- [x] Ingestion to chunking to indexes to retrievers to eval and API (Mermaid, rendered by GitHub; `reports/architecture.md`, same block in the README; no image files or new tools)
 - Acceptance: diagram in `reports/` and embedded in README
 
 ### [ ] T-31 Case study (Day 13, 0.75h)
@@ -324,3 +324,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-28 closed: Aldi confirmed CI green with the image job. | Serving choice and label decisions with Aldi. | T-29 README. |
 | 23 Oct 2026 | Serving retriever set to hybrid (ADR-018, Aldi). Label proposals closed with no dataset change (Aldi delegated; `eval/LABEL_ISSUES.md`). | None. | T-29 README. |
 | 23 Oct 2026 | T-29: README with results (dev and test, CIs), paired findings, reproduce steps, API and Docker usage, limitations. Also fixed a test that broke when the serving retriever changed (pushed red once, fixed in 7784ed2). | None. | T-30 architecture diagram. |
+| 23 Oct 2026 | T-30: Mermaid architecture diagram in `reports/architecture.md` and the README. | Rendering on GitHub not checked by Claude. | T-31 case study. |
