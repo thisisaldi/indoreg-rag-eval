@@ -6,15 +6,13 @@
     "number": "27",
     "year": 2022,
     "status": "in_force",
-    "status_source": "Pasal.id API metadata, status 'berlaku', probe 22 Oct 2026; confirmed by Aldi",
-    "source_url": "https://peraturan.go.id/id/uu-no-27-tahun-2022",
-    "retrieved_on": null,
+    "status_source": "peraturan.bpk.go.id detail page, Status field 'Berlaku'; STATUS PERATURAN 'Belum Tersedia' (no amendment data on the page). Page read 2026-10-23; PDF retrieved by Aldi 2026-10-22.",
+    "source_url": "https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022",
+    "retrieved_on": "2026-10-22",
     "filename": "UU Nomor 27 Tahun 2022.pdf",
     "sha256": "ed952dea04b87d14ecf037f9f324a65d50b396ddd34fc28ddf9ff014391971f6",
     "text_quality": "image_text_layer",
-    "todo": [
-      "retrieved_on"
-    ]
+    "todo": []
   },
   {
     "doc_id": "pp-71-2019",
@@ -37,19 +35,14 @@
     "reg_type": "Permen",
     "number": "20",
     "year": 2016,
-    "status": null,
-    "status_source": null,
-    "source_url": null,
-    "retrieved_on": null,
+    "status": "in_force",
+    "status_source": "peraturan.bpk.go.id detail page, Status field 'Berlaku'; STATUS PERATURAN 'Belum Tersedia' (no amendment data on the page). Page read 2026-10-23; PDF retrieved by Aldi 2026-10-22.",
+    "source_url": "https://peraturan.bpk.go.id/Details/150543/permenkominfo-no-20-tahun-2016",
+    "retrieved_on": "2026-10-22",
     "filename": "Permen Kominfo Nomor 20 Tahun 2016.pdf",
     "sha256": "cee5ba2a62bbcbff4e15cb20a073ef033c1c1aca93f662ccfde9e70fc018e237",
     "text_quality": "native",
-    "todo": [
-      "status",
-      "status_source",
-      "source_url",
-      "retrieved_on"
-    ]
+    "todo": []
   },
   {
     "doc_id": "uu-11-2008",
@@ -57,18 +50,13 @@
     "reg_type": "UU",
     "number": "11",
     "year": 2008,
-    "status": null,
-    "status_source": null,
-    "source_url": null,
-    "retrieved_on": null,
+    "status": "amended",
+    "status_source": "peraturan.bpk.go.id detail page, Status field 'Berlaku' but STATUS PERATURAN: 'Diubah dengan' UU 19/2016 and UU 1/2024; 'Dicabut sebagian' by UU 1/2023 (KUHP), for Pasal 27(1), 27(3), 28(2), 30, 31(1), 31(2), 36, 45(1), 45(3), 45A(2), 46, 47, 51(2). Page read 2026-10-23; PDF retrieved by Aldi 2026-10-22. The corpus text is the original 2008 text.",
+    "source_url": "https://peraturan.bpk.go.id/Details/37589/uu-no-11-tahun-2008",
+    "retrieved_on": "2026-10-22",
     "filename": "UU Nomor 11 Tahun 2008.pdf",
     "sha256": "3c174f55b4a7982af268a24316e3353c8e712fc8a57e87a9fdf0502da4ea0af3",
     "text_quality": "native",
-    "todo": [
-      "status",
-      "status_source",
-      "source_url",
-      "retrieved_on"
-    ]
+    "todo": []
   }
 ]
