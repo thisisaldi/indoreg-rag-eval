@@ -3,7 +3,7 @@
 from indoreg.config import BM25Spec, Settings
 from indoreg.retrieval.base import Retriever
 from indoreg.retrieval.bm25 import BM25Retriever
-from indoreg.retrieval.dense import DenseRetriever, SentenceTransformerEncoder
+from indoreg.retrieval.dense import DenseRetriever, OnnxEncoder
 from indoreg.retrieval.preprocess import TOKENIZERS
 
 
@@ -20,13 +20,18 @@ def build_retriever(name: str, settings: Settings) -> Retriever:
             tokenizer=TOKENIZERS[spec.preprocess],
             index_title=spec.index_title,
         )
-    encoder = SentenceTransformerEncoder(
-        spec.model, spec.revision, spec.device, spec.batch_size, spec.max_seq_length
+    encoder = OnnxEncoder(
+        spec.model,
+        spec.revision,
+        spec.onnx_file,
+        spec.batch_size,
+        spec.max_seq_length,
     )
     key = "|".join(
         [
             spec.model,
             spec.revision,
+            spec.onnx_file,
             spec.query_prefix,
             spec.passage_prefix,
             str(spec.max_seq_length),

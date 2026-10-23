@@ -2,8 +2,8 @@
 
 Chunk embeddings are cached under the cache dir, keyed by the model identity and
 a hash of the chunk ids and texts, so a changed chunk file never reuses vectors.
-The sentence-transformers import is deferred to SentenceTransformerEncoder, so
-this module and its tests run without the optional `dense` extra.
+The model is only downloaded and loaded when an OnnxEncoder is built, so tests
+run with a stub encoder and no model files.
 """
 
 import hashlib
@@ -30,25 +30,63 @@ class Encoder(Protocol):
         ...
 
 
-class SentenceTransformerEncoder:
-    def __init__(
-        self, model: str, revision: str, device: str, batch_size: int, max_seq: int
-    ) -> None:
-        from sentence_transformers import SentenceTransformer  # optional extra
+class OnnxEncoder:
+    """Transformer encoder run with onnxruntime: mean pooling over the attention
+    mask, then L2 normalisation (the E5 recipe). No torch, so it fits a small
+    serverless function (ADR-016)."""
 
-        self._model = SentenceTransformer(model, revision=revision, device=device)
-        self._model.max_seq_length = max_seq
+    def __init__(
+        self,
+        model: str,
+        revision: str,
+        onnx_file: str,
+        batch_size: int,
+        max_seq_length: int,
+    ) -> None:
+        import onnxruntime as ort
+        from huggingface_hub import hf_hub_download
+        from tokenizers import Tokenizer
+
+        def fetch(filename: str) -> str:
+            return hf_hub_download(model, filename, revision=revision)
+
+        self._tokenizer = Tokenizer.from_file(fetch("tokenizer.json"))
+        self._tokenizer.enable_truncation(max_length=max_seq_length)
+        self._tokenizer.enable_padding()
+        self._session = ort.InferenceSession(
+            fetch(onnx_file), providers=["CPUExecutionProvider"]
+        )
+        self._inputs = {i.name for i in self._session.get_inputs()}
         self._batch_size = batch_size
 
     def encode(self, texts: list[str]) -> Matrix:
-        out = self._model.encode(
-            texts,
-            batch_size=self._batch_size,
-            normalize_embeddings=True,
-            convert_to_numpy=True,
-            show_progress_bar=False,
+        out = [
+            self._encode_batch(texts[i : i + self._batch_size])
+            for i in range(0, len(texts), self._batch_size)
+        ]
+        return np.concatenate(out) if out else np.zeros((0, 0), dtype=np.float32)
+
+    def _encode_batch(self, texts: list[str]) -> Matrix:
+        enc = self._tokenizer.encode_batch(texts)
+        feed = {
+            "input_ids": np.array([e.ids for e in enc], dtype=np.int64),
+            "attention_mask": np.array([e.attention_mask for e in enc], dtype=np.int64),
+            "token_type_ids": np.array([e.type_ids for e in enc], dtype=np.int64),
+        }
+        hidden = self._session.run(
+            None, {k: v for k, v in feed.items() if k in self._inputs}
+        )[0]
+        return mean_pool_normalise(
+            np.asarray(hidden, dtype=np.float32), feed["attention_mask"]
         )
-        return np.asarray(out, dtype=np.float32)
+
+
+def mean_pool_normalise(hidden: Matrix, mask: npt.NDArray[np.int64]) -> Matrix:
+    """(batch, tokens, dim) hidden states to (batch, dim) unit vectors."""
+    m = mask[:, :, None].astype(np.float32)
+    pooled = (hidden * m).sum(axis=1) / np.maximum(m.sum(axis=1), 1e-9)
+    norms = np.linalg.norm(pooled, axis=1, keepdims=True)
+    return (pooled / np.maximum(norms, 1e-12)).astype(np.float32)
 
 
 class DenseRetriever:

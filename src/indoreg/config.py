@@ -81,16 +81,17 @@ class BM25Spec(_Strict):
 
 
 class DenseSpec(_Strict):
-    """A named dense model (FR-RET-2); a new model is a config change (FR-RET-3)."""
+    """A named dense model run with onnxruntime (FR-RET-2, ADR-016); a new model
+    is a config change (FR-RET-3)."""
 
     type: Literal["dense"]
-    model: str
+    model: str  # Hugging Face repo id
     revision: str  # pinned model commit, recorded in every result file
+    onnx_file: str  # path of the ONNX graph inside the repo
     query_prefix: str
     passage_prefix: str
     max_seq_length: PositiveInt
     batch_size: PositiveInt
-    device: Literal["cpu"]
 
 
 RetrieverSpec = Annotated[BM25Spec | DenseSpec, Field(discriminator="type")]
