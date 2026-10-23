@@ -1,3 +1,4 @@
+import json
 from collections.abc import Iterator, Sequence
 from pathlib import Path
 
@@ -121,3 +122,79 @@ def test_openapi_docs_render(client: TestClient) -> None:
     spec = client.get("/openapi.json").json()
     assert {"/search", "/health"} <= set(spec["paths"])
     assert client.get("/docs").status_code == 200
+
+
+def log_lines(err: str) -> list[dict]:
+    return [json.loads(x) for x in err.splitlines() if x.startswith("{")]
+
+
+def make_client(stub: Stub) -> TestClient:
+    return TestClient(create_app(load_settings(REPO_CONFIG), stub, CHUNKS))
+
+
+def test_request_id_header_body_and_logs(
+    stub: Stub, capsys: pytest.CaptureFixture[str]
+) -> None:
+    with make_client(stub) as c:
+        r = c.post("/search", json={"query": "rahasia pribadi"})
+        mine = c.get("/health", headers={"X-Request-ID": "trace-42"})
+        bad = c.get("/health", headers={"X-Request-ID": "x y\n{evil}"})
+    rid = r.headers["X-Request-ID"]
+    assert r.json()["request_id"] == rid and len(rid) == 32
+    assert mine.headers["X-Request-ID"] == "trace-42"
+    assert bad.headers["X-Request-ID"] != "x y\n{evil}"
+    logs = log_lines(capsys.readouterr().err)
+    search = next(x for x in logs if x["msg"] == "search")
+    request = next(x for x in logs if x["msg"] == "request" and x["request_id"] == rid)
+    assert search["request_id"] == rid and search["query_chars"] == 15
+    assert "query" not in search  # query text is off by default
+    assert request["status"] == 200 and request["path"] == "/search"
+    assert request["latency_ms"] >= 0
+    assert all("rahasia" not in json.dumps(x) for x in logs)
+
+
+def test_query_text_logged_only_when_enabled(
+    stub: Stub, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("INDOREG_LOGGING__LOG_QUERY_TEXT", "true")
+    with make_client(stub) as c:
+        c.post("/search", json={"query": "rahasia pribadi"})
+    search = next(x for x in log_lines(capsys.readouterr().err) if x["msg"] == "search")
+    assert search["query"] == "rahasia pribadi"
+
+
+def test_unhandled_error_is_500_with_request_id_and_no_trace(
+    stub: Stub, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def boom(query: str, top_k: int) -> list[RetrievalResult]:
+        raise RuntimeError("index exploded")
+
+    monkeypatch.setattr(stub, "search", boom)
+    with make_client(stub) as c:
+        r = c.post("/search", json={"query": "data"})
+    assert r.status_code == 500
+    assert r.json() == {
+        "detail": "internal server error",
+        "request_id": r.headers["X-Request-ID"],
+    }
+    assert "exploded" not in r.text
+    err = next(x for x in log_lines(capsys.readouterr().err) if "exc" in x)
+    assert "index exploded" in err["exc"]
+
+
+def test_bad_config_exits_with_a_clear_error(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("INDOREG_CONFIG", str(tmp_path / "missing.yaml"))
+    with pytest.raises(SystemExit, match="invalid configuration: config file"):
+        create_app()
+    bad = tmp_path / "bad.yaml"
+    bad.write_text(
+        REPO_CONFIG.read_text(encoding="utf-8").replace(
+            "max_top_k: 20", "max_top_k: -1"
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("INDOREG_CONFIG", str(bad))
+    with pytest.raises(SystemExit, match="invalid configuration"):
+        create_app()
