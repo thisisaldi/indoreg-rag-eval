@@ -13,7 +13,8 @@ chunking: {fixed: {size_chars: 100, overlap_chars: 10}}
 logging: {level: INFO, log_query_text: false}
 retrieval: {bm25: {k1: 1.5, b: 0.75},
   retrievers: {bm25-basic: {type: bm25, preprocess: basic, index_title: false}}}
-search: {default_top_k: 5, max_top_k: 20, retriever: bm25-basic,
+search: {default_top_k: 5, max_top_k: 20, max_query_chars: 500,
+  retriever: bm25-basic,
   strategy: article}
 eval: {retrievers: [bm25-basic], strategies: [article],
   baseline: bm25-basic/article, pairs: [],

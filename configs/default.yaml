@@ -55,6 +55,7 @@ retrieval:
 search:
   default_top_k: 5
   max_top_k: 20
+  max_query_chars: 500
   retriever: bm25-basic
   strategy: article
 
