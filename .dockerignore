@@ -1,0 +1,17 @@
+# Only what the image needs: pyproject, lock, README, src, configs, data/chunks.
+.git
+.venv
+**/__pycache__
+.mypy_cache
+.ruff_cache
+.pytest_cache
+.env
+scratch
+data/raw
+data/processed
+data/cache
+reports
+eval
+tests
+docs
+scripts
