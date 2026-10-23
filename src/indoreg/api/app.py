@@ -17,6 +17,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 
 from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from indoreg.api.models import (
@@ -105,6 +106,14 @@ def create_app(
         " regulations. Retrieval only, not legal advice.",
         lifespan=lifespan,
     )
+    if cfg.cors_origins:  # the portfolio site calls /search from the browser
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origins=cfg.cors_origins,
+            allow_methods=["GET", "POST"],
+            allow_headers=["Content-Type", REQUEST_ID_HEADER],
+            expose_headers=[REQUEST_ID_HEADER],
+        )
 
     @app.middleware("http")
     async def request_id_and_log(

@@ -11,6 +11,7 @@ paths:
   processed: data/processed
   chunks: data/chunks
   cache: data/cache
+  models: data/models
   results: reports/results
 
 chunking:
@@ -29,6 +30,7 @@ search:
   default_top_k: 5
   max_top_k: 20
   max_query_chars: 500
+  cors_origins: []
   retriever: bm25-basic
   strategy: article
 

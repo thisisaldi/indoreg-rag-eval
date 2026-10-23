@@ -44,6 +44,7 @@ class PathsConfig(_Strict):
     processed: Path
     chunks: Path
     cache: Path
+    models: Path  # model files as plain files (no symlinks), ADR-019
     results: Path
 
 
@@ -120,6 +121,7 @@ class SearchConfig(_Strict):
     default_top_k: PositiveInt
     max_top_k: PositiveInt
     max_query_chars: PositiveInt  # after stripping whitespace (FR-API-3)
+    cors_origins: list[str]  # browser origins allowed to call the API
     retriever: str  # name in retrieval.retrievers
     strategy: Strategy  # chunk strategy served by search
 

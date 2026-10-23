@@ -18,6 +18,14 @@ dependencies = [
     "uvicorn>=0.54.0",
 ]
 
+# Vercel deployment (T-35, ADR-016): module-level app and a build step that
+# bakes the model and embeddings into the function.
+[tool.vercel]
+entrypoint = "src.vercel_app:app"
+
+[tool.vercel.scripts]
+build = "python scripts/vercel_build.py"
+
 [build-system]
 requires = ["uv_build>=0.12.7,<0.13"]
 build-backend = "uv_build"
