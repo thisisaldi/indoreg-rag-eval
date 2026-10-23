@@ -150,17 +150,18 @@ Links: BR7, NFR6
 - [x] CI runs eval on the fixture and fails if metrics drop below a recorded floor (`tests/test_ci_eval.py`, floor in `floor.json`, runs with pytest in CI)
 - Acceptance: a deliberate bug in BM25 makes CI fail (verified 23 Oct 2026: reversing the BM25 sort order dropped dev recall@1 from 0.90 to 0.00 and the test failed; reverted)
 
-### [ ] T-16 Dense retrieval, model 1 (Day 7, 1.5h)
+### [x] T-16 Dense retrieval, model 1 (Day 7, 1.5h)
 Links: FR-RET-2, BR3
-- [ ] Sentence Transformers retriever, embeddings cached by model name and chunk hash
-- [ ] Run on both chunkers, same queries
-- [ ] Record embedding time and index size
-- Acceptance: first BM25 vs dense table committed
+- [x] Dense retriever (onnxruntime, ADR-016; `retrieval/dense.py`), embeddings cached by model identity plus chunk ids and texts
+- [x] Run on both chunkers, same queries (`dense-e5-small`, ADR-006)
+- [x] Record embedding time and index size (in the result JSON and table)
+- Acceptance: first BM25 vs dense table committed: `reports/results/20261023T072143Z-28cc2a8.md`
+- Dev reading (test not used for choices): `dense-e5-small/article` vs `bm25-basic/article` shows no established difference on any metric (all CIs include 0; nDCG@10 -0.012 [-0.12, +0.10], 9/9/12). Fixed chunks lose to article chunks for dense too (MRR -0.223 [-0.31, -0.14]). A cached rerun reproduced every per-query metric. Labels are LLM-checked, not human-verified (ADR-015).
 
 ### [ ] T-17 Dense model 2 (and 3 if time) (Day 8, 0.75h)
 Links: FR-RET-3
-- [ ] Verify current Indonesian embedding benchmarks before choosing
-- [ ] Add model via config only, no code change
+- [ ] Verify current Indonesian embedding benchmarks before choosing (done for model 1, ADR-006)
+- [ ] Add model via config only, no code change (needs an ONNX export that fits the Vercel bundle, ADR-016, or is marked eval-only)
 - Acceptance: model comparison table with latency per model
 
 ### [ ] T-18 Hybrid retrieval with RRF (Day 8, 0.75h)
@@ -235,6 +236,13 @@ Links: NFR7, FR-EVAL-8
 - [ ] Cost note: cash cost vs estimated compute
 - Acceptance: latency table in reports, method described
 
+### [ ] T-35 Vercel deployment (added 23 Oct 2026, ADR-016)
+Links: BR6, ADR-016
+- [ ] Deploy the API as a Vercel Hobby Python function serving the retriever chosen on dev
+- [ ] Measure bundle size (limit 500 MB uncompressed), memory, cold-start and warm latency; confirm CPU architecture
+- [ ] CORS allowlist for the portfolio site's origin, from config
+- Acceptance: deployed `/health` and `/search` answer requests from the portfolio origin, measurements recorded
+
 ### [ ] T-28 CI builds image (Day 12, 0.5h)
 Links: BR7
 - [ ] CI builds the Docker image and runs a smoke test against `/health`
@@ -282,3 +290,4 @@ Links: BR5, BR8
 | 22 Oct 2026 | T-08 workflow written (not yet run on GitHub). T-06 done: pdfplumber extraction, noise filter and OCR-tolerant segmentation ported from the spike, 273 articles from 4 documents with offsets identical to the spike, deterministic outputs. T-07 article chunker and T-13 basic BM25 done; `make search` CLI for a first end-to-end demo. | T-01 page-image check and T-03 manifest fields still open; 3 documents show "not yet recorded" for status and source. | T-07 fixed-size chunker and BAB context; labeling (T-09 to T-11). |
 | 23 Oct 2026 | T-15 CI eval with floor; T-07 fixed chunker, chapter context, multi-article chunk mapping; T-13 Indonesian and title-indexing BM25 variants (ADR-007); T-19 bootstrap CIs and paired win/loss, dataset hash made line-ending independent. Results: `reports/results/20261023T025613Z-a20cbfe`. | Dense retrieval (T-16) needs sentence-transformers and torch; Windows Application Control may block their native libraries. T-01 page check and T-03 manifest fields still with Aldi. | T-20 chunking ablation write-up, then T-16. |
 | 23 Oct 2026 | T-20: per-retriever paired fixed-vs-article comparison in the runner (1 test), rerun on clean commit 0cb8d5c (metrics identical to the a20cbfe file, whose commit is no longer in history; that file is superseded by 20261023T065417Z-0cb8d5c), write-up in `reports/chunking_ablation.md`. | None. | T-16 dense retrieval: ask Aldi about sentence-transformers and torch first. |
+| 23 Oct 2026 | T-16: torch blocked by Application Control and too big for Vercel Hobby, so dense runs on onnxruntime (ADR-016, approved by Aldi); model 1 multilingual-e5-small int8 ONNX (ADR-006). Results `reports/results/20261023T072143Z-28cc2a8`. Added T-35 (Vercel deploy). | Portfolio origin for CORS needed by T-35. BGE-M3 does not fit this machine's memory. | T-17 second model. |

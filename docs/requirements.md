@@ -54,7 +54,7 @@ Primary persona: a compliance analyst who needs the exact article and its source
 
 ### Retrieval (FR-RET)
 - FR-RET-1: BM25 retriever with a basic tokenizer and an Indonesian-aware preprocessing variant.
-- FR-RET-2: Dense retriever using Sentence Transformers, with embeddings cached on disk keyed by model name and chunk file hash.
+- FR-RET-2: Dense retriever using sentence-embedding models (run with onnxruntime, ADR-016), with embeddings cached on disk keyed by model name and chunk file hash.
 - FR-RET-3: At least 2 embedding models compared (3 if time allows).
 - FR-RET-4: Hybrid retriever using reciprocal rank fusion over BM25 and the best dense model.
 - FR-RET-5 (stretch): Cross-encoder reranker over top-k candidates.
@@ -103,7 +103,7 @@ Primary persona: a compliance analyst who needs the exact article and its source
 
 - At least 10 text-extractable official regulations exist for the chosen topic.
 - A CPU-only machine is enough for embedding a corpus of this size.
-- Sentence Transformers models for Indonesian can be downloaded and cached locally.
+- Sentence-embedding models for Indonesian can be downloaded and cached locally (as ONNX, ADR-016).
 
 ## 8. Risks
 
@@ -127,5 +127,5 @@ Primary persona: a compliance analyst who needs the exact article and its source
 ## 10. Open decisions
 
 - OD1: Confirm topic (personal data protection) after T-01.
-- OD2: Embedding models to compare. Starting candidates: BGE-M3, multilingual-e5. Verify current Indonesian benchmarks before committing.
+- OD2: Embedding models to compare. Model 1 decided (ADR-006: multilingual-e5-small int8 ONNX); model 2 in T-17.
 - OD3: Whether to run the reranker, decided on Day 10 based on schedule.

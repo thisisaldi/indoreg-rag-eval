@@ -6,10 +6,14 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.11"
 dependencies = [
+    "huggingface-hub>=2.2.0",
+    "numpy>=2.3",
+    "onnxruntime>=1.31.0",
     "pdfplumber>=0.11.10",
     "pydantic>=2.14.1",
     "pydantic-settings>=2.16.1",
     "pyyaml>=6.0.3",
+    "tokenizers>=0.23.3",
 ]
 
 [build-system]
@@ -30,6 +34,11 @@ python_version = "3.11"
 strict = true
 files = ["src"]
 
+# onnxruntime ships no type information.
+[[tool.mypy.overrides]]
+module = ["onnxruntime", "onnxruntime.*"]
+ignore_missing_imports = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
@@ -40,3 +49,4 @@ dev = [
     "pytest>=9.1.1",
     "ruff>=0.17.1",
 ]
+

@@ -33,9 +33,10 @@ Format: one entry per decision. Status is Accepted, Proposed, or Superseded. Add
 - Consequences: No cross-extractor comparison was run, so T-04's "try 2 extractors" is not satisfied. For the two image-based documents (ADR-009) the result depends on the text layer already in the PDF. Revisit if another extractor can be run (for example on another machine or in CI).
 
 ## ADR-006: Embedding models
-- Status: Proposed (decide in T-16 and T-17)
-- Candidates: BGE-M3, multilingual-e5 (verify current Indonesian benchmarks before choosing).
-- Decision: TBD. Record model name and revision hash.
+- Status: Accepted for model 1 (23 Oct 2026, T-16); model 2 open (T-17).
+- Context: No Indonesian-specific embedding leaderboard was found (searched 23 Oct 2026). The closest evidence is the Indonesian column of MIRACL dev nDCG@10 in the BGE-M3 paper (arXiv 2402.03216, Table 1, read through a fetched summary, not checked against the PDF): BM25 29.7, mE5-large 52.9, BGE-M3 dense 56.1. MMTEB (arXiv 2502.13595) reports multilingual-e5-large-instruct as the best public model overall, not per language. The served model must also fit a Vercel Hobby function (ADR-016), which rules out torch and BGE-M3 (about 2.3 GB of weights against a 2 GB memory cap).
+- Decision: Model 1 is `intfloat/multilingual-e5-small`, the authors' int8 ONNX export (`onnx/model_qint8_avx512_vnni.onnx`, 118 MB), revision `614241f622f53c4eeff9890bdc4f31cfecc418b3`, prefixes "query: " and "passage: ", mean pooling, max 512 tokens. The eval measures this exact int8 file, the one that would be served. Model 2 candidates for T-17: `multilingual-e5-base` int8 (279 MB, bundle fit to be measured); BGE-M3 only as an eval-only reference marked not deployable, if it can run on the dev machine at all.
+- Consequences: 512 tokens truncate the longest articles (9 article chunks exceed 2000 characters); check them in error analysis (T-21). int8 may cost quality against the full-precision model; that cost is not measured. First result: `reports/results/20261023T072143Z-28cc2a8`.
 
 ## ADR-007: BM25 library and Indonesian preprocessing
 - Status: Accepted (23 Oct 2026, T-13)
@@ -106,6 +107,12 @@ Format: one entry per decision. Status is Accepted, Proposed, or Superseded. Add
 - Context: Aldi asked Claude to do the label verification itself instead of checking every label by hand.
 - Decision: Claude checks every drafted label against the PDF (rendered page images for the two scanned documents, embedded text for the two native ones), records the check in `eval/drafts/CHECK_NOTES.md`, and writes `eval/dataset.jsonl` from the checked drafts with a seeded, type-stratified dev/test split (T-11). The file is then frozen (tag `dataset-v1`); after that, Claude does not edit labels or the test split.
 - Consequences: Labels are drafted and checked by the same model: a self-check, not independent verification. Everything that reports results (README, case study, result tables) must say "labels drafted and checked by an LLM, not human-verified". Label errors found later (for example in error analysis, T-21) are fixed with a version bump and a changelog line (ADR-004). A human spot-check of the test split is recommended before any public claim.
+
+## ADR-016: Vercel Hobby deployment target, ONNX instead of torch
+- Status: Accepted (23 Oct 2026), at Aldi's request: the API will be deployed on Vercel's free tier and called from Aldi's portfolio site.
+- Context: Vercel Hobby Python functions are limited to 500 MB uncompressed bundle and 2 GB memory (vercel.com/docs/functions/limitations, read 23 Oct 2026; a 5 GB bundle beta exists but Hobby eligibility is unconfirmed). CPU torch alone takes most of that bundle. Torch is also blocked by Windows Application Control on the dev machine (WinError 4551 loading torch_python.dll), while onnxruntime loads.
+- Decision: Dense models run with onnxruntime, tokenizers and huggingface-hub (base dependencies; no torch, no sentence-transformers). Model files come from the Hugging Face Hub at a pinned revision. The eval and the API use the same encoder (`retrieval/dense.py`). The served retriever is chosen on dev results; if dense or hybrid does not beat BM25 with a CI excluding 0, BM25 is served. The Docker image (T-26) stays for local reproduction (BR6); Vercel deployment is a separate task (T-35).
+- Consequences: Model choice is limited to models with an ONNX export that fits the bundle. Bundle size, cold-start latency and CPU architecture on Vercel are not measured yet (T-35). Replaces "Sentence Transformers" as the library named in FR-RET-2; the models are still sentence-embedding models.
 
 ---
 
