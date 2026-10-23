@@ -225,12 +225,13 @@ Links: FR-RET-5
 
 ## M5 Service (Day 11 to 12)
 
-### [ ] T-24 FastAPI service (Day 11, 1.75h)
+### [x] T-24 FastAPI service (Day 11, 1.75h)
 Links: BR6, FR-API-1 to FR-API-6
-- [ ] `POST /search`, `GET /health`
-- [ ] Pydantic request and response models, top_k bounds, query length limit
-- [ ] Response includes document status and disclaimer
-- [ ] Tests: valid request, empty query, over-length, bad top_k, response schema
+- [x] `POST /search`, `GET /health` (`src/indoreg/api/`, app factory with the retriever built once in the lifespan; `make serve`)
+- [x] Pydantic request and response models, top_k bounds, query length limit (bounds from config: `search.default_top_k`, `max_top_k`, new `max_query_chars` 500)
+- [x] Response includes document status and disclaimer (plus source URL, title, article and the overlapped `articles`)
+- [x] Tests: valid request, empty query, over-length, bad top_k, response schema (`tests/test_api.py`, stub retriever; 12 tests)
+- Dependencies added with Aldi's approval: fastapi, uvicorn; httpx (dev, for the test client). Smoke test on the real index (bm25-basic, 273 chunks): `/health` ok, `/search` answers, whitespace query 422. Request ID middleware and request logging are T-25; CORS is T-35.
 - Acceptance: all API tests pass, OpenAPI docs render
 
 ### [ ] T-25 Structured logging and config validation (Day 11, 1.25h)
@@ -311,3 +312,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-36 (from T-21): section headings no longer end up in article spans (ADR-017); `scripts/compare_runs.py`; results `reports/results/20261023T074949Z-ed9dbfc`, before/after `reports/results/20261023T074949Z-ed9dbfc.vs-a0d608d.md`. Neutral on dev; small drop on test for hybrid (reported, not used to decide). | Serving choice still open (hybrid vs bm25-id-title now borderline on dev). | T-22 reranker or skip, then T-23. |
 | 23 Oct 2026 | T-22 skipped (Aldi), reasons in T-22. | None. | T-23 clean-clone reproduction and tag. |
 | 23 Oct 2026 | T-23: clean-clone reproduction exact (`reports/results/20261023T080406Z-a67e1de`), tag `v0.1-benchmark`. | Serving choice, q-022/q-033 and q-021 decisions with Aldi. | M5: T-24 FastAPI service (needs fastapi, ask first). |
+| 23 Oct 2026 | T-24: FastAPI `/search` and `/health`, config-driven limits, 12 API tests, `make serve`. | Serving retriever still bm25-basic (config) until Aldi decides. | T-25 request IDs, JSON request logs, fail-fast config. |
