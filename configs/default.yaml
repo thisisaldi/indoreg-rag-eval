@@ -39,6 +39,8 @@ search:
 eval:
   retrievers: [bm25-basic, bm25-id, bm25-id-title]
   strategies: [article, fixed]
+  baseline: bm25-basic/article
+  bootstrap: {iterations: 1000, seed: 42, confidence: 0.95}
   splits: [dev, test]
   recall_ks: [5, 10]
   ndcg_k: 10

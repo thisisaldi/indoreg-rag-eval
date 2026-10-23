@@ -19,7 +19,8 @@ from pathlib import Path
 from statistics import mean
 from typing import Any
 
-from indoreg.config import Settings, load_settings
+from indoreg.config import BootstrapConfig, Settings, load_settings
+from indoreg.eval.bootstrap import bootstrap_ci, paired_diff_ci, win_loss
 from indoreg.eval.dataset import DatasetError, Query, load_dataset
 from indoreg.eval.metrics import ndcg_at_k, recall_at_k, reciprocal_rank
 from indoreg.logging import configure_logging, get_logger
@@ -76,14 +77,48 @@ def evaluate(
 
 
 def summarize(
-    rows: Sequence[dict[str, Any]], metric_keys: Sequence[str]
+    rows: Sequence[dict[str, Any]],
+    metric_keys: Sequence[str],
+    boot: BootstrapConfig,
 ) -> dict[str, Any]:
-    out: dict[str, Any] = {"n": len(rows)}
+    out: dict[str, Any] = {"n": len(rows), "ci": {}}
     for key in metric_keys:
         out[key] = mean(r[key] for r in rows) if rows else None
+        ci = bootstrap_ci(
+            [r[key] for r in rows], boot.iterations, boot.seed, boot.confidence
+        )
+        out["ci"][key] = ci.model_dump() if ci else None
     lat = [r["latency_ms"] for r in rows]
     out["latency_p50_ms"] = percentile(lat, 50) if lat else None
     out["latency_p95_ms"] = percentile(lat, 95) if lat else None
+    return out
+
+
+def compare(
+    results: dict[str, dict[str, Any]],
+    baseline: str,
+    metric_keys: Sequence[str],
+    boot: BootstrapConfig,
+) -> dict[str, dict[str, Any]]:
+    """Paired comparison of every run with the baseline, per split and metric:
+    mean difference with bootstrap CI, and per-query wins/losses/ties."""
+    out: dict[str, dict[str, Any]] = {}
+    for split, by_run in results.items():
+        base = by_run[baseline]["queries"]
+        out[split] = {}
+        for name, res in by_run.items():
+            if name == baseline:
+                continue
+            rows = res["queries"]
+            out[split][name] = {}
+            for key in metric_keys:
+                a = [r[key] for r in rows]
+                b = [r[key] for r in base]
+                diff = paired_diff_ci(a, b, boot.iterations, boot.seed, boot.confidence)
+                out[split][name][key] = {
+                    "diff": diff.model_dump() if diff else None,
+                    "win_loss": win_loss(a, b).model_dump(),
+                }
     return out
 
 
@@ -111,6 +146,22 @@ def _fmt(value: float | None, digits: int) -> str:
     return "n/a" if value is None else f"{value:.{digits}f}"
 
 
+def _with_ci(value: float | None, ci: dict[str, float] | None) -> str:
+    if value is None or ci is None:
+        return "n/a"
+    return f"{value:.3f} [{ci['low']:.2f}, {ci['high']:.2f}]"
+
+
+def _diff_cell(c: dict[str, Any]) -> str:
+    d, wl = c["diff"], c["win_loss"]
+    if d is None:
+        return "n/a"
+    return (
+        f"{d['mean']:+.3f} [{d['low']:+.2f}, {d['high']:+.2f}]"
+        f" {wl['wins']}/{wl['losses']}/{wl['ties']}"
+    )
+
+
 def markdown(result: dict[str, Any]) -> str:
     keys = result["metric_keys"]
     head = [
@@ -135,11 +186,15 @@ def markdown(result: dict[str, Any]) -> str:
         ]
     ds, git = result["dataset"], result["git"]
     dirty = " (dirty)" if git["dirty"] else ""
+    boot = result["bootstrap"]
+    pct = round(boot["confidence"] * 100)
     lines += [
         f"Dataset `{ds['path']}` (sha256 {ds['sha256'][:12]}),"
         f" git {git['sha'][:7]}{dirty}.",
-        "Bootstrap confidence intervals arrive with T-19; without them, do not call a"
-        " difference between retrievers real.",
+        f"Cells are mean [{pct}% bootstrap CI] over queries ({boot['iterations']}"
+        f" resamples, seed {boot['seed']}). Comparisons are paired against"
+        f" `{result['baseline']}`: difference [CI] and per-query wins/losses/ties."
+        " A difference whose CI includes 0 is not established.",
         "",
     ]
     for split, by_ret in result["results"].items():
@@ -147,10 +202,22 @@ def markdown(result: dict[str, Any]) -> str:
         lines.append("|" + "---|" * len(head))
         for name, res in by_ret.items():
             s = res["summary"]
-            cells = [name, str(s["n"]), *[_fmt(s[k], 3) for k in keys]]
+            cells = [name, str(s["n"]), *[_with_ci(s[k], s["ci"][k]) for k in keys]]
             cells += [_fmt(s["latency_p50_ms"], 2), _fmt(s["latency_p95_ms"], 2)]
             lines.append("| " + " | ".join(cells) + " |")
         lines.append("")
+        cmp = result["comparisons"].get(split, {})
+        if cmp and any(res["summary"]["n"] for res in by_ret.values()):
+            lines += [
+                f"vs `{result['baseline']}`:",
+                "",
+                "| retriever | " + " | ".join(head[2 : 2 + len(keys)]) + " |",
+                "|" + "---|" * (len(keys) + 1),
+            ]
+            for name, by_key in cmp.items():
+                cells = [name, *[_diff_cell(by_key[k]) for k in keys]]
+                lines.append("| " + " | ".join(cells) + " |")
+            lines.append("")
     return "\n".join(lines)
 
 
@@ -174,9 +241,10 @@ def run(settings: Settings, dataset_path: Path, allow_drafts: bool) -> dict[str,
                     retriever, chunks, split_q, cfg.recall_ks, cfg.ndcg_k, cfg.depth
                 )
                 results[split][f"{name}/{strategy}"] = {
-                    "summary": summarize(rows, metric_keys),
+                    "summary": summarize(rows, metric_keys, cfg.bootstrap),
                     "queries": rows,
                 }
+    comparisons = compare(results, cfg.baseline, metric_keys, cfg.bootstrap)
     now = datetime.now(UTC)
     git = git_state()
     run_id = now.strftime("%Y%m%dT%H%M%SZ") + f"-{git['sha'][:7]}"
@@ -197,6 +265,9 @@ def run(settings: Settings, dataset_path: Path, allow_drafts: bool) -> dict[str,
         "chunks": n_chunks,
         "metric_keys": metric_keys,
         "results": results,
+        "baseline": cfg.baseline,
+        "bootstrap": cfg.bootstrap.model_dump(),
+        "comparisons": comparisons,
     }
 
 

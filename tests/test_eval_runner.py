@@ -66,6 +66,8 @@ retrieval: {{bm25: {{k1: 1.5, b: 0.75}},
 search: {{default_top_k: 5, max_top_k: 20, retriever: bm25-basic,
   strategy: article}}
 eval: {{retrievers: [bm25-basic], strategies: [article],
+  baseline: bm25-basic/article,
+  bootstrap: {{iterations: 200, seed: 42, confidence: 0.95}},
   splits: [dev, test], recall_ks: [1, 2], ndcg_k: 2,
   depth: 3}}
 """,
@@ -183,3 +185,21 @@ def test_percentile_nearest_rank() -> None:
     assert percentile([5.0, 1.0, 3.0, 2.0, 4.0], 50) == 3.0
     assert percentile([5.0, 1.0, 3.0, 2.0, 4.0], 95) == 5.0
     assert percentile([7.0], 95) == 7.0
+
+
+def test_summary_has_ci_and_compare_is_paired(tmp_path: Path) -> None:
+    from indoreg.config import BootstrapConfig
+    from indoreg.eval.runner import compare
+
+    settings = load_settings(setup(tmp_path, DATA))
+    res = run(settings, settings.paths.dataset, False)
+    s = res["results"]["dev"]["bm25-basic/article"]["summary"]
+    assert s["ci"]["rr"]["low"] <= s["rr"] <= s["ci"]["rr"]["high"]
+    assert res["comparisons"] == {"dev": {}, "test": {}}  # only the baseline ran
+    rows_a = [{"m": 1.0}, {"m": 0.0}, {"m": 1.0}]
+    rows_b = [{"m": 0.0}, {"m": 0.0}, {"m": 1.0}]
+    results = {"dev": {"base": {"queries": rows_b}, "new": {"queries": rows_a}}}
+    boot = BootstrapConfig(iterations=100, seed=1, confidence=0.95)
+    c = compare(results, "base", ["m"], boot)["dev"]["new"]["m"]
+    assert c["win_loss"] == {"wins": 1, "losses": 0, "ties": 2}
+    assert c["diff"]["mean"] == pytest.approx(1 / 3)
