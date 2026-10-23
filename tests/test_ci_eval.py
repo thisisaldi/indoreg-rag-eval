@@ -26,13 +26,13 @@ def fixture_settings(tmp_path: Path) -> Settings:
     cfg.write_text(
         f"""
 paths: {{raw: r, manifest: m, dataset: {(FIXTURE / "dataset.jsonl").as_posix()},
-  processed: p, chunks: {(FIXTURE / "chunks").as_posix()}, cache: k,
+  processed: p, chunks: {(FIXTURE / "chunks").as_posix()}, cache: k, models: mo,
   results: {(tmp_path / "out").as_posix()}}}
 chunking: {{fixed: {{size_chars: 100, overlap_chars: 10}}}}
 logging: {{level: WARNING, log_query_text: false}}
 retrieval: {{bm25: {{k1: 1.5, b: 0.75}},
   retrievers: {{bm25-basic: {{type: bm25, preprocess: basic, index_title: false}}}}}}
-search: {{default_top_k: 5, max_top_k: 20, max_query_chars: 500,
+search: {{default_top_k: 5, max_top_k: 20, max_query_chars: 500, cors_origins: [],
   retriever: bm25-basic,
   strategy: article}}
 eval: {{retrievers: [bm25-basic], strategies: [article],
