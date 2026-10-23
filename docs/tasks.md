@@ -158,11 +158,12 @@ Links: FR-RET-2, BR3
 - Acceptance: first BM25 vs dense table committed: `reports/results/20261023T072143Z-28cc2a8.md`
 - Dev reading (test not used for choices): `dense-e5-small/article` vs `bm25-basic/article` shows no established difference on any metric (all CIs include 0; nDCG@10 -0.012 [-0.12, +0.10], 9/9/12). Fixed chunks lose to article chunks for dense too (MRR -0.223 [-0.31, -0.14]). A cached rerun reproduced every per-query metric. Labels are LLM-checked, not human-verified (ADR-015).
 
-### [ ] T-17 Dense model 2 (and 3 if time) (Day 8, 0.75h)
+### [x] T-17 Dense model 2 (and 3 if time) (Day 8, 0.75h)
 Links: FR-RET-3
-- [ ] Verify current Indonesian embedding benchmarks before choosing (done for model 1, ADR-006)
-- [ ] Add model via config only, no code change (needs an ONNX export that fits the Vercel bundle, ADR-016, or is marked eval-only)
-- Acceptance: model comparison table with latency per model
+- [x] Verify current Indonesian embedding benchmarks before choosing (ADR-006)
+- [x] Add model via config only, no code change (`dense-e5-base`; the runner also gained `eval.pairs` for a direct paired model comparison, which is an eval feature, not a model change)
+- Acceptance: model comparison table with latency per model: `reports/results/20261023T073208Z-cfff220.md` (rows, latency, index size, cold embedding time, and the paired `dense-e5-base/article vs dense-e5-small/article` table)
+- Dev reading: no established difference between the two models or between either model and `bm25-basic/article` (all CIs include 0). e5-small is the hybrid member (ADR-006). Model 3 skipped: BGE-M3 does not fit this machine's memory (ADR-016).
 
 ### [ ] T-18 Hybrid retrieval with RRF (Day 8, 0.75h)
 Links: FR-RET-4
@@ -240,7 +241,7 @@ Links: NFR7, FR-EVAL-8
 Links: BR6, ADR-016
 - [ ] Deploy the API as a Vercel Hobby Python function serving the retriever chosen on dev
 - [ ] Measure bundle size (limit 500 MB uncompressed), memory, cold-start and warm latency; confirm CPU architecture
-- [ ] CORS allowlist for the portfolio site's origin, from config
+- [ ] CORS allowlist for the portfolio site's origin, from config (origin: https://naufaldi.vercel.app, given by Aldi 23 Oct 2026)
 - Acceptance: deployed `/health` and `/search` answer requests from the portfolio origin, measurements recorded
 
 ### [ ] T-28 CI builds image (Day 12, 0.5h)
@@ -291,3 +292,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-15 CI eval with floor; T-07 fixed chunker, chapter context, multi-article chunk mapping; T-13 Indonesian and title-indexing BM25 variants (ADR-007); T-19 bootstrap CIs and paired win/loss, dataset hash made line-ending independent. Results: `reports/results/20261023T025613Z-a20cbfe`. | Dense retrieval (T-16) needs sentence-transformers and torch; Windows Application Control may block their native libraries. T-01 page check and T-03 manifest fields still with Aldi. | T-20 chunking ablation write-up, then T-16. |
 | 23 Oct 2026 | T-20: per-retriever paired fixed-vs-article comparison in the runner (1 test), rerun on clean commit 0cb8d5c (metrics identical to the a20cbfe file, whose commit is no longer in history; that file is superseded by 20261023T065417Z-0cb8d5c), write-up in `reports/chunking_ablation.md`. | None. | T-16 dense retrieval: ask Aldi about sentence-transformers and torch first. |
 | 23 Oct 2026 | T-16: torch blocked by Application Control and too big for Vercel Hobby, so dense runs on onnxruntime (ADR-016, approved by Aldi); model 1 multilingual-e5-small int8 ONNX (ADR-006). Results `reports/results/20261023T072143Z-28cc2a8`. Added T-35 (Vercel deploy). | Portfolio origin for CORS needed by T-35. BGE-M3 does not fit this machine's memory. | T-17 second model. |
+| 23 Oct 2026 | T-17: `dense-e5-base` added by config; `eval.pairs` for direct paired comparisons (1 test). Clean cold run `reports/results/20261023T073208Z-cfff220` (embedding from scratch reproduced the cached metrics exactly). e5-small chosen for hybrid on dev (ADR-006). | None. | T-18 hybrid RRF, k and depth tuned on dev only. |

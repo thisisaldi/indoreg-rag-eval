@@ -33,10 +33,12 @@ Format: one entry per decision. Status is Accepted, Proposed, or Superseded. Add
 - Consequences: No cross-extractor comparison was run, so T-04's "try 2 extractors" is not satisfied. For the two image-based documents (ADR-009) the result depends on the text layer already in the PDF. Revisit if another extractor can be run (for example on another machine or in CI).
 
 ## ADR-006: Embedding models
-- Status: Accepted for model 1 (23 Oct 2026, T-16); model 2 open (T-17).
+- Status: Accepted (23 Oct 2026; model 1 in T-16, model 2 and the hybrid member in T-17).
 - Context: No Indonesian-specific embedding leaderboard was found (searched 23 Oct 2026). The closest evidence is the Indonesian column of MIRACL dev nDCG@10 in the BGE-M3 paper (arXiv 2402.03216, Table 1, read through a fetched summary, not checked against the PDF): BM25 29.7, mE5-large 52.9, BGE-M3 dense 56.1. MMTEB (arXiv 2502.13595) reports multilingual-e5-large-instruct as the best public model overall, not per language. The served model must also fit a Vercel Hobby function (ADR-016), which rules out torch and BGE-M3 (about 2.3 GB of weights against a 2 GB memory cap).
 - Decision: Model 1 is `intfloat/multilingual-e5-small`, the authors' int8 ONNX export (`onnx/model_qint8_avx512_vnni.onnx`, 118 MB), revision `614241f622f53c4eeff9890bdc4f31cfecc418b3`, prefixes "query: " and "passage: ", mean pooling, max 512 tokens. The eval measures this exact int8 file, the one that would be served. Model 2 candidates for T-17: `multilingual-e5-base` int8 (279 MB, bundle fit to be measured); BGE-M3 only as an eval-only reference marked not deployable, if it can run on the dev machine at all.
 - Consequences: 512 tokens truncate the longest articles (9 article chunks exceed 2000 characters); check them in error analysis (T-21). int8 may cost quality against the full-precision model; that cost is not measured. First result: `reports/results/20261023T072143Z-28cc2a8`.
+- Model 2 (T-17): `intfloat/multilingual-e5-base`, int8 ONNX `onnx/model_qint8_avx512_vnni.onnx` (279 MB), revision `d128750597153bb5987e10b1c3493a34e5a4502a`, same prefixes and pooling. BGE-M3 was not run (memory, ADR-016).
+- Hybrid member (T-18), chosen on dev from `reports/results/20261023T073208Z-cfff220`: e5-base vs e5-small on article chunks shows no established difference (nDCG@10 +0.042 [-0.06, +0.15], 11/10/9; MRR +0.059 [-0.04, +0.18]), while e5-base has a 2.4x larger model file (279 vs 118 MB), a slower dev p50 (15.11 vs 8.79 ms) and a cold article-chunk embedding time of 60.4 s vs 35.0 s. T-18 fuses BM25 with e5-small. Revisit if a larger dev set or label fixes (T-21) separate the two models.
 
 ## ADR-007: BM25 library and Indonesian preprocessing
 - Status: Accepted (23 Oct 2026, T-13)
