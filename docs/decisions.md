@@ -116,6 +116,12 @@ Format: one entry per decision. Status is Accepted, Proposed, or Superseded. Add
 - Decision: Dense models run with onnxruntime, tokenizers and huggingface-hub (base dependencies; no torch, no sentence-transformers). Model files come from the Hugging Face Hub at a pinned revision. The eval and the API use the same encoder (`retrieval/dense.py`). The served retriever is chosen on dev results; if dense or hybrid does not beat BM25 with a CI excluding 0, BM25 is served. The Docker image (T-26) stays for local reproduction (BR6); Vercel deployment is a separate task (T-35).
 - Consequences: Model choice is limited to models with an ONNX export that fits the bundle. Bundle size, cold-start latency and CPU architecture on Vercel are not measured yet (T-35). Replaces "Sentence Transformers" as the library named in FR-RET-2; the models are still sentence-embedding models.
 
+## ADR-017: Section headings are not part of any article span
+- Status: Accepted (23 Oct 2026, T-36)
+- Context: T-21 found that 76 of 273 article spans ended with the heading and title of the next BAB, Bagian or Paragraf (for example UU 27/2022 Pasal 55 ending in "Bagian Kedua Transfer Data Pribadi ke Luar Wilayah Hukum Negara Republik Indonesia"), so an article could match queries about the section after it.
+- Decision: An article span ends at the first whole-line heading after its Pasal marker (`SECTION` in `ingest/articles.py`: "BAB <roman>", bare "BAB", "Bagian Ke...", including the OCR form "Baqian", and "Paragraf <n>"). The heading and its title lines belong to no article; the chapter stays recorded per span (design.md 3.2). Section titles are not added to the next article (possible later experiment).
+- Consequences: Same 273 articles; 0 spans contain a heading. Measured in `reports/results/20261023T074949Z-ed9dbfc.vs-a0d608d.md`: on dev no configuration changes with a CI excluding 0 (hybrid/article nDCG@10 -0.002 [-0.03, +0.02], 6/5/19). On test, hybrid/article nDCG@10 drops by 0.022 [-0.049, -0.004] (0/3/7); the test split is reported, not used to decide. The fix is kept because it is a data correction and is neutral on dev.
+
 ---
 
 ## Template
