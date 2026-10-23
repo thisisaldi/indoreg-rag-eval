@@ -246,10 +246,11 @@ Links: BR6
 - [x] Multi-stage or slim image, non-root user, models and index baked in or mounted (decide and document): baked, ADR-008; `Dockerfile`, `.dockerignore`
 - Acceptance: `docker run` serves `/search` locally. Checked 23 Oct 2026 for two builds: default config (bm25-basic, 546 MB) and a temporary config serving `hybrid` (767 MB); `/health` and `/search` answered, the process runs as `app`, and the hybrid image built its index and searched with `--network none`. Latency is T-27.
 
-### [ ] T-27 Latency benchmark (Day 12, 0.5h)
+### [x] T-27 Latency benchmark (Day 12, 0.5h)
 Links: NFR7, FR-EVAL-8
-- [ ] p50 and p95 per configuration, warm and cold start
-- [ ] Cost note: cash cost vs estimated compute
+- [x] p50 and p95 per configuration, warm and cold start (`scripts/latency_bench.py`; two runs, `reports/results/20261023T084412Z-2c4861a-latency` and `20261023T084535Z-f50375f-latency`)
+- [x] Cost note: cash cost vs estimated compute (`reports/latency.md`)
+- Warm p50 (in-process HTTP): BM25 4.4 to 5.7 ms, dense-e5-small 16.4 to 17.0 ms, hybrid 18.1 to 19.0 ms, dense-e5-base 25.5 to 29.9 ms; cold start about 1 s for BM25, 3 to 4 s with a model. p95 varies between runs on this laptop. Docker, Vercel and network latency not measured here.
 - Acceptance: latency table in reports, method described
 
 ### [ ] T-35 Vercel deployment (added 23 Oct 2026, ADR-016)
@@ -316,3 +317,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-24: FastAPI `/search` and `/health`, config-driven limits, 12 API tests, `make serve`. | Serving retriever still bm25-basic (config) until Aldi decides. | T-25 request IDs, JSON request logs, fail-fast config. |
 | 23 Oct 2026 | T-25: request IDs, JSON request and search logs (no query text by default), 500 without trace, fail-fast config. | None. | T-26 Dockerfile (ADR-008 baked vs mounted). |
 | 23 Oct 2026 | T-26: Dockerfile with baked model and embeddings (ADR-008), checked for bm25-basic and hybrid, offline run works. | Docker build needs data/chunks (gitignored): CI must ingest or use fixtures (T-28). | T-27 latency benchmark. |
+| 23 Oct 2026 | T-27: latency script, two committed runs, `reports/latency.md` with method and cost note. | None. | T-28 CI builds the image (needs chunks without the PDFs). |

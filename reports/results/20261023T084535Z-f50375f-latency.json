@@ -1,0 +1,71 @@
+{
+ "git": {
+  "dirty": false,
+  "sha": "f50375f010d2c389d91ecb82a8c7d1744b59a32c"
+ },
+ "machine": {
+  "cpu_count": 12,
+  "onnxruntime": "1.31.0",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+  "python": "3.12.14"
+ },
+ "method": "Serving latency per retriever, cold and warm (T-27, NFR7, FR-EVAL-8).\n\nEach retriever runs in its own fresh Python process, so \"cold\" includes imports,\nloading chunks, loading the model and the embedding cache from disk, and the\nfirst request. \"Warm\" then sends the dataset queries `--rounds` times through\nthe FastAPI app in-process (Starlette TestClient: full request handling,\nvalidation and JSON, but no network socket), after `--warmup` discarded\nrequests. The embedding cache must already exist (run `make eval` first),\nas it does in the Docker image.\n\nUsage:\n  uv run python scripts/latency_bench.py       --retrievers bm25-basic bm25-id-title dense-e5-small hybrid\nWrites reports/results/<timestamp>-<sha>-latency.{json,md}.\n",
+ "rounds": 5,
+ "rows": [
+  {
+   "cold_total_ms": 978.2841000014741,
+   "first_request_ms": 14.726600002177292,
+   "retriever": "bm25-basic",
+   "startup_ms": 963.5568000012427,
+   "warm_max_ms": 35.0070999993477,
+   "warm_n": 200,
+   "warm_p50_ms": 5.7157999981427565,
+   "warm_p95_ms": 16.312799998559058
+  },
+  {
+   "cold_total_ms": 704.1241999977501,
+   "first_request_ms": 6.818300000304589,
+   "retriever": "bm25-id-title",
+   "startup_ms": 697.3055999987992,
+   "warm_max_ms": 18.15319999877829,
+   "warm_n": 200,
+   "warm_p50_ms": 4.426300001796335,
+   "warm_p95_ms": 12.405299999954877
+  },
+  {
+   "cold_total_ms": 3118.2724999998754,
+   "first_request_ms": 116.82549999750336,
+   "retriever": "dense-e5-small",
+   "startup_ms": 3001.446500002203,
+   "warm_max_ms": 39.46399999767891,
+   "warm_n": 200,
+   "warm_p50_ms": 16.38490000186721,
+   "warm_p95_ms": 23.67930000036722
+  },
+  {
+   "cold_total_ms": 3865.3071000007913,
+   "first_request_ms": 46.73059999913676,
+   "retriever": "dense-e5-base",
+   "startup_ms": 3818.576000001485,
+   "warm_max_ms": 106.77790000045206,
+   "warm_n": 200,
+   "warm_p50_ms": 25.475900001765694,
+   "warm_p95_ms": 37.76329999891459
+  },
+  {
+   "cold_total_ms": 3029.579600002762,
+   "first_request_ms": 117.79870000100345,
+   "retriever": "hybrid",
+   "startup_ms": 2911.780500002351,
+   "warm_max_ms": 61.18679999781307,
+   "warm_n": 200,
+   "warm_p50_ms": 18.08530000198516,
+   "warm_p95_ms": 26.17119999922579
+  }
+ ],
+ "run_id": "20261023T084535Z-f50375f-latency",
+ "strategy": "article",
+ "timestamp": "2026-10-23T08:45:35.876613+00:00",
+ "warmup": 10
+}
