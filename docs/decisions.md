@@ -129,6 +129,12 @@ Format: one entry per decision. Status is Accepted, Proposed, or Superseded. Add
 - Decision: `search.retriever: hybrid` (RRF over bm25-id-title and dense-e5-small, k 60, depth 50) on article chunks.
 - Consequences: The served index needs the e5-small ONNX model (118 MB) and its embedding cache, which the Docker image bakes in (ADR-008). If the Vercel bundle, memory or cold start measured in T-35 do not fit the Hobby limits, switch to `bm25-id-title`, a config-only change, and record it here. The CI image keeps serving BM25 from the fixture corpus (`configs/ci-image.yaml`).
 
+## ADR-019: Commit the article chunks; plain-file model directory
+- Status: Accepted (23 Oct 2026, Aldi chose this option for T-35)
+- Context: Vercel builds the API from the Git repository, but the searchable text (`data/chunks/article.jsonl`) is derived from the PDFs and was gitignored, and a build step must not download the PDFs automatically while the source's terms are unchecked (CLAUDE.md rule 6). The alternative, deploying from Aldi's laptop with the Vercel CLI, would give up deploy-on-push.
+- Decision: Commit `data/chunks/article.jsonl` (290 KB: the body articles of the 4 regulations as extracted, with document ID, title, article number, status and source URL). The PDFs, processed text and fixed-size chunks stay out of Git. Model files are downloaded into `paths.models` (`data/models/<repo>@<revision>/`) as plain files instead of the Hugging Face cache, which uses symlinks that a bundler may not keep. The Vercel build step (`scripts/vercel_build.py`) builds the serving index once, so the model and the embedding cache ship inside the function and it runs with `HF_HUB_OFFLINE=1`.
+- Consequences: The repository now redistributes the extracted text of public Indonesian statutes. Claude's understanding is that Indonesian copyright law (UU 28/2014, Pasal 42) gives no copyright protection to statutes and regulations; this was not checked by a lawyer, and the terms of peraturan.bpk.go.id were not checked. The text carries OCR errors from two image-based PDFs and is not an authoritative copy. `article.jsonl` must be regenerated and committed whenever ingestion changes. Embedding cache keys are unchanged, so existing result files stay valid.
+
 ---
 
 ## Template
