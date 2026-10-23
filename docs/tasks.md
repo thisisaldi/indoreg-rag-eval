@@ -280,8 +280,8 @@ Links: BR5, BR8
 - [x] Ingestion to chunking to indexes to retrievers to eval and API (Mermaid, rendered by GitHub; `reports/architecture.md`, same block in the README; no image files or new tools)
 - Acceptance: diagram in `reports/` and embedded in README
 
-### [ ] T-31 Case study (Day 13, 0.75h)
-- [ ] Problem, approach, results with CIs, failure analysis, tradeoffs, what I did not build and why, lessons
+### [x] T-31 Case study (Day 13, 0.75h)
+- [x] Problem, approach, results with CIs, failure analysis, tradeoffs, what I did not build and why, lessons (`reports/case_study.md`; each number names its result file; LLM-label disclosure up front)
 - Acceptance: every number traces to a committed result file, no invented claims
 
 ### [ ] T-32 Demo (Day 14, 0.5h)
@@ -325,3 +325,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | Serving retriever set to hybrid (ADR-018, Aldi). Label proposals closed with no dataset change (Aldi delegated; `eval/LABEL_ISSUES.md`). | None. | T-29 README. |
 | 23 Oct 2026 | T-29: README with results (dev and test, CIs), paired findings, reproduce steps, API and Docker usage, limitations. Also fixed a test that broke when the serving retriever changed (pushed red once, fixed in 7784ed2). | None. | T-30 architecture diagram. |
 | 23 Oct 2026 | T-30: Mermaid architecture diagram in `reports/architecture.md` and the README. | Rendering on GitHub not checked by Claude. | T-31 case study. |
+| 23 Oct 2026 | T-31: case study. | Aldi to review tone and claims before publishing. | T-32 demo (needs Aldi to record), T-33 resume bullets. |
