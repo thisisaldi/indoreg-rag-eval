@@ -114,6 +114,9 @@ Without `make` (for example on Windows), run the `uv run ...` commands in the [M
 
 ## Search API
 
+Live demo: `https://indoreg-rag-eval.vercel.app` (Vercel Hobby, serving the hybrid; [OpenAPI docs](https://indoreg-rag-eval.vercel.app/docs)). Measured from Indonesia: server retrieval p50 9.9 ms, round trip p50 378 ms, mostly network to the US region (`reports/results/20261023T092147Z-25c0f58-remote.md`).
+
+
 ```
 make serve       # http://127.0.0.1:8000, OpenAPI docs at /docs
 ```

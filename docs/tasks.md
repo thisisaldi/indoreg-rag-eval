@@ -253,12 +253,15 @@ Links: NFR7, FR-EVAL-8
 - Warm p50 (in-process HTTP): BM25 4.4 to 5.7 ms, dense-e5-small 16.4 to 17.0 ms, hybrid 18.1 to 19.0 ms, dense-e5-base 25.5 to 29.9 ms; cold start about 1 s for BM25, 3 to 4 s with a model. p95 varies between runs on this laptop. Docker, Vercel and network latency not measured here.
 - Acceptance: latency table in reports, method described
 
-### [ ] T-35 Vercel deployment (added 23 Oct 2026, ADR-016)
+### [x] T-35 Vercel deployment (added 23 Oct 2026, ADR-016)
 Links: BR6, ADR-016
-- [ ] Deploy the API as a Vercel Hobby Python function serving the retriever chosen on dev (prepared 23 Oct 2026: `src/vercel_app.py` entrypoint and `scripts/vercel_build.py` build step set in `pyproject.toml`, `data/chunks/article.jsonl` committed (ADR-019); checked locally that the entrypoint serves hybrid offline from another working directory with an empty Hugging Face cache. First Vercel build failed before this, with FASTAPI_ENTRYPOINT_NOT_FOUND.)
+- [x] Deploy the API as a Vercel Hobby Python function serving the retriever chosen on dev: live at https://indoreg-rag-eval.vercel.app, serving hybrid (prepared 23 Oct 2026: `src/vercel_app.py` entrypoint and `scripts/vercel_build.py` build step set in `pyproject.toml`, `data/chunks/article.jsonl` committed (ADR-019); checked locally that the entrypoint serves hybrid offline from another working directory with an empty Hugging Face cache. First Vercel build failed before this, with FASTAPI_ENTRYPOINT_NOT_FOUND.)
 - [ ] Measure bundle size (limit 500 MB uncompressed), memory, cold-start and warm latency; confirm CPU architecture
+  - Measured (`reports/results/20261023T092147Z-25c0f58-remote`): 120 search requests from Aldi's laptop in Indonesia; server retrieval p50 9.9 ms, p95 18.8 ms; round trip p50 378 ms, p95 678 ms, almost all network (edge `sin1`, function in `iad1`, Washington D.C.); CORS preflight from https://naufaldi.vercel.app allowed.
+  - A first deploy failed at startup: the Hugging Face client wrote a lock file next to the baked model on the read-only filesystem; fixed by reading baked files directly (`model_file` in `retrieval/dense.py`).
+  - Not measured: bundle size, memory, CPU architecture (deployment succeeded, so the bundle is within the limit), and cold start. The runtime log shows Vercel installing dependencies into /tmp at startup (about 2 s), so cold starts are slower than the laptop's 3 to 4 s estimate would suggest.
 - [x] CORS allowlist for the portfolio site's origin, from config (`search.cors_origins: [https://naufaldi.vercel.app]`; GET and POST, `X-Request-ID` exposed; test in `tests/test_api.py`)
-- Acceptance: deployed `/health` and `/search` answer requests from the portfolio origin, measurements recorded
+- Acceptance: deployed `/health` and `/search` answer requests from the portfolio origin, measurements recorded (met: /health and /search answer, CORS allows the portfolio origin; partial measurements as listed)
 
 ### [x] T-28 CI builds image (Day 12, 0.5h)
 Links: BR7
@@ -327,3 +330,5 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-30: Mermaid architecture diagram in `reports/architecture.md` and the README. | Rendering on GitHub not checked by Claude. | T-31 case study. |
 | 23 Oct 2026 | T-31: case study. | Aldi to review tone and claims before publishing. | T-32 demo (needs Aldi to record), T-33 resume bullets. |
 | 23 Oct 2026 | T-35 prepared: Vercel entrypoint and build step, article chunks committed (ADR-019), model files as plain files in `data/models`, CORS for the portfolio. | Needs a Vercel build to confirm bundle size, memory and cold start. | Push, Aldi redeploys or Vercel builds on push; then measure. |
+| 23 Oct 2026 | T-35: deployed at https://indoreg-rag-eval.vercel.app (hybrid); read-only filesystem fix; remote latency `reports/results/20261023T092147Z-25c0f58-remote`. | Suggest Aldi sets the function region to sin1 (Singapore) to cut the round trip. | T-32 demo, T-33 resume bullets, T-34 audit; T-04 open. |
+| 23 Oct 2026 | Local environment: Windows Application Control started blocking Python's `_ctypes` (import ctypes fails), so `huggingface_hub` and the dense path no longer run on Aldi's laptop; the read-only model test fails locally for that reason only, all other tests pass. T-35 close-out pushed with Aldi's OK, relying on CI (Linux). | Aldi: check Windows Security protection history; local dense runs need WSL or the block lifted. | CI result for this push. |
