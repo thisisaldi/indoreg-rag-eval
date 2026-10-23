@@ -62,7 +62,7 @@ Format: one entry per decision. Status is Accepted, Proposed, or Superseded. Add
 | Permen Kominfo 20/2016 | 24 | native | 39 | 39 | none | 0 |
 | UU 11/2008 | 38 | native | 54 | 54 | none | 0 |
 
-- Consequences: Page-image verification (Tier 1) by Aldi: PENDING. Update before ticking T-01. The two native documents need no repairs; the two image-based ones depend on ADR-010. The requirements assumption of at least 10 text-extractable regulations is not yet tested beyond these four.
+- Consequences: Page-image verification (Tier 1) by Aldi: SKIPPED by Aldi on 23 Oct 2026. Instead, Claude checked the 39 labeled articles of the two image-based documents against their rendered page images (31 pages, `eval/drafts/CHECK_NOTES.md`); the segmentation of the other articles, and the span ends, were not compared with page images by anyone. The two native documents need no repairs; the two image-based ones depend on ADR-010. The requirements assumption of at least 10 text-extractable regulations is not yet tested beyond these four.
 
 ## ADR-010: OCR-tolerant article segmentation
 - Status: Accepted (22 Oct 2026)
