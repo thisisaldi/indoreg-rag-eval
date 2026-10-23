@@ -78,7 +78,7 @@ def test_registry_builds_configured_variants() -> None:
 
 def test_config_rejects_undefined_retriever_names(tmp_path: Path) -> None:
     text = REPO_CONFIG.read_text(encoding="utf-8").replace(
-        "retriever: bm25-basic", "retriever: bm25-missing"
+        "retriever: hybrid", "retriever: bm25-missing"
     )
     p = tmp_path / "c.yaml"
     p.write_text(text, encoding="utf-8")
