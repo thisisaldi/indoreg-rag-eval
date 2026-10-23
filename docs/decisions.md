@@ -47,9 +47,10 @@ Format: one entry per decision. Status is Accepted, Proposed, or Superseded. Add
 - Consequences: Variant choice is made on the dev split only, by nDCG@10 with bootstrap CIs (T-19); the test split is reported but not used to choose. A library can replace the implementation later if a measured latency problem appears.
 
 ## ADR-008: Image contents (baked vs mounted model and index)
-- Status: Proposed (decide in T-26)
+- Status: Accepted (23 Oct 2026, T-26, Aldi chose baked)
 - Criteria: Image size, cold-start latency, reproducibility.
-- Decision: TBD.
+- Decision: Bake everything the configured serving retriever needs. The build copies `data/chunks/` (not the PDFs), runs `build_index` once, which downloads the model at its pinned revision into `HF_HOME` and fills the embedding cache, and the runtime sets `HF_HUB_OFFLINE=1`. Two-stage build on `python:3.12.12-slim-bookworm` with uv 0.13.5, non-root user. `--build-arg CONFIG=configs/<file>.yaml` selects another config.
+- Consequences: `docker run` needs no network or mounts (checked: the hybrid image builds its index and searches with `--network none`). Image sizes on 23 Oct 2026: 546 MB for the default config (bm25-basic) and 767 MB with `hybrid` as the serving retriever; the image must be rebuilt after `make ingest` or a config change. The build needs `data/chunks/`, which is generated locally and gitignored, so CI (T-28) must produce it first.
 
 ## ADR-009: Topic
 - Status: Accepted (22 Oct 2026)
