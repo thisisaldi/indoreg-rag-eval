@@ -1,9 +1,10 @@
 """Build retrievers by config name, so adding a variant is a config change (4.3)."""
 
-from indoreg.config import BM25Spec, Settings
+from indoreg.config import BM25Spec, HybridSpec, Settings
 from indoreg.retrieval.base import Retriever
 from indoreg.retrieval.bm25 import BM25Retriever
 from indoreg.retrieval.dense import DenseRetriever, OnnxEncoder
+from indoreg.retrieval.hybrid import HybridRetriever
 from indoreg.retrieval.preprocess import TOKENIZERS
 
 
@@ -20,6 +21,9 @@ def build_retriever(name: str, settings: Settings) -> Retriever:
             tokenizer=TOKENIZERS[spec.preprocess],
             index_title=spec.index_title,
         )
+    if isinstance(spec, HybridSpec):
+        members = [build_retriever(m, settings) for m in spec.members]
+        return HybridRetriever(name, members, rrf_k=spec.rrf_k, depth=spec.depth)
     encoder = OnnxEncoder(
         spec.model,
         spec.revision,
