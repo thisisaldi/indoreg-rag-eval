@@ -291,9 +291,10 @@ Links: BR5, BR8
 - [ ] 2 minute screen recording or screenshot walkthrough with curl examples
 - Acceptance: link in README
 
-### [ ] T-33 Resume bullets and talking points (Day 14, 0.25h)
-- [ ] 3 to 5 resume bullets with measured numbers
-- [ ] 3 interview talking points (one on a decision, one on a failure, one on a tradeoff)
+### [x] T-33 Resume bullets and talking points (Day 14, 0.25h)
+- [x] 3 to 5 resume bullets with measured numbers (`reports/resume.md`, 5 bullets, each with its source file)
+- [x] 3 interview talking points (one on a decision, one on a failure, one on a tradeoff), plus one on the labels
+- Also: `reports/portfolio_brief.md`, a handoff for adding the project and a live demo to https://naufaldi.vercel.app (copy, required caveats, API contract, fetch example, UI guidance; example queries checked on the live API).
 
 ### [ ] T-34 Confidentiality audit and next-project brief (Day 14, 0.75h)
 - [ ] Search repo, history, and docs for any employer or internal-system names, credentials, or proprietary logic
@@ -332,3 +333,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-35 prepared: Vercel entrypoint and build step, article chunks committed (ADR-019), model files as plain files in `data/models`, CORS for the portfolio. | Needs a Vercel build to confirm bundle size, memory and cold start. | Push, Aldi redeploys or Vercel builds on push; then measure. |
 | 23 Oct 2026 | T-35: deployed at https://indoreg-rag-eval.vercel.app (hybrid); read-only filesystem fix; remote latency `reports/results/20261023T092147Z-25c0f58-remote`. | Suggest Aldi sets the function region to sin1 (Singapore) to cut the round trip. | T-32 demo, T-33 resume bullets, T-34 audit; T-04 open. |
 | 23 Oct 2026 | Local environment: Windows Application Control started blocking Python's `_ctypes` (import ctypes fails), so `huggingface_hub` and the dense path no longer run on Aldi's laptop; the read-only model test fails locally for that reason only, all other tests pass. T-35 close-out pushed with Aldi's OK, relying on CI (Linux). | Aldi: check Windows Security protection history; local dense runs need WSL or the block lifted. | CI result for this push. |
+| 23 Oct 2026 | T-33: resume bullets and talking points; portfolio brief for the site's agent. | None. | T-32 demo (Aldi records), T-34 audit. |
