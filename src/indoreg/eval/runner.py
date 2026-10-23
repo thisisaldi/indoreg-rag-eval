@@ -246,6 +246,7 @@ def markdown(result: dict[str, Any]) -> str:
                 f" `{result.get('strategy_reference')}` chunks:",
                 result.get("strategy_comparisons", {}),
             ),
+            ("Other paired comparisons:", result.get("pair_comparisons", {})),
         ]
         for title, by_split in tables:
             cmp = by_split.get(split, {})
@@ -292,6 +293,11 @@ def run(settings: Settings, dataset_path: Path, allow_drafts: bool) -> dict[str,
                     "queries": rows,
                 }
     comparisons = compare(results, cfg.baseline, metric_keys, cfg.bootstrap)
+    pair_comparisons: dict[str, dict[str, Any]] = {s: {} for s in results}
+    for run_name, ref in cfg.pairs:
+        one = compare_pairs(results, [(run_name, ref)], metric_keys, cfg.bootstrap)
+        for sp in results:
+            pair_comparisons[sp][f"{run_name} vs {ref}"] = one[sp][run_name]
     strategy_comparisons = compare_strategies(
         results, cfg.retrievers, cfg.strategies, metric_keys, cfg.bootstrap
     )
@@ -324,6 +330,7 @@ def run(settings: Settings, dataset_path: Path, allow_drafts: bool) -> dict[str,
         "comparisons": comparisons,
         "strategy_reference": cfg.strategies[0],
         "strategy_comparisons": strategy_comparisons,
+        "pair_comparisons": pair_comparisons,
     }
 
 
