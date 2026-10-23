@@ -26,6 +26,11 @@ PDP = re.compile(r"(?i)PASAL\s*DEMI\s*PASAL")
 BAB = re.compile(r"^BAB\s*([IVXLCDMivxlcdm1]+)\s*$")
 BAB_BARE = re.compile(r"^BAB\s*$")
 ROMAN = re.compile(r"^([IVXLCDMivxlcdm1]+)\s*$")
+# A heading line that opens a chapter, section or paragraph. It and the title
+# lines after it belong to no article (the chapter is kept per span, design 3.2).
+SECTION = re.compile(
+    r"^(?:BAB\s*[IVXLCDMivxlcdm1]*|Ba[gq]ian\s+Ke\w+|Paragraf\s+[0-9Il]+)\s*$"
+)
 
 
 def _roman(token: str) -> str:
@@ -380,6 +385,9 @@ def segment(pages: list[str], doc_id: str) -> Segmentation:
             e_line = accepted[j + 1].cand.start_idx
         else:
             e_line = close if close is not None else end
+        e_line = next(
+            (i for i in range(s_line + 1, e_line) if SECTION.match(texts[i])), e_line
+        )
         method = _method(a, unresolved)
         methods[method] += 1
         spans.append(

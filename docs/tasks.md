@@ -201,6 +201,14 @@ Links: Definition of done
 - Known input: dataset-v1 labels UU 11/2008 articles BPK lists as partly revoked by UU 1/2023: q-022 (test; Pasal 46 grade 2, Pasal 30 grade 1) and q-033 (dev; Pasal 31 and 47, both grade 2). Their source_note already says the labels follow the corpus text. Decide here whether to keep, mark `superseded regulation`, or replace them (version bump per ADR-004); Claude does not edit the dataset.
 - Acceptance: `reports/error_analysis.md` committed
 
+### [x] T-36 Section headings out of article spans (added 23 Oct 2026, from T-21)
+Links: FR-CHK-1, ADR-017
+- [x] End each article span at the next section heading line; test in `tests/test_articles.py`
+- [x] Re-ingest (still 273 articles, 0 spans with a heading) and rerun the eval: `reports/results/20261023T074949Z-ed9dbfc`
+- [x] Paired before/after comparison across result files (`scripts/compare_runs.py`): `reports/results/20261023T074949Z-ed9dbfc.vs-a0d608d.md`
+- Acceptance: dev comparison with CIs. Dev: no change established for any configuration (hybrid/article nDCG@10 -0.002 [-0.03, +0.02]). Test (reported only): hybrid/article nDCG@10 -0.022 [-0.049, -0.004], 0/3/7. Kept as a data correction (ADR-017).
+- Effect on the T-18 reading, from `reports/results/20261023T074949Z-ed9dbfc`: dev hybrid/article vs bm25-id-title/article nDCG@10 is now +0.078 [+0.0003, +0.151] (16/3/11) and recall@10 +0.090 [0.000, +0.183]. A lower bound this close to 0 is borderline, not a robust difference; the serving decision is still open.
+
 ### [ ] T-22 Reranker (stretch) (Day 10, 1h)
 Links: FR-RET-5
 - [ ] Cross-encoder reranking of top-k, measure gain and latency cost
@@ -298,3 +306,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-17: `dense-e5-base` added by config; `eval.pairs` for direct paired comparisons (1 test). Clean cold run `reports/results/20261023T073208Z-cfff220` (embedding from scratch reproduced the cached metrics exactly). e5-small chosen for hybrid on dev (ADR-006). | None. | T-18 hybrid RRF, k and depth tuned on dev only. |
 | 23 Oct 2026 | T-18: hybrid RRF retriever (6 tests); dev-only grid `reports/results/20261023T073543Z-a07f39f` kept k 60 / depth 50; full run `reports/results/20261023T073624Z-a0d608d`. Hybrid beats bm25-basic and dense-e5-small on dev, not established against bm25-id-title. | Serving choice (bm25-id-title vs hybrid) needs Aldi, see T-18. | T-20 is done; next T-21 error analysis. |
 | 23 Oct 2026 | T-21: error analysis of hybrid/article on dev (10 failures; vocabulary gap 7, multi-article 4, chunk boundary 2, extraction 2, superseded 1, label error 0). Found section headings at the end of 76 of 273 article spans. `eval/LABEL_ISSUES.md` proposals. | Aldi: q-022/q-033 decision and the q-021 label proposal; serving choice from T-18. | T-22 reranker (stretch) or skip; heading fix as a dev experiment if wanted. |
+| 23 Oct 2026 | T-36 (from T-21): section headings no longer end up in article spans (ADR-017); `scripts/compare_runs.py`; results `reports/results/20261023T074949Z-ed9dbfc`, before/after `reports/results/20261023T074949Z-ed9dbfc.vs-a0d608d.md`. Neutral on dev; small drop on test for hybrid (reported, not used to decide). | Serving choice still open (hybrid vs bm25-id-title now borderline on dev). | T-22 reranker or skip, then T-23. |

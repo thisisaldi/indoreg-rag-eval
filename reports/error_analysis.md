@@ -59,3 +59,7 @@ Each would be a dev-only experiment with paired CIs; none is implemented here.
 6. Fusion: q-026 shows RRF burying a BM25 rank-1 hit that dense misses. A weighted RRF would be one more dev-tuned parameter on 30 queries; not recommended without more queries.
 
 Not supported by the dev data: scanned documents being retrieved worse, and the 512-token limit of e5 causing misses.
+
+## Follow-up: hypothesis 1 tested (T-36)
+
+Headings were moved out of the article spans (ADR-017) and the eval rerun (`reports/results/20261023T074949Z-ed9dbfc`; before/after in `reports/results/20261023T074949Z-ed9dbfc.vs-a0d608d.md`). On dev no configuration changed with a CI excluding 0 (hybrid/article nDCG@10 -0.002 [-0.03, +0.02]). q-026 went from 0.301 to 0.333 and q-011 from 0.472 to 0.550, but uu-27-2022:55 still ranks in the top 3 for q-026, so the trailing heading was not the main reason it ranked high. On test, hybrid/article nDCG@10 fell by 0.022 [-0.049, -0.004]. The fix is kept as a data correction; it did not deliver a measurable gain.

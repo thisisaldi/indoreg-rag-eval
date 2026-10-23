@@ -97,7 +97,7 @@ The example entry is illustrative. Verify each real entry against its source bef
 ```json
 {"doc_id": "...", "article": "26", "chapter": "BAB IV", "char_start": 10234, "char_end": 11876}
 ```
-Offsets index into `<doc_id>.txt`. This is the single source of truth linking text to articles, and it is what makes labels chunking-independent.
+Offsets index into `<doc_id>.txt`. A span ends before the next section heading line (BAB, Bagian, Paragraf), which belongs to no article (ADR-017). This is the single source of truth linking text to articles, and it is what makes labels chunking-independent.
 
 ### 3.3 Chunk (`data/chunks/<strategy>.jsonl`)
 ```json
