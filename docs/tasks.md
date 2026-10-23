@@ -215,9 +215,10 @@ Links: FR-RET-5
 - Skipped 23 Oct 2026 by Aldi's decision, logged here as the acceptance allows. Reasons: a reranker must run with onnxruntime and fit the Vercel Hobby bundle next to the embedding model (ADR-016), and no suitable small multilingual ONNX cross-encoder was identified; the dev set (30 queries) is already at the edge of separating hybrid from BM25 (T-36 note). Revisit with a larger dev set.
 - Acceptance: results added to the comparison table, or task explicitly skipped and logged
 
-### [ ] T-23 Tag benchmark release (Day 10, 0.5h)
-- [ ] Verify clean-clone reproduction of the benchmark table
-- [ ] Tag `v0.1-benchmark`
+### [x] T-23 Tag benchmark release (Day 10, 0.5h)
+- [x] Verify clean-clone reproduction of the benchmark table: fresh `git clone` from GitHub at a67e1de, PDFs copied in (hashes match the manifest), `uv sync --locked`, tests, ingest, eval with an empty embedding cache. Run `reports/results/20261023T080406Z-a67e1de` matches `reports/results/20261023T074949Z-ed9dbfc` exactly: 480 query rows, identical rankings, metric differences 0, identical CIs and comparisons (latency differs). Same Windows machine and Hugging Face model cache (pinned revisions); not verified on another OS or CPU.
+- [x] Tag `v0.1-benchmark`
+- Tolerance stated for the README (T-29): exact on the same platform; across platforms, onnxruntime float differences could change dense scores slightly (not measured).
 - Acceptance: fresh environment reproduces the committed results within the stated tolerance
 
 ---
@@ -309,3 +310,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-21: error analysis of hybrid/article on dev (10 failures; vocabulary gap 7, multi-article 4, chunk boundary 2, extraction 2, superseded 1, label error 0). Found section headings at the end of 76 of 273 article spans. `eval/LABEL_ISSUES.md` proposals. | Aldi: q-022/q-033 decision and the q-021 label proposal; serving choice from T-18. | T-22 reranker (stretch) or skip; heading fix as a dev experiment if wanted. |
 | 23 Oct 2026 | T-36 (from T-21): section headings no longer end up in article spans (ADR-017); `scripts/compare_runs.py`; results `reports/results/20261023T074949Z-ed9dbfc`, before/after `reports/results/20261023T074949Z-ed9dbfc.vs-a0d608d.md`. Neutral on dev; small drop on test for hybrid (reported, not used to decide). | Serving choice still open (hybrid vs bm25-id-title now borderline on dev). | T-22 reranker or skip, then T-23. |
 | 23 Oct 2026 | T-22 skipped (Aldi), reasons in T-22. | None. | T-23 clean-clone reproduction and tag. |
+| 23 Oct 2026 | T-23: clean-clone reproduction exact (`reports/results/20261023T080406Z-a67e1de`), tag `v0.1-benchmark`. | Serving choice, q-022/q-033 and q-021 decisions with Aldi. | M5: T-24 FastAPI service (needs fastapi, ask first). |
