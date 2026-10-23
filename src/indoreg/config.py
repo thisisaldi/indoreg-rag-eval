@@ -6,7 +6,7 @@ fails at load time instead of silently falling back.
 
 import os
 from pathlib import Path
-from typing import Any, Literal
+from typing import Annotated, Any, Literal
 
 import yaml  # type: ignore[import-untyped]  # stubs (types-PyYAML) not a dependency
 from pydantic import (
@@ -80,9 +80,25 @@ class BM25Spec(_Strict):
     index_title: bool
 
 
+class DenseSpec(_Strict):
+    """A named dense model (FR-RET-2); a new model is a config change (FR-RET-3)."""
+
+    type: Literal["dense"]
+    model: str
+    revision: str  # pinned model commit, recorded in every result file
+    query_prefix: str
+    passage_prefix: str
+    max_seq_length: PositiveInt
+    batch_size: PositiveInt
+    device: Literal["cpu"]
+
+
+RetrieverSpec = Annotated[BM25Spec | DenseSpec, Field(discriminator="type")]
+
+
 class RetrievalConfig(_Strict):
     bm25: BM25Config
-    retrievers: dict[str, BM25Spec] = Field(min_length=1)
+    retrievers: dict[str, RetrieverSpec] = Field(min_length=1)
 
 
 Strategy = Literal["article", "fixed"]

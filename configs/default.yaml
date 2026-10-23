@@ -29,6 +29,16 @@ retrieval:
     bm25-basic: {type: bm25, preprocess: basic, index_title: false}
     bm25-id: {type: bm25, preprocess: id, index_title: false}
     bm25-id-title: {type: bm25, preprocess: id, index_title: true}
+    # Needs the optional extra: uv sync --extra dense (ADR-006, ADR-016).
+    dense-bge-m3:
+      type: dense
+      model: BAAI/bge-m3
+      revision: 5617a9f61b028005a4858fdac845db406aefb181
+      query_prefix: ""
+      passage_prefix: ""
+      max_seq_length: 8192
+      batch_size: 4
+      device: cpu
 
 search:
   default_top_k: 5
@@ -37,7 +47,7 @@ search:
   strategy: article
 
 eval:
-  retrievers: [bm25-basic, bm25-id, bm25-id-title]
+  retrievers: [bm25-basic, bm25-id, bm25-id-title, dense-bge-m3]
   strategies: [article, fixed]
   baseline: bm25-basic/article
   bootstrap: {iterations: 1000, seed: 42, confidence: 0.95}

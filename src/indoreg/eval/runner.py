@@ -220,6 +220,14 @@ def markdown(result: dict[str, Any]) -> str:
         " A difference whose CI includes 0 is not established.",
         "",
     ]
+    for name, st in result.get("index_stats", {}).items():
+        cached = " (cache hit)" if st["cache_hit"] else ""
+        lines.append(
+            f"- `{name}`: index {st['index_bytes'] / 1e6:.2f} MB, dim {st['dim']},"
+            f" build {st['embed_seconds']:.1f} s{cached}"
+        )
+    if result.get("index_stats"):
+        lines.append("")
     for split, by_ret in result["results"].items():
         lines += [f"## {split}", "", "| " + " | ".join(head) + " |"]
         lines.append("|" + "---|" * len(head))
@@ -264,12 +272,16 @@ def run(settings: Settings, dataset_path: Path, allow_drafts: bool) -> dict[str,
     metric_keys = [*[f"recall@{k}" for k in cfg.recall_ks], "rr", f"ndcg@{cfg.ndcg_k}"]
     results: dict[str, dict[str, Any]] = {split: {} for split in cfg.splits}
     n_chunks: dict[str, int] = {}
+    index_stats: dict[str, dict[str, Any]] = {}
     for strategy in cfg.strategies:
         chunks = load_chunks(settings, strategy)
         n_chunks[strategy] = len(chunks)
         for name in cfg.retrievers:
             retriever = build_retriever(name, settings)
             retriever.build(chunks)
+            stats = getattr(retriever, "stats", None)  # dense: embed time, size
+            if stats:
+                index_stats[f"{name}/{strategy}"] = stats
             for split in cfg.splits:
                 split_q = [q for q in queries if q.split == split]
                 rows = evaluate(
@@ -304,6 +316,7 @@ def run(settings: Settings, dataset_path: Path, allow_drafts: bool) -> dict[str,
             "labels_human_verified": human_verified,
         },
         "chunks": n_chunks,
+        "index_stats": index_stats,
         "metric_keys": metric_keys,
         "results": results,
         "baseline": cfg.baseline,
