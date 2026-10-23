@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 
 from indoreg.config import DenseSpec, load_settings
-from indoreg.retrieval.dense import DenseRetriever, Matrix
+from indoreg.retrieval.dense import DenseRetriever, Matrix, mean_pool_normalise
 from indoreg.schemas import Chunk
 
 REPO_CONFIG = Path(__file__).resolve().parent.parent / "configs" / "default.yaml"
@@ -82,5 +82,12 @@ def test_empty_index_returns_nothing(tmp_path: Path) -> None:
 
 
 def test_repo_config_declares_pinned_dense_model() -> None:
-    spec = load_settings(REPO_CONFIG).retrieval.retrievers["dense-bge-m3"]
+    spec = load_settings(REPO_CONFIG).retrieval.retrievers["dense-e5-small"]
     assert isinstance(spec, DenseSpec) and len(spec.revision) == 40
+
+
+def test_mean_pool_ignores_padding_and_normalises() -> None:
+    hidden = np.array([[[3.0, 4.0], [100.0, 100.0]]], dtype=np.float32)
+    mask = np.array([[1, 0]], dtype=np.int64)
+    out = mean_pool_normalise(hidden, mask)
+    assert out.tolist() == [[pytest.approx(0.6), pytest.approx(0.8)]]
