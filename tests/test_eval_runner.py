@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from indoreg.config import load_settings
+from indoreg.config import ConfigError, load_settings
 from indoreg.eval.dataset import DatasetError, load_dataset
 from indoreg.eval.runner import markdown, percentile, run, write
 from indoreg.schemas import Chunk
@@ -66,7 +66,7 @@ retrieval: {{bm25: {{k1: 1.5, b: 0.75}},
 search: {{default_top_k: 5, max_top_k: 20, retriever: bm25-basic,
   strategy: article}}
 eval: {{retrievers: [bm25-basic], strategies: [article],
-  baseline: bm25-basic/article,
+  baseline: bm25-basic/article, pairs: [],
   bootstrap: {{iterations: 200, seed: 42, confidence: 0.95}},
   splits: [dev, test], recall_ks: [1, 2], ndcg_k: 2,
   depth: 3}}
@@ -226,3 +226,18 @@ def test_compare_strategies_pairs_each_retriever_with_itself() -> None:
     assert c["dev"]["a/fixed"]["m"]["win_loss"] == {"wins": 0, "losses": 1, "ties": 1}
     assert c["dev"]["b/fixed"]["m"]["win_loss"] == {"wins": 1, "losses": 0, "ties": 1}
     assert c["dev"]["a/fixed"]["m"]["diff"]["mean"] == pytest.approx(-0.5)
+
+
+def test_extra_pairs_are_compared_and_validated(tmp_path: Path) -> None:
+    cfg = setup(tmp_path, DATA)
+    text = cfg.read_text(encoding="utf-8")
+    pair = "pairs: [[bm25-basic/article, bm25-basic/article]],"
+    cfg.write_text(text.replace("pairs: [],", pair), encoding="utf-8")
+    settings = load_settings(cfg)
+    res = run(settings, settings.paths.dataset, False)
+    c = res["pair_comparisons"]["dev"]["bm25-basic/article vs bm25-basic/article"]
+    assert c["rr"]["win_loss"] == {"wins": 0, "losses": 0, "ties": 2}
+    assert "Other paired comparisons:" in markdown(res)
+    cfg.write_text(text.replace("pairs: [],", "pairs: [[nope/article, x/y]],"))
+    with pytest.raises(ConfigError, match="nope/article"):
+        load_settings(cfg)
