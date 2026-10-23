@@ -174,6 +174,7 @@ docker run --rm -p 8000:8000 indoreg-search
 - [docs/design.md](docs/design.md): architecture, schemas, repository layout
 - [docs/decisions.md](docs/decisions.md): decision log (ADR-001 to ADR-018)
 - [docs/tasks.md](docs/tasks.md): tasks, acceptance criteria and progress log
+- [reports/case_study.md](reports/case_study.md): the project write-up
 - [reports/error_analysis.md](reports/error_analysis.md), [reports/chunking_ablation.md](reports/chunking_ablation.md), [reports/latency.md](reports/latency.md)
 
 ## Data and licensing
