@@ -3,17 +3,21 @@
 The retriever is built once in the lifespan and shared read-only by requests;
 it is the same Retriever the eval runner benchmarks. Tests inject a stub.
 
+Every request gets an ID (a well-formed incoming X-Request-ID, else a new
+one), returned in the X-Request-ID header and attached to its log lines (T-25).
+
 Run locally: uv run uvicorn indoreg.api.app:create_app --factory
 """
 
+import re
 import time
-import uuid
-from collections.abc import AsyncIterator, Sequence
+from collections.abc import AsyncIterator, Awaitable, Callable, Sequence
 from contextlib import asynccontextmanager
 from dataclasses import dataclass
 from datetime import UTC, datetime
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi.responses import JSONResponse
 
 from indoreg.api.models import (
     HealthResponse,
@@ -21,14 +25,23 @@ from indoreg.api.models import (
     SearchRequest,
     SearchResponse,
 )
-from indoreg.config import Settings, load_settings
-from indoreg.logging import configure_logging, get_logger
+from indoreg.config import ConfigError, Settings, load_settings
+from indoreg.logging import (
+    configure_logging,
+    get_logger,
+    request_context,
+    request_id_var,
+)
 from indoreg.retrieval.base import Retriever
 from indoreg.retrieval.registry import build_retriever
 from indoreg.schemas import Chunk
 from indoreg.search import load_chunks
 
 log = get_logger(__name__)
+
+REQUEST_ID_HEADER = "X-Request-ID"
+# Incoming IDs are untrusted: accept only short tokens, never raw text into logs.
+SAFE_ID = re.compile(r"[A-Za-z0-9_-]{1,64}")
 
 
 @dataclass(frozen=True)
@@ -71,9 +84,15 @@ def create_app(
     retriever: Retriever | None = None,
     chunks: Sequence[Chunk] | None = None,
 ) -> FastAPI:
-    settings = settings or load_settings()
+    if settings is None:
+        try:
+            settings = load_settings()
+        except ConfigError as e:
+            # Fail fast with one clear line instead of a traceback (T-25).
+            raise SystemExit(f"invalid configuration: {e}") from None
     configure_logging(settings.logging.level)
     cfg = settings.search
+    log_query_text = settings.logging.log_query_text
 
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
@@ -86,6 +105,36 @@ def create_app(
         " regulations. Retrieval only, not legal advice.",
         lifespan=lifespan,
     )
+
+    @app.middleware("http")
+    async def request_id_and_log(
+        request: Request, call_next: Callable[[Request], Awaitable[Response]]
+    ) -> Response:
+        incoming = request.headers.get(REQUEST_ID_HEADER, "")
+        with request_context(incoming if SAFE_ID.fullmatch(incoming) else None) as rid:
+            start = time.perf_counter()
+            try:
+                response = await call_next(request)
+            except Exception:
+                # No stack trace in the body (design.md 4.7); it goes to the log.
+                log.exception("unhandled error")
+                response = JSONResponse(
+                    status_code=500,
+                    content={"detail": "internal server error", "request_id": rid},
+                )
+            response.headers[REQUEST_ID_HEADER] = rid
+            log.info(
+                "request",
+                extra={
+                    "fields": {
+                        "method": request.method,
+                        "path": request.url.path,
+                        "status": response.status_code,
+                        "latency_ms": round((time.perf_counter() - start) * 1000, 3),
+                    }
+                },
+            )
+            return response
 
     @app.get("/health", response_model=HealthResponse)
     def health(request: Request) -> HealthResponse:
@@ -109,6 +158,16 @@ def create_app(
         start = time.perf_counter()
         hits = index.retriever.search(body.query, top_k)
         latency_ms = (time.perf_counter() - start) * 1000
+        fields: dict[str, object] = {
+            "retriever": index.retriever.name,
+            "query_chars": len(body.query),
+            "top_k": top_k,
+            "results": len(hits),
+            "retrieval_ms": round(latency_ms, 3),
+        }
+        if log_query_text:  # off by default: queries may be sensitive (design 10)
+            fields["query"] = body.query
+        log.info("search", extra={"fields": fields})
         results = []
         for h in hits:
             c = index.chunks[h.chunk_id]
@@ -126,7 +185,7 @@ def create_app(
                 )
             )
         return SearchResponse(
-            request_id=uuid.uuid4().hex,
+            request_id=request_id_var.get() or "",
             query=body.query,
             retriever=index.retriever.name,
             results=results,

@@ -234,10 +234,11 @@ Links: BR6, FR-API-1 to FR-API-6
 - Dependencies added with Aldi's approval: fastapi, uvicorn; httpx (dev, for the test client). Smoke test on the real index (bm25-basic, 273 chunks): `/health` ok, `/search` answers, whitespace query 422. Request ID middleware and request logging are T-25; CORS is T-35.
 - Acceptance: all API tests pass, OpenAPI docs render
 
-### [ ] T-25 Structured logging and config validation (Day 11, 1.25h)
+### [x] T-25 Structured logging and config validation (Day 11, 1.25h)
 Links: NFR2, NFR3
-- [ ] Request ID middleware, JSON logs for requests and retrieval timing
-- [ ] Fail fast on invalid config at startup
+- [x] Request ID middleware, JSON logs for requests and retrieval timing (`X-Request-ID` echoed when well-formed, else generated; one `request` line per request with method, path, status, latency; one `search` line with retriever, query length, top_k, result count, retrieval ms; query text only if `logging.log_query_text`; unhandled errors return 500 with the request ID and no stack trace, the trace goes to the log)
+- [x] Fail fast on invalid config at startup (`create_app` exits with "invalid configuration: ..."; checked with uvicorn: one line, exit code 1)
+- Tests: 4 more in `tests/test_api.py` (93 in total).
 - Acceptance: a log line per request with request ID and latency, bad config exits with a clear error
 
 ### [ ] T-26 Dockerfile (Day 12, 0.5h)
@@ -313,3 +314,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-22 skipped (Aldi), reasons in T-22. | None. | T-23 clean-clone reproduction and tag. |
 | 23 Oct 2026 | T-23: clean-clone reproduction exact (`reports/results/20261023T080406Z-a67e1de`), tag `v0.1-benchmark`. | Serving choice, q-022/q-033 and q-021 decisions with Aldi. | M5: T-24 FastAPI service (needs fastapi, ask first). |
 | 23 Oct 2026 | T-24: FastAPI `/search` and `/health`, config-driven limits, 12 API tests, `make serve`. | Serving retriever still bm25-basic (config) until Aldi decides. | T-25 request IDs, JSON request logs, fail-fast config. |
+| 23 Oct 2026 | T-25: request IDs, JSON request and search logs (no query text by default), 500 without trace, fail-fast config. | None. | T-26 Dockerfile (ADR-008 baked vs mounted). |
