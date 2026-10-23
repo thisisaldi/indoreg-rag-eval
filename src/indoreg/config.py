@@ -119,6 +119,7 @@ Strategy = Literal["article", "fixed"]
 class SearchConfig(_Strict):
     default_top_k: PositiveInt
     max_top_k: PositiveInt
+    max_query_chars: PositiveInt  # after stripping whitespace (FR-API-3)
     retriever: str  # name in retrieval.retrievers
     strategy: Strategy  # chunk strategy served by search
 

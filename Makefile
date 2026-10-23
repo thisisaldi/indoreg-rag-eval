@@ -27,5 +27,6 @@ eval:
 eval-drafts:
 	uv run python -m indoreg.eval.runner --dataset eval/drafts/dataset_draft.jsonl --allow-drafts
 
+# Serves search.retriever from configs/default.yaml; docs at http://127.0.0.1:8000/docs
 serve:
-	@echo "not yet: API arrives in T-24"; exit 1
+	uv run uvicorn indoreg.api.app:create_app --factory
