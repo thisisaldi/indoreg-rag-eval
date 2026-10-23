@@ -71,3 +71,9 @@ def test_invalid_config_fails_fast(tmp_path: Path, text: str, fragment: str) -> 
 def test_missing_file(tmp_path: Path) -> None:
     with pytest.raises(ConfigError, match="not found"):
         load_settings(tmp_path / "nope.yaml")
+
+
+def test_ci_image_config_is_valid_and_serves_bm25() -> None:
+    root = Path(__file__).resolve().parent.parent
+    settings = load_settings(root / "configs" / "ci-image.yaml")
+    assert settings.search.retriever == "bm25-basic"  # no model download in CI

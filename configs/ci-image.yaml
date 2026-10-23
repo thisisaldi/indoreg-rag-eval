@@ -1,0 +1,44 @@
+# Config for the CI Docker smoke test (T-28): the image is built from the
+# fictional fixture corpus (tests/fixtures/ci_eval/chunks, no real legal text)
+# and serves BM25, so CI needs no PDFs and no model download.
+#   docker build --build-arg CONFIG=configs/ci-image.yaml \
+#     --build-arg CHUNKS=tests/fixtures/ci_eval/chunks -t indoreg-ci .
+
+paths:
+  raw: data/raw
+  manifest: data/manifest.json
+  dataset: eval/dataset.jsonl
+  processed: data/processed
+  chunks: data/chunks
+  cache: data/cache
+  results: reports/results
+
+chunking:
+  fixed: {size_chars: 1200, overlap_chars: 200}
+
+logging:
+  level: INFO
+  log_query_text: false
+
+retrieval:
+  bm25: {k1: 1.5, b: 0.75}
+  retrievers:
+    bm25-basic: {type: bm25, preprocess: basic, index_title: false}
+
+search:
+  default_top_k: 5
+  max_top_k: 20
+  max_query_chars: 500
+  retriever: bm25-basic
+  strategy: article
+
+eval:
+  retrievers: [bm25-basic]
+  strategies: [article]
+  baseline: bm25-basic/article
+  pairs: []
+  bootstrap: {iterations: 1000, seed: 42, confidence: 0.95}
+  splits: [dev, test]
+  recall_ks: [5, 10]
+  ndcg_k: 10
+  depth: 20
