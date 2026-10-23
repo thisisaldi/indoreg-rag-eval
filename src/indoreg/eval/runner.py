@@ -100,16 +100,39 @@ def compare(
     metric_keys: Sequence[str],
     boot: BootstrapConfig,
 ) -> dict[str, dict[str, Any]]:
-    """Paired comparison of every run with the baseline, per split and metric:
-    mean difference with bootstrap CI, and per-query wins/losses/ties."""
+    """Paired comparison of every run with the baseline."""
+    names = next(iter(results.values()), {})
+    pairs = [(name, baseline) for name in names if name != baseline]
+    return compare_pairs(results, pairs, metric_keys, boot)
+
+
+def compare_strategies(
+    results: dict[str, dict[str, Any]],
+    retrievers: Sequence[str],
+    strategies: Sequence[str],
+    metric_keys: Sequence[str],
+    boot: BootstrapConfig,
+) -> dict[str, dict[str, Any]]:
+    """Chunking ablation: each retriever on every other strategy, paired with
+    the same retriever on the first configured strategy."""
+    ref, *others = strategies
+    pairs = [(f"{r}/{s}", f"{r}/{ref}") for r in retrievers for s in others]
+    return compare_pairs(results, pairs, metric_keys, boot)
+
+
+def compare_pairs(
+    results: dict[str, dict[str, Any]],
+    pairs: Sequence[tuple[str, str]],
+    metric_keys: Sequence[str],
+    boot: BootstrapConfig,
+) -> dict[str, dict[str, Any]]:
+    """Per split and metric, for each (run, reference) pair: mean difference
+    run minus reference with bootstrap CI, and per-query wins/losses/ties."""
     out: dict[str, dict[str, Any]] = {}
     for split, by_run in results.items():
-        base = by_run[baseline]["queries"]
         out[split] = {}
-        for name, res in by_run.items():
-            if name == baseline:
-                continue
-            rows = res["queries"]
+        for name, ref in pairs:
+            rows, base = by_run[name]["queries"], by_run[ref]["queries"]
             out[split][name] = {}
             for key in metric_keys:
                 a = [r[key] for r in rows]
@@ -206,10 +229,22 @@ def markdown(result: dict[str, Any]) -> str:
             cells += [_fmt(s["latency_p50_ms"], 2), _fmt(s["latency_p95_ms"], 2)]
             lines.append("| " + " | ".join(cells) + " |")
         lines.append("")
-        cmp = result["comparisons"].get(split, {})
-        if cmp and any(res["summary"]["n"] for res in by_ret.values()):
+        if not any(res["summary"]["n"] for res in by_ret.values()):
+            continue
+        tables = [
+            (f"vs `{result['baseline']}`:", result["comparisons"]),
+            (
+                "Chunking ablation, vs the same retriever on"
+                f" `{result.get('strategy_reference')}` chunks:",
+                result.get("strategy_comparisons", {}),
+            ),
+        ]
+        for title, by_split in tables:
+            cmp = by_split.get(split, {})
+            if not cmp:
+                continue
             lines += [
-                f"vs `{result['baseline']}`:",
+                title,
                 "",
                 "| retriever | " + " | ".join(head[2 : 2 + len(keys)]) + " |",
                 "|" + "---|" * (len(keys) + 1),
@@ -245,6 +280,9 @@ def run(settings: Settings, dataset_path: Path, allow_drafts: bool) -> dict[str,
                     "queries": rows,
                 }
     comparisons = compare(results, cfg.baseline, metric_keys, cfg.bootstrap)
+    strategy_comparisons = compare_strategies(
+        results, cfg.retrievers, cfg.strategies, metric_keys, cfg.bootstrap
+    )
     now = datetime.now(UTC)
     git = git_state()
     run_id = now.strftime("%Y%m%dT%H%M%SZ") + f"-{git['sha'][:7]}"
@@ -271,6 +309,8 @@ def run(settings: Settings, dataset_path: Path, allow_drafts: bool) -> dict[str,
         "baseline": cfg.baseline,
         "bootstrap": cfg.bootstrap.model_dump(),
         "comparisons": comparisons,
+        "strategy_reference": cfg.strategies[0],
+        "strategy_comparisons": strategy_comparisons,
     }
 
 
