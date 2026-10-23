@@ -6,10 +6,17 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.11"
 dependencies = [
+    "numpy>=2.3",
     "pdfplumber>=0.11.10",
     "pydantic>=2.14.1",
     "pydantic-settings>=2.16.1",
     "pyyaml>=6.0.3",
+]
+
+[project.optional-dependencies]
+dense = [
+    "sentence-transformers>=6.2.0",
+    "torch>=2.14.1",
 ]
 
 [build-system]
@@ -30,6 +37,12 @@ python_version = "3.11"
 strict = true
 files = ["src"]
 
+# Optional `dense` extra: absent in CI, and not worth type-checking through torch.
+[[tool.mypy.overrides]]
+module = ["sentence_transformers", "sentence_transformers.*"]
+ignore_missing_imports = true
+follow_imports = "skip"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
@@ -40,3 +53,12 @@ dev = [
     "pytest>=9.1.1",
     "ruff>=0.17.1",
 ]
+
+# CPU-only torch on Linux (WSL, Docker); the Windows PyPI wheel is already CPU-only.
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
