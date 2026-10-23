@@ -1,0 +1,24 @@
+{
+ "git": {
+  "dirty": false,
+  "sha": "25c0f588779106c621fc81e757213761eca82493"
+ },
+ "method": "Latency of a deployed API from this machine (T-35). Stdlib only.\n\nSends the dataset queries `--rounds` times to <url>/search and records the\nclient round trip (network included) and the server's own `latency_ms`\n(retrieval only). The first request of the run is reported separately; it may\nor may not hit a cold instance, which this script cannot control. Also checks\nthat a CORS preflight from `--origin` is allowed.\n\nUsage:\n  uv run python scripts/remote_bench.py https://indoreg-rag-eval.vercel.app\nWrites reports/results/<timestamp>-<sha>-remote.{json,md}.\n",
+ "origin": "https://naufaldi.vercel.app",
+ "rounds": 3,
+ "row": {
+  "cors_allow_origin": "https://naufaldi.vercel.app",
+  "cors_preflight_status": 200,
+  "first_request_ms": 513.0371000013838,
+  "n": 120,
+  "retriever": "hybrid",
+  "rtt_p50_ms": 378.22980000055395,
+  "rtt_p95_ms": 678.3508000007714,
+  "server_p50_ms": 9.926,
+  "server_p95_ms": 18.846,
+  "url": "https://indoreg-rag-eval.vercel.app",
+  "vercel_id": "sin1::iad1::gj8zj-1792747253881-e3e23e8a6894"
+ },
+ "run_id": "20261023T092147Z-25c0f58-remote",
+ "timestamp": "2026-10-23T09:21:47.447019+00:00"
+}
