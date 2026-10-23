@@ -30,6 +30,21 @@ class Encoder(Protocol):
         ...
 
 
+def model_file(model: str, revision: str, filename: str, model_dir: Path) -> Path:
+    """Path of a model file as a plain file under model_dir (no cache symlinks),
+    so the directory can be bundled by Docker or Vercel (ADR-019). A file already
+    there is used as is: the revision is part of the directory name, and the hub
+    client would try to write a lock file, which fails on a read-only deployment.
+    """
+    local = model_dir / f"{model.replace('/', '__')}@{revision}"
+    path = local / filename
+    if path.is_file():
+        return path
+    from huggingface_hub import hf_hub_download
+
+    return Path(hf_hub_download(model, filename, revision=revision, local_dir=local))
+
+
 class OnnxEncoder:
     """Transformer encoder run with onnxruntime: mean pooling over the attention
     mask, then L2 normalisation (the E5 recipe). No torch, so it fits a small
@@ -45,15 +60,10 @@ class OnnxEncoder:
         model_dir: Path,
     ) -> None:
         import onnxruntime as ort
-        from huggingface_hub import hf_hub_download
         from tokenizers import Tokenizer
 
-        # Plain files under model_dir (no cache symlinks), so the directory can
-        # be bundled by Docker or Vercel and read offline (ADR-019).
-        local = model_dir / f"{model.replace('/', '__')}@{revision}"
-
         def fetch(filename: str) -> str:
-            return hf_hub_download(model, filename, revision=revision, local_dir=local)
+            return str(model_file(model, revision, filename, model_dir))
 
         self._tokenizer = Tokenizer.from_file(fetch("tokenizer.json"))
         self._tokenizer.enable_truncation(max_length=max_seq_length)
