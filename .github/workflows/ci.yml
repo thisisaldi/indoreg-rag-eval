@@ -28,3 +28,14 @@ jobs:
         run: uv run mypy
       - name: Tests
         run: uv run pytest
+
+  image:
+    # Builds the Docker image from the fictional fixture corpus and smoke-tests
+    # /health and /search (T-28); no PDFs or model downloads needed.
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build and smoke-test the image
+        run: bash scripts/smoke_image.sh

@@ -262,8 +262,9 @@ Links: BR6, ADR-016
 
 ### [ ] T-28 CI builds image (Day 12, 0.5h)
 Links: BR7
-- [ ] CI builds the Docker image and runs a smoke test against `/health`
-- Acceptance: CI green with the image step
+- [x] CI builds the Docker image and runs a smoke test against `/health` (job `image` in `.github/workflows/ci.yml`, after `check`; `scripts/smoke_image.sh` builds from the fictional fixture corpus with `configs/ci-image.yaml` (BM25, no model, no PDFs), checks `/health`, `/search` and a non-root user). Passed locally with Docker Desktop on 23 Oct 2026.
+- Acceptance: CI green with the image step. Waiting for Aldi to confirm the Actions run.
+- Not covered by CI: the real corpus and the dense model in the image (checked by hand in T-26).
 
 ---
 
@@ -318,3 +319,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-25: request IDs, JSON request and search logs (no query text by default), 500 without trace, fail-fast config. | None. | T-26 Dockerfile (ADR-008 baked vs mounted). |
 | 23 Oct 2026 | T-26: Dockerfile with baked model and embeddings (ADR-008), checked for bm25-basic and hybrid, offline run works. | Docker build needs data/chunks (gitignored): CI must ingest or use fixtures (T-28). | T-27 latency benchmark. |
 | 23 Oct 2026 | T-27: latency script, two committed runs, `reports/latency.md` with method and cost note. | None. | T-28 CI builds the image (needs chunks without the PDFs). |
+| 23 Oct 2026 | T-28: CI image job with fixture corpus and smoke script; local smoke test passed. | CI result to confirm (Aldi, Actions tab). | T-35 Vercel deploy needs the serving decision; M6 packaging (T-29 to T-34). |
