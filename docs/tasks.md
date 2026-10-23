@@ -173,11 +173,12 @@ Links: FR-RET-4
 
 ## M4 Analysis (Day 9 to 10)
 
-### [ ] T-19 Bootstrap CIs and win/loss (Day 9, 0.75h)
+### [x] T-19 Bootstrap CIs and win/loss (Day 9, 0.75h)
 Links: BR4, FR-EVAL-5
-- [ ] Bootstrap 95% CIs for every metric, seeded
-- [ ] Per-query win/loss/tie between any two configs
-- [ ] Add to the results tables
+- [x] Bootstrap 95% CIs for every metric, seeded (1000 resamples of queries, seed 42, from config)
+- [x] Per-query win/loss/tie between any two configs (paired against `eval.baseline`, with a CI on the difference)
+- [x] Add to the results tables (`reports/results/20261023T025613Z-a20cbfe.md`: 3 BM25 variants x 2 chunk strategies)
+- Dev reading of that file (test split not used for choices): `bm25-id/article` improves Recall@10 over `bm25-basic/article` (+0.065, CI +0.01 to +0.14, 6/1/23); `bm25-id-title/article` gains on MRR and nDCG@10 are not established (CIs include 0); fixed chunks lose to article chunks on MRR and nDCG@10 for all three variants (CIs exclude 0). Labels are LLM-checked, not human-verified (ADR-015).
 - Acceptance: every comparison table shows CIs, seed fixed, tests cover the bootstrap function
 
 ### [ ] T-20 Chunking ablation (Day 9, 0.75h)
@@ -278,3 +279,4 @@ Links: BR5, BR8
 | 22 Oct 2026 | T-01 probes: pdfplumber extraction and OCR-tolerant segmentation spike on 4 PDFs, Pasal.id API probe. ADR-005, ADR-009 to ADR-012 recorded. Spec conflict on label granularity fixed (FR-EVAL-1, T-09, T-10). T-02 partly done: .gitignore, pre-commit config, README. | PyMuPDF blocked by application control (no extractor comparison). Page-image check pending (Aldi). License choice and public repo pending (Aldi). | Aldi's page-image check, then tick T-01. T-03 source manifest. |
 | 22 Oct 2026 | T-03 partly: data/manifest.json for 4 documents (hashes, titles, text_quality), scripts/check_manifest.py, ADR-013. T-05 done: uv project on Python 3.12, config (YAML + INDOREG_ env) and JSON logging modules, 13 tests, mypy strict and ruff clean, `pip install -e .` verified in a clean venv. | T-03: 13 manifest fields need source URLs, status and retrieval dates from Aldi. | T-06 ingestion pipeline after T-03 fields are filled. |
 | 22 Oct 2026 | T-08 workflow written (not yet run on GitHub). T-06 done: pdfplumber extraction, noise filter and OCR-tolerant segmentation ported from the spike, 273 articles from 4 documents with offsets identical to the spike, deterministic outputs. T-07 article chunker and T-13 basic BM25 done; `make search` CLI for a first end-to-end demo. | T-01 page-image check and T-03 manifest fields still open; 3 documents show "not yet recorded" for status and source. | T-07 fixed-size chunker and BAB context; labeling (T-09 to T-11). |
+| 23 Oct 2026 | T-15 CI eval with floor; T-07 fixed chunker, chapter context, multi-article chunk mapping; T-13 Indonesian and title-indexing BM25 variants (ADR-007); T-19 bootstrap CIs and paired win/loss, dataset hash made line-ending independent. Results: `reports/results/20261023T025613Z-a20cbfe`. | Dense retrieval (T-16) needs sentence-transformers and torch; Windows Application Control may block their native libraries. T-01 page check and T-03 manifest fields still with Aldi. | T-20 chunking ablation write-up, then T-16. |
