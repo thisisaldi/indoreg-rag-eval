@@ -4,7 +4,12 @@ import numpy as np
 import pytest
 
 from indoreg.config import DenseSpec, load_settings
-from indoreg.retrieval.dense import DenseRetriever, Matrix, mean_pool_normalise
+from indoreg.retrieval.dense import (
+    DenseRetriever,
+    Matrix,
+    mean_pool_normalise,
+    model_file,
+)
 from indoreg.schemas import Chunk
 
 REPO_CONFIG = Path(__file__).resolve().parent.parent / "configs" / "default.yaml"
@@ -91,3 +96,20 @@ def test_mean_pool_ignores_padding_and_normalises() -> None:
     mask = np.array([[1, 0]], dtype=np.int64)
     out = mean_pool_normalise(hidden, mask)
     assert out.tolist() == [[pytest.approx(0.6), pytest.approx(0.8)]]
+
+
+def test_baked_model_file_is_used_without_the_hub(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import huggingface_hub
+
+    def no_hub(*args: object, **kwargs: object) -> str:
+        raise AssertionError("must not call the hub (read-only deployments)")
+
+    monkeypatch.setattr(huggingface_hub, "hf_hub_download", no_hub)
+    baked = tmp_path / "org__m@abc" / "onnx" / "model.onnx"
+    baked.parent.mkdir(parents=True)
+    baked.write_bytes(b"x")
+    assert model_file("org/m", "abc", "onnx/model.onnx", tmp_path) == baked
+    with pytest.raises(AssertionError, match="must not call the hub"):
+        model_file("org/m", "other-rev", "onnx/model.onnx", tmp_path)
