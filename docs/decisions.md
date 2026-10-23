@@ -123,6 +123,12 @@ Format: one entry per decision. Status is Accepted, Proposed, or Superseded. Add
 - Decision: An article span ends at the first whole-line heading after its Pasal marker (`SECTION` in `ingest/articles.py`: "BAB <roman>", bare "BAB", "Bagian Ke...", including the OCR form "Baqian", and "Paragraf <n>"). The heading and its title lines belong to no article; the chapter stays recorded per span (design.md 3.2). Section titles are not added to the next article (possible later experiment).
 - Consequences: Same 273 articles; 0 spans contain a heading. Measured in `reports/results/20261023T074949Z-ed9dbfc.vs-a0d608d.md`: on dev no configuration changes with a CI excluding 0 (hybrid/article nDCG@10 -0.002 [-0.03, +0.02], 6/5/19). On test, hybrid/article nDCG@10 drops by 0.022 [-0.049, -0.004] (0/3/7); the test split is reported, not used to decide. The fix is kept because it is a data correction and is neutral on dev.
 
+## ADR-018: Serve the hybrid retriever
+- Status: Accepted (23 Oct 2026, Aldi)
+- Context: ADR-016 serves BM25 unless dense or hybrid beats BM25 with a CI excluding 0. On dev (`reports/results/20261023T074949Z-ed9dbfc`), hybrid/article beats bm25-basic/article on nDCG@10 (+0.093 [+0.01, +0.19]) and beats the stronger bm25-id-title/article by +0.078 [+0.0003, +0.151] (16/3/11), a lower bound only just above 0. Warm p50 serving latency is about 18 ms for hybrid vs about 5 ms for bm25-id-title (`reports/latency.md`), both well below what a user notices.
+- Decision: `search.retriever: hybrid` (RRF over bm25-id-title and dense-e5-small, k 60, depth 50) on article chunks.
+- Consequences: The served index needs the e5-small ONNX model (118 MB) and its embedding cache, which the Docker image bakes in (ADR-008). If the Vercel bundle, memory or cold start measured in T-35 do not fit the Hobby limits, switch to `bm25-id-title`, a config-only change, and record it here. The CI image keeps serving BM25 from the fixture corpus (`configs/ci-image.yaml`).
+
 ---
 
 ## Template
