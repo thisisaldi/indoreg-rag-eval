@@ -2,7 +2,7 @@
 
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 DocStatus = Literal["in_force", "amended", "revoked", "unknown"]
 # How an article marker was resolved (ADR-010); "plain" is an exact "Pasal N".
@@ -40,6 +40,7 @@ class ArticleSpan(BaseModel):
     char_end: int
     method: Method
     marker_raw: str
+    chapter: str | None = None  # last BAB heading before the article
 
 
 class Chunk(BaseModel):
@@ -51,8 +52,9 @@ class Chunk(BaseModel):
     doc_id: str
     title: str
     strategy: Literal["article", "fixed"]
-    article: str | None
+    article: str | None  # the single article, or None if the chunk spans several
     chapter: str | None
+    articles: list[str] = Field(default_factory=list)  # every article overlapped
     char_start: int
     char_end: int
     text: str

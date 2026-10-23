@@ -76,9 +76,13 @@ class RetrievalConfig(_Strict):
     bm25: BM25Config
 
 
+Strategy = Literal["article", "fixed"]
+
+
 class SearchConfig(_Strict):
     default_top_k: PositiveInt
     max_top_k: PositiveInt
+    strategy: Strategy  # chunk strategy served by search
 
     @model_validator(mode="after")
     def _default_within_max(self) -> "SearchConfig":
@@ -89,6 +93,7 @@ class SearchConfig(_Strict):
 
 class EvalConfig(_Strict):
     retrievers: list[str] = Field(min_length=1)
+    strategies: list[Strategy] = Field(min_length=1)
     splits: list[Literal["dev", "test"]] = Field(min_length=1)
     recall_ks: list[PositiveInt] = Field(min_length=1)
     ndcg_k: PositiveInt

@@ -74,12 +74,13 @@ Links: FR-ING-1 to FR-ING-4
 - [x] Tests on a small fixture PDF or text sample (synthetic OCR-like page text)
 - Acceptance: two runs produce identical output hashes, failures appear in the log not as crashes
 
-### [ ] T-07 Chunkers (Day 3, 1h)
+### [x] T-07 Chunkers (Day 3, 1h)
 Links: FR-CHK-1 to FR-CHK-3
-- [ ] Article-based chunker on Pasal markers, keep chapter (BAB) context (chunker done; BAB context not yet, `chapter` is null)
-- [ ] Fixed-size overlapping chunker, size and overlap from config
+- [x] Article-based chunker on Pasal markers, keep chapter (BAB) context (OCR-tolerant BAB detection; chapter sequences are contiguous in all 4 documents)
+- [x] Fixed-size overlapping chunker, size and overlap from config (1200/200 chars over the body only; 188 chunks; each lists every overlapped article)
 - [x] Chunk schema: document ID, chunk ID, article number, offsets, source URL, text
-- [ ] Tests for edge cases: missing markers, very long articles, ayat sub-items
+- [x] Tests for edge cases: missing markers, very long articles, ayat sub-items (`tests/test_chunking.py`, `tests/test_articles.py`)
+- Also fixed: the noise filter dropped all header/footer-zone lines of a 1-page text; a running header now has to repeat on at least 2 pages (no change on the 4 real documents).
 - Acceptance: every chunk links back to its document and offsets reconstruct the source text span
 
 ### [ ] T-08 CI skeleton (Day 3, 0.5h)

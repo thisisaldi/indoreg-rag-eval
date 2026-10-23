@@ -62,8 +62,9 @@ paths: {{raw: r, manifest: m, dataset: {dataset},
 chunking: {{fixed: {{size_chars: 100, overlap_chars: 10}}}}
 logging: {{level: INFO, log_query_text: false}}
 retrieval: {{bm25: {{k1: 1.5, b: 0.75}}}}
-search: {{default_top_k: 5, max_top_k: 20}}
-eval: {{retrievers: [bm25-basic], splits: [dev, test], recall_ks: [1, 2], ndcg_k: 2,
+search: {{default_top_k: 5, max_top_k: 20, strategy: article}}
+eval: {{retrievers: [bm25-basic], strategies: [article],
+  splits: [dev, test], recall_ks: [1, 2], ndcg_k: 2,
   depth: 3}}
 """,
         encoding="utf-8",
@@ -81,8 +82,8 @@ DATA = [
 def test_run_scores_dev_and_test_splits(tmp_path: Path) -> None:
     settings = load_settings(setup(tmp_path, DATA))
     res = run(settings, settings.paths.dataset, allow_drafts=False)
-    dev = res["results"]["dev"]["bm25-basic"]
-    test = res["results"]["test"]["bm25-basic"]
+    dev = res["results"]["dev"]["bm25-basic/article"]
+    test = res["results"]["test"]["bm25-basic/article"]
     assert dev["summary"]["n"] == 2 and test["summary"]["n"] == 1
     q1, q2 = dev["queries"]
     assert q1["ranking"][0] == "d:1" and q1["rr"] == 1.0 and q1["recall@1"] == 1.0
@@ -118,7 +119,7 @@ def test_write_json_and_markdown(tmp_path: Path) -> None:
     saved = json.loads(path.read_text(encoding="utf-8"))
     assert saved["run_id"] == res["run_id"] and "git" in saved and "config" in saved
     md = path.with_suffix(".md").read_text(encoding="utf-8")
-    assert "| bm25-basic | 2 |" in md and "MRR" in md and "UNVERIFIED" not in md
+    assert "| bm25-basic/article | 2 |" in md and "MRR" in md and "UNVERIFIED" not in md
     assert saved["dataset"]["labels_human_verified"] and "not human-verified" not in md
 
 
@@ -147,7 +148,9 @@ def test_drafts_need_flag_and_are_marked(tmp_path: Path) -> None:
     assert res["dataset"]["unverified_drafts"] and res["run_id"].endswith("-unverified")
     md = markdown(res)
     assert "UNVERIFIED LABELS" in md
-    assert "| bm25-basic | 0 | n/a |" in md  # empty test split renders, not crashes
+    assert (
+        "| bm25-basic/article | 0 | n/a |" in md
+    )  # empty test split renders, not crashes
 
 
 @pytest.mark.parametrize(

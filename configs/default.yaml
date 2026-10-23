@@ -28,9 +28,11 @@ retrieval:
 search:
   default_top_k: 5
   max_top_k: 20
+  strategy: article
 
 eval:
   retrievers: [bm25-basic]
+  strategies: [article, fixed]
   splits: [dev, test]
   recall_ks: [5, 10]
   ndcg_k: 10

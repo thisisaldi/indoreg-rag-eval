@@ -11,6 +11,7 @@ import sys
 from pathlib import Path
 
 from indoreg.chunking.article import article_chunks
+from indoreg.chunking.fixed import fixed_chunks
 from indoreg.config import Settings, load_settings
 from indoreg.ingest.articles import segment
 from indoreg.ingest.extract import extract_pages
@@ -30,7 +31,8 @@ def _write(path: Path, content: str) -> None:
     path.write_text(content, encoding="utf-8", newline="\n")
 
 
-def ingest_document(settings: Settings, entry: ManifestEntry) -> list[Chunk]:
+def ingest_document(settings: Settings, entry: ManifestEntry) -> dict[str, list[Chunk]]:
+    """Chunks of one document per strategy ("article", "fixed")."""
     pdf = settings.paths.raw / entry.filename
     digest = hashlib.sha256(pdf.read_bytes()).hexdigest()
     if digest != entry.sha256:
@@ -55,26 +57,39 @@ def ingest_document(settings: Settings, entry: ManifestEntry) -> list[Chunk]:
             }
         },
     )
-    return article_chunks(entry, seg.text, seg.spans)
+    fx = settings.chunking.fixed
+    return {
+        "article": article_chunks(entry, seg.text, seg.spans),
+        "fixed": fixed_chunks(
+            entry, seg.text, seg.spans, fx.size_chars, fx.overlap_chars
+        ),
+    }
 
 
-def run(settings: Settings) -> list[Chunk]:
-    chunks: list[Chunk] = []
+def run(settings: Settings) -> dict[str, list[Chunk]]:
+    chunks: dict[str, list[Chunk]] = {"article": [], "fixed": []}
     failed: list[str] = []
     for entry in load_manifest(settings.paths.manifest):
         try:
-            chunks.extend(ingest_document(settings, entry))
+            for strategy, part in ingest_document(settings, entry).items():
+                chunks[strategy].extend(part)
         except (OSError, ValueError) as e:
             log.error(
                 "document failed",
                 extra={"fields": {"doc_id": entry.doc_id, "error": str(e)}},
             )
             failed.append(entry.doc_id)
-    lines = "".join(c.model_dump_json() + "\n" for c in chunks)
-    _write(settings.paths.chunks / "article.jsonl", lines)
+    for strategy, part in chunks.items():
+        lines = "".join(c.model_dump_json() + "\n" for c in part)
+        _write(settings.paths.chunks / f"{strategy}.jsonl", lines)
     log.info(
         "ingest finished",
-        extra={"fields": {"chunks": len(chunks), "failed_documents": failed}},
+        extra={
+            "fields": {
+                "chunks": {k: len(v) for k, v in chunks.items()},
+                "failed_documents": failed,
+            }
+        },
     )
     return chunks
 
