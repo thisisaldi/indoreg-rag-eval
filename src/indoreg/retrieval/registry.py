@@ -30,6 +30,7 @@ def build_retriever(name: str, settings: Settings) -> Retriever:
         spec.onnx_file,
         spec.batch_size,
         spec.max_seq_length,
+        settings.paths.models,
     )
     key = "|".join(
         [

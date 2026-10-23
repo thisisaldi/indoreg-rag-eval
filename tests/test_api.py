@@ -198,3 +198,24 @@ def test_bad_config_exits_with_a_clear_error(
     monkeypatch.setenv("INDOREG_CONFIG", str(bad))
     with pytest.raises(SystemExit, match="invalid configuration"):
         create_app()
+
+
+def test_cors_allows_only_configured_origins(client: TestClient) -> None:
+    ok = "https://naufaldi.vercel.app"  # configs/default.yaml search.cors_origins
+    pre = client.options(
+        "/search",
+        headers={
+            "Origin": ok,
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "content-type",
+        },
+    )
+    assert pre.status_code == 200
+    assert pre.headers["access-control-allow-origin"] == ok
+    r = client.post("/search", json={"query": "data"}, headers={"Origin": ok})
+    assert r.headers["access-control-allow-origin"] == ok
+    assert "x-request-id" in r.headers["access-control-expose-headers"].lower()
+    other = client.post(
+        "/search", json={"query": "data"}, headers={"Origin": "https://evil.example"}
+    )
+    assert "access-control-allow-origin" not in other.headers

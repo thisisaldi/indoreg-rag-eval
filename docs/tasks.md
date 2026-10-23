@@ -255,9 +255,9 @@ Links: NFR7, FR-EVAL-8
 
 ### [ ] T-35 Vercel deployment (added 23 Oct 2026, ADR-016)
 Links: BR6, ADR-016
-- [ ] Deploy the API as a Vercel Hobby Python function serving the retriever chosen on dev
+- [ ] Deploy the API as a Vercel Hobby Python function serving the retriever chosen on dev (prepared 23 Oct 2026: `src/vercel_app.py` entrypoint and `scripts/vercel_build.py` build step set in `pyproject.toml`, `data/chunks/article.jsonl` committed (ADR-019); checked locally that the entrypoint serves hybrid offline from another working directory with an empty Hugging Face cache. First Vercel build failed before this, with FASTAPI_ENTRYPOINT_NOT_FOUND.)
 - [ ] Measure bundle size (limit 500 MB uncompressed), memory, cold-start and warm latency; confirm CPU architecture
-- [ ] CORS allowlist for the portfolio site's origin, from config (origin: https://naufaldi.vercel.app, given by Aldi 23 Oct 2026)
+- [x] CORS allowlist for the portfolio site's origin, from config (`search.cors_origins: [https://naufaldi.vercel.app]`; GET and POST, `X-Request-ID` exposed; test in `tests/test_api.py`)
 - Acceptance: deployed `/health` and `/search` answer requests from the portfolio origin, measurements recorded
 
 ### [x] T-28 CI builds image (Day 12, 0.5h)
@@ -326,3 +326,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-29: README with results (dev and test, CIs), paired findings, reproduce steps, API and Docker usage, limitations. Also fixed a test that broke when the serving retriever changed (pushed red once, fixed in 7784ed2). | None. | T-30 architecture diagram. |
 | 23 Oct 2026 | T-30: Mermaid architecture diagram in `reports/architecture.md` and the README. | Rendering on GitHub not checked by Claude. | T-31 case study. |
 | 23 Oct 2026 | T-31: case study. | Aldi to review tone and claims before publishing. | T-32 demo (needs Aldi to record), T-33 resume bullets. |
+| 23 Oct 2026 | T-35 prepared: Vercel entrypoint and build step, article chunks committed (ADR-019), model files as plain files in `data/models`, CORS for the portfolio. | Needs a Vercel build to confirm bundle size, memory and cold start. | Push, Aldi redeploys or Vercel builds on push; then measure. |

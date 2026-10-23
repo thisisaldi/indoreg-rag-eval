@@ -42,13 +42,18 @@ class OnnxEncoder:
         onnx_file: str,
         batch_size: int,
         max_seq_length: int,
+        model_dir: Path,
     ) -> None:
         import onnxruntime as ort
         from huggingface_hub import hf_hub_download
         from tokenizers import Tokenizer
 
+        # Plain files under model_dir (no cache symlinks), so the directory can
+        # be bundled by Docker or Vercel and read offline (ADR-019).
+        local = model_dir / f"{model.replace('/', '__')}@{revision}"
+
         def fetch(filename: str) -> str:
-            return hf_hub_download(model, filename, revision=revision)
+            return hf_hub_download(model, filename, revision=revision, local_dir=local)
 
         self._tokenizer = Tokenizer.from_file(fetch("tokenizer.json"))
         self._tokenizer.enable_truncation(max_length=max_seq_length)

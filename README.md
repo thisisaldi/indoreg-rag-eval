@@ -166,7 +166,7 @@ docker run --rm -p 8000:8000 indoreg-search
 - **Explanations (Penjelasan) are not indexed** ([ADR-012](docs/decisions.md)).
 - **OCR noise.** Two of the four PDFs are page images with a text layer that contains character errors (for example "Persetqiuan" for "Persetujuan"). Article segmentation tolerates them ([ADR-010](docs/decisions.md)); retrieval sometimes does not.
 - **Models.** multilingual-e5 reads at most 512 tokens (one labeled article is longer); int8 quantization may cost some quality against the full model (not measured).
-- **Reproduction** is verified on one Windows machine only. The public deployment on Vercel is planned (T-35), not done yet.
+- **Reproduction** is verified on one Windows machine only.
 
 ## Documentation
 
@@ -179,4 +179,6 @@ docker run --rm -p 8000:8000 indoreg-search
 
 ## Data and licensing
 
-The code is released under the [MIT License](LICENSE). The license does not cover the regulation texts or the third-party models, which have their own terms. All sources are public official regulations; each source URL, retrieval date and status is recorded in [`data/manifest.json`](data/manifest.json). The PDFs and the text derived from them are not redistributed (`data/` outputs are gitignored); the CI uses a small fictional corpus instead.
+The code is released under the [MIT License](LICENSE). The license does not cover the regulation texts or the third-party models, which have their own terms. All sources are public official regulations; each source URL, retrieval date and status is recorded in [`data/manifest.json`](data/manifest.json).
+
+The PDFs are not redistributed. The extracted article text, `data/chunks/article.jsonl`, is committed so the API can be deployed from Git ([ADR-019](docs/decisions.md)); it contains OCR errors and is not an authoritative copy of the law. Check the official source for the text in force. The CI uses a small fictional corpus.

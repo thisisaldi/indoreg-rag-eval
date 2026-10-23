@@ -9,5 +9,7 @@ __pycache__/
 .env
 *.egg-info/
 data/processed/
-data/chunks/
+data/chunks/*
+!data/chunks/article.jsonl
+data/models/
 reports/results/*-unverified.*
