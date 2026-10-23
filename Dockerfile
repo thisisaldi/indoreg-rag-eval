@@ -6,11 +6,13 @@
 #   docker build -t indoreg-search .
 #   docker run --rm -p 8000:8000 indoreg-search
 # Another config file under configs/: --build-arg CONFIG=configs/<file>.yaml
+# Another chunk directory (CI uses the fixture): --build-arg CHUNKS=<dir>
 
 FROM ghcr.io/astral-sh/uv:0.13.5 AS uv
 
 FROM python:3.12.12-slim-bookworm AS build
 ARG CONFIG=configs/default.yaml
+ARG CHUNKS=data/chunks
 COPY --from=uv /uv /usr/local/bin/uv
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy UV_PYTHON_DOWNLOADS=never \
     HF_HOME=/app/hf INDOREG_CONFIG=$CONFIG
@@ -20,7 +22,7 @@ RUN uv sync --locked --no-dev --no-install-project
 COPY src ./src
 RUN uv sync --locked --no-dev
 COPY configs ./configs
-COPY data/chunks ./data/chunks
+COPY ${CHUNKS} ./data/chunks
 # Build the configured serving index once: downloads the model (if any) at its
 # pinned revision into HF_HOME and fills data/cache with chunk embeddings.
 RUN .venv/bin/python -c "from indoreg.config import load_settings; \

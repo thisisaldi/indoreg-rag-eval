@@ -13,5 +13,6 @@ data/cache
 reports
 eval
 tests
+!tests/fixtures/ci_eval/chunks
 docs
 scripts
