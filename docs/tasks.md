@@ -24,13 +24,13 @@ indoreg-rag-eval/
 
 ## M1 Foundation (Day 1 to 3)
 
-### [ ] T-01 Feasibility check (Day 1, 0.75h)
+### [x] T-01 Feasibility check (Day 1, 0.75h)
 Links: Assumptions, Risks
 - [x] Find 3 to 5 candidate regulations for personal data protection on official sources (4 found and probed, see ADR-009)
-- [ ] Download manually, check that text is selectable and copy-paste preserves Pasal structure (text extracts on all 4; Pasal structure recovery pending Aldi's page-image check)
+- [x] Download manually, check that text is selectable and copy-paste preserves Pasal structure (text extracts on all 4; Pasal structure recovered by the OCR-tolerant segmentation, ADR-010; Aldi's full page-image check skipped by Aldi on 23 Oct 2026, see ADR-009)
 - [x] Note any scanned pages, broken numbering, annex-heavy files (image-based pages with garbled headings in PP 71/2019 and UU 27/2022, see ADR-009 and ADR-010; no annexes found)
 - Acceptance: at least 3 documents with clean extractable article structure, or a decision to switch topic recorded in `docs/decisions.md`
-- Output: feasibility notes (5 lines per document)
+- Output: feasibility notes: ADR-009 table and `scratch/` reports (local, not committed)
 
 ### [ ] T-02 Repository and spec docs (Day 1, 0.75h)
 Links: BR5, NFR4, NFR9
@@ -39,6 +39,7 @@ Links: BR5, NFR4, NFR9
 - [ ] README stub with problem statement and the "not legal advice" note
 - [ ] `.gitignore`, license, pre-commit with ruff and a secret scanner
 - Acceptance: repo is public, docs committed, pre-commit runs
+- Status: repo exists with docs, license, pre-commit; it is PRIVATE as of 23 Oct 2026 (Aldi), so "public" is not met. T-02 stays open until Aldi makes it public.
 - Output: initial commit
 
 ### [ ] T-03 Source collection and manifest (Day 2, 1h)
@@ -48,6 +49,7 @@ Links: BR2, FR-ING-2
 - [ ] Build `data/manifest.json` with ID, title, number, year, status, URL, retrieved date, filename, SHA-256
 - [ ] Mark status (in force, amended, revoked, unknown) with a source for each claim
 - Acceptance: every manifest entry has all fields, hashes match files
+- Status 23 Oct 2026: hashes match; PP 71/2019 complete (peraturan.bpk.go.id, status Berlaku, retrieved 2026-10-22, per Aldi). Still null: UU 27/2022 retrieved_on; Permen Kominfo 20/2016 and UU 11/2008 status, status_source, source_url, retrieved_on (9 fields). `scripts/check_manifest.py --strict` fails until they are filled.
 - Output: `data/manifest.json`
 
 ### [ ] T-04 Extraction spike (Day 2, 0.5h)
@@ -83,12 +85,11 @@ Links: FR-CHK-1 to FR-CHK-3
 - Also fixed: the noise filter dropped all header/footer-zone lines of a 1-page text; a running header now has to repeat on at least 2 pages (no change on the 4 real documents).
 - Acceptance: every chunk links back to its document and offsets reconstruct the source text span
 
-### [ ] T-08 CI skeleton (Day 3, 0.5h)
+### [x] T-08 CI skeleton (Day 3, 0.5h)
 Links: BR7, NFR5, NFR6
 - [x] GitHub Actions: install, ruff, type check, pytest (`.github/workflows/ci.yml`)
 - [x] Cache pip (uv cache via setup-uv, since the project uses uv)
-- Not yet verified: CI has not run on GitHub; tick T-08 after the first green run on main.
-- Acceptance: CI green on main, badge in README
+- Acceptance: CI green on main (Aldi confirmed green on 23 Oct 2026), badge in README
 
 ---
 

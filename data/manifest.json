@@ -12,7 +12,9 @@
     "filename": "UU Nomor 27 Tahun 2022.pdf",
     "sha256": "ed952dea04b87d14ecf037f9f324a65d50b396ddd34fc28ddf9ff014391971f6",
     "text_quality": "image_text_layer",
-    "todo": ["retrieved_on"]
+    "todo": [
+      "retrieved_on"
+    ]
   },
   {
     "doc_id": "pp-71-2019",
@@ -20,14 +22,14 @@
     "reg_type": "PP",
     "number": "71",
     "year": 2019,
-    "status": null,
-    "status_source": null,
-    "source_url": null,
-    "retrieved_on": null,
+    "status": "in_force",
+    "status_source": "peraturan.bpk.go.id detail page for PP 71/2019 shows status Berlaku (checked by Aldi, 2026-10-22)",
+    "source_url": "https://peraturan.bpk.go.id/Details/122030/pp-no-71-tahun-2019",
+    "retrieved_on": "2026-10-22",
     "filename": "PP Nomor 71 Tahun 2019.pdf",
     "sha256": "0c454f81e36883d1a2c004247523baaa9f0d121eb60c8b42309cd3487f0ae6a8",
     "text_quality": "image_text_layer",
-    "todo": ["status", "status_source", "source_url", "retrieved_on"]
+    "todo": []
   },
   {
     "doc_id": "permen-kominfo-20-2016",
@@ -42,7 +44,12 @@
     "filename": "Permen Kominfo Nomor 20 Tahun 2016.pdf",
     "sha256": "cee5ba2a62bbcbff4e15cb20a073ef033c1c1aca93f662ccfde9e70fc018e237",
     "text_quality": "native",
-    "todo": ["status", "status_source", "source_url", "retrieved_on"]
+    "todo": [
+      "status",
+      "status_source",
+      "source_url",
+      "retrieved_on"
+    ]
   },
   {
     "doc_id": "uu-11-2008",
@@ -57,6 +64,11 @@
     "filename": "UU Nomor 11 Tahun 2008.pdf",
     "sha256": "3c174f55b4a7982af268a24316e3353c8e712fc8a57e87a9fdf0502da4ea0af3",
     "text_quality": "native",
-    "todo": ["status", "status_source", "source_url", "retrieved_on"]
+    "todo": [
+      "status",
+      "status_source",
+      "source_url",
+      "retrieved_on"
+    ]
   }
 ]
