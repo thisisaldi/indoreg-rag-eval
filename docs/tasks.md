@@ -209,9 +209,10 @@ Links: FR-CHK-1, ADR-017
 - Acceptance: dev comparison with CIs. Dev: no change established for any configuration (hybrid/article nDCG@10 -0.002 [-0.03, +0.02]). Test (reported only): hybrid/article nDCG@10 -0.022 [-0.049, -0.004], 0/3/7. Kept as a data correction (ADR-017).
 - Effect on the T-18 reading, from `reports/results/20261023T074949Z-ed9dbfc`: dev hybrid/article vs bm25-id-title/article nDCG@10 is now +0.078 [+0.0003, +0.151] (16/3/11) and recall@10 +0.090 [0.000, +0.183]. A lower bound this close to 0 is borderline, not a robust difference; the serving decision is still open.
 
-### [ ] T-22 Reranker (stretch) (Day 10, 1h)
+### [x] T-22 Reranker (stretch) (Day 10, 1h): skipped
 Links: FR-RET-5
 - [ ] Cross-encoder reranking of top-k, measure gain and latency cost
+- Skipped 23 Oct 2026 by Aldi's decision, logged here as the acceptance allows. Reasons: a reranker must run with onnxruntime and fit the Vercel Hobby bundle next to the embedding model (ADR-016), and no suitable small multilingual ONNX cross-encoder was identified; the dev set (30 queries) is already at the edge of separating hybrid from BM25 (T-36 note). Revisit with a larger dev set.
 - Acceptance: results added to the comparison table, or task explicitly skipped and logged
 
 ### [ ] T-23 Tag benchmark release (Day 10, 0.5h)
@@ -307,3 +308,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-18: hybrid RRF retriever (6 tests); dev-only grid `reports/results/20261023T073543Z-a07f39f` kept k 60 / depth 50; full run `reports/results/20261023T073624Z-a0d608d`. Hybrid beats bm25-basic and dense-e5-small on dev, not established against bm25-id-title. | Serving choice (bm25-id-title vs hybrid) needs Aldi, see T-18. | T-20 is done; next T-21 error analysis. |
 | 23 Oct 2026 | T-21: error analysis of hybrid/article on dev (10 failures; vocabulary gap 7, multi-article 4, chunk boundary 2, extraction 2, superseded 1, label error 0). Found section headings at the end of 76 of 273 article spans. `eval/LABEL_ISSUES.md` proposals. | Aldi: q-022/q-033 decision and the q-021 label proposal; serving choice from T-18. | T-22 reranker (stretch) or skip; heading fix as a dev experiment if wanted. |
 | 23 Oct 2026 | T-36 (from T-21): section headings no longer end up in article spans (ADR-017); `scripts/compare_runs.py`; results `reports/results/20261023T074949Z-ed9dbfc`, before/after `reports/results/20261023T074949Z-ed9dbfc.vs-a0d608d.md`. Neutral on dev; small drop on test for hybrid (reported, not used to decide). | Serving choice still open (hybrid vs bm25-id-title now borderline on dev). | T-22 reranker or skip, then T-23. |
+| 23 Oct 2026 | T-22 skipped (Aldi), reasons in T-22. | None. | T-23 clean-clone reproduction and tag. |
