@@ -49,6 +49,9 @@ retrieval:
       max_seq_length: 512
       batch_size: 16
 
+    # RRF over the best dev BM25 variant and the chosen dense model (ADR-006);
+    # k and depth kept at the design default after the dev-only grid (T-18).
+    hybrid: {type: hybrid, members: [bm25-id-title, dense-e5-small], rrf_k: 60, depth: 50}
 search:
   default_top_k: 5
   max_top_k: 20
@@ -56,12 +59,14 @@ search:
   strategy: article
 
 eval:
-  retrievers: [bm25-basic, bm25-id, bm25-id-title, dense-e5-small, dense-e5-base]
+  retrievers: [bm25-basic, bm25-id, bm25-id-title, dense-e5-small, dense-e5-base, hybrid]
   strategies: [article, fixed]
   baseline: bm25-basic/article
   # Extra paired comparisons [run, reference], e.g. to pick the dense model.
   pairs:
     - [dense-e5-base/article, dense-e5-small/article]
+    - [hybrid/article, bm25-id-title/article]
+    - [hybrid/article, dense-e5-small/article]
   bootstrap: {iterations: 1000, seed: 42, confidence: 0.95}
   splits: [dev, test]
   recall_ks: [5, 10]

@@ -94,7 +94,18 @@ class DenseSpec(_Strict):
     batch_size: PositiveInt
 
 
-RetrieverSpec = Annotated[BM25Spec | DenseSpec, Field(discriminator="type")]
+class HybridSpec(_Strict):
+    """Reciprocal rank fusion over named member retrievers (FR-RET-4)."""
+
+    type: Literal["hybrid"]
+    members: list[str] = Field(min_length=2)  # names of non-hybrid retrievers
+    rrf_k: PositiveFloat
+    depth: PositiveInt  # results taken from each member before fusing
+
+
+RetrieverSpec = Annotated[
+    BM25Spec | DenseSpec | HybridSpec, Field(discriminator="type")
+]
 
 
 class RetrievalConfig(_Strict):
@@ -171,6 +182,18 @@ class Settings(BaseSettings):
             raise ValueError(
                 f"retrievers not defined in retrieval.retrievers: {unknown}"
             )
+        for name, spec in known.items():
+            if isinstance(spec, HybridSpec):
+                bad = [
+                    m
+                    for m in spec.members
+                    if m not in known or isinstance(known[m], HybridSpec)
+                ]
+                if bad:
+                    raise ValueError(
+                        f"hybrid {name!r} members must be defined, non-hybrid"
+                        f" retrievers: {bad}"
+                    )
         return self
 
     @classmethod

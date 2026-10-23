@@ -1,0 +1,6814 @@
+{
+ "baseline": "hybrid-k60-d50/article",
+ "bootstrap": {
+  "confidence": 0.95,
+  "iterations": 1000,
+  "seed": 42
+ },
+ "chunks": {
+  "article": 273
+ },
+ "comparisons": {
+  "dev": {
+   "bm25-id-title/article": {
+    "ndcg@10": {
+     "diff": {
+      "high": 0.014704641987963306,
+      "low": -0.13825060654856589,
+      "mean": -0.06508621179115173
+     },
+     "win_loss": {
+      "losses": 15,
+      "ties": 11,
+      "wins": 4
+     }
+    },
+    "recall@10": {
+     "diff": {
+      "high": 0.02666666666666667,
+      "low": -0.15777777777777777,
+      "mean": -0.06222222222222222
+     },
+     "win_loss": {
+      "losses": 5,
+      "ties": 23,
+      "wins": 2
+     }
+    },
+    "recall@5": {
+     "diff": {
+      "high": 0.05555555555555556,
+      "low": -0.15,
+      "mean": -0.04722222222222222
+     },
+     "win_loss": {
+      "losses": 5,
+      "ties": 23,
+      "wins": 2
+     }
+    },
+    "rr": {
+     "diff": {
+      "high": 0.043187830687830685,
+      "low": -0.1632936507936508,
+      "mean": -0.06040694055399939
+     },
+     "win_loss": {
+      "losses": 9,
+      "ties": 17,
+      "wins": 4
+     }
+    }
+   },
+   "dense-e5-small/article": {
+    "ndcg@10": {
+     "diff": {
+      "high": -0.023535639749985175,
+      "low": -0.21158450611725194,
+      "mean": -0.11444261964125259
+     },
+     "win_loss": {
+      "losses": 14,
+      "ties": 11,
+      "wins": 5
+     }
+    },
+    "recall@10": {
+     "diff": {
+      "high": -0.02222222222222222,
+      "low": -0.25,
+      "mean": -0.1361111111111111
+     },
+     "win_loss": {
+      "losses": 8,
+      "ties": 20,
+      "wins": 2
+     }
+    },
+    "recall@5": {
+     "diff": {
+      "high": 0.0027777777777777753,
+      "low": -0.2833333333333333,
+      "mean": -0.1361111111111111
+     },
+     "win_loss": {
+      "losses": 7,
+      "ties": 21,
+      "wins": 2
+     }
+    },
+    "rr": {
+     "diff": {
+      "high": -0.01879629629629629,
+      "low": -0.2570875420875421,
+      "mean": -0.13576599326599326
+     },
+     "win_loss": {
+      "losses": 11,
+      "ties": 17,
+      "wins": 2
+     }
+    }
+   },
+   "hybrid-k10-d20/article": {
+    "ndcg@10": {
+     "diff": {
+      "high": 0.04681757530600922,
+      "low": -0.02630925629043872,
+      "mean": 0.008574318003037418
+     },
+     "win_loss": {
+      "losses": 4,
+      "ties": 20,
+      "wins": 6
+     }
+    },
+    "recall@10": {
+     "diff": {
+      "high": 0.028888888888888895,
+      "low": -0.10444444444444444,
+      "mean": -0.026666666666666665
+     },
+     "win_loss": {
+      "losses": 2,
+      "ties": 26,
+      "wins": 2
+     }
+    },
+    "recall@5": {
+     "diff": {
+      "high": 0.03333333333333333,
+      "low": -0.025,
+      "mean": 0.002777777777777777
+     },
+     "win_loss": {
+      "losses": 1,
+      "ties": 28,
+      "wins": 1
+     }
+    },
+    "rr": {
+     "diff": {
+      "high": 0.08074074074074074,
+      "low": -0.01111111111111111,
+      "mean": 0.027407407407407408
+     },
+     "win_loss": {
+      "losses": 2,
+      "ties": 25,
+      "wins": 3
+     }
+    }
+   },
+   "hybrid-k10-d50/article": {
+    "ndcg@10": {
+     "diff": {
+      "high": 0.046544880232136675,
+      "low": -0.030781207150272195,
+      "mean": 0.006287442642277297
+     },
+     "win_loss": {
+      "losses": 5,
+      "ties": 19,
+      "wins": 6
+     }
+    },
+    "recall@10": {
+     "diff": {
+      "high": 0.015555555555555557,
+      "low": -0.11777777777777777,
+      "mean": -0.04
+     },
+     "win_loss": {
+      "losses": 3,
+      "ties": 26,
+      "wins": 1
+     }
+    },
+    "recall@5": {
+     "diff": {
+      "high": 0.1111111111111111,
+      "low": -0.016666666666666666,
+      "mean": 0.03611111111111111
+     },
+     "win_loss": {
+      "losses": 1,
+      "ties": 27,
+      "wins": 2
+     }
+    },
+    "rr": {
+     "diff": {
+      "high": 0.08661375661375662,
+      "low": -0.0015873015873015873,
+      "mean": 0.03513227513227513
+     },
+     "win_loss": {
+      "losses": 2,
+      "ties": 24,
+      "wins": 4
+     }
+    }
+   },
+   "hybrid-k30-d20/article": {
+    "ndcg@10": {
+     "diff": {
+      "high": 0.004513512618240023,
+      "low": -0.03591108712437112,
+      "mean": -0.0127095163631573
+     },
+     "win_loss": {
+      "losses": 5,
+      "ties": 23,
+      "wins": 2
+     }
+    },
+    "recall@10": {
+     "diff": {
+      "high": 0.028888888888888895,
+      "low": -0.10444444444444444,
+      "mean": -0.026666666666666665
+     },
+     "win_loss": {
+      "losses": 2,
+      "ties": 26,
+      "wins": 2
+     }
+    },
+    "recall@5": {
+     "diff": {
+      "high": 0.0,
+      "low": -0.025,
+      "mean": -0.008333333333333333
+     },
+     "win_loss": {
+      "losses": 1,
+      "ties": 29,
+      "wins": 0
+     }
+    },
+    "rr": {
+     "diff": {
+      "high": 0.0,
+      "low": -0.017777777777777778,
+      "mean": -0.007407407407407407
+     },
+     "win_loss": {
+      "losses": 3,
+      "ties": 27,
+      "wins": 0
+     }
+    }
+   },
+   "hybrid-k30-d50/article": {
+    "ndcg@10": {
+     "diff": {
+      "high": 0.006504361532403946,
+      "low": -0.0008793893058499092,
+      "mean": 0.002014041827355839
+     },
+     "win_loss": {
+      "losses": 3,
+      "ties": 23,
+      "wins": 4
+     }
+    },
+    "recall@10": {
+     "diff": {
+      "high": 0.03333333333333334,
+      "low": 0.0,
+      "mean": 0.011111111111111112
+     },
+     "win_loss": {
+      "losses": 0,
+      "ties": 29,
+      "wins": 1
+     }
+    },
+    "recall@5": {
+     "diff": {
+      "high": 0.0,
+      "low": -0.025,
+      "mean": -0.008333333333333333
+     },
+     "win_loss": {
+      "losses": 1,
+      "ties": 29,
+      "wins": 0
+     }
+    },
+    "rr": {
+     "diff": {
+      "high": 0.0013888888888888896,
+      "low": 0.0,
+      "mean": 0.00046296296296296314
+     },
+     "win_loss": {
+      "losses": 0,
+      "ties": 29,
+      "wins": 1
+     }
+    }
+   },
+   "hybrid-k60-d20/article": {
+    "ndcg@10": {
+     "diff": {
+      "high": 0.00482887246297515,
+      "low": -0.035595727279635996,
+      "mean": -0.012485577557154633
+     },
+     "win_loss": {
+      "losses": 4,
+      "ties": 24,
+      "wins": 2
+     }
+    },
+    "recall@10": {
+     "diff": {
+      "high": 0.028888888888888895,
+      "low": -0.10444444444444444,
+      "mean": -0.026666666666666665
+     },
+     "win_loss": {
+      "losses": 2,
+      "ties": 26,
+      "wins": 2
+     }
+    },
+    "recall@5": {
+     "diff": {
+      "high": 0.0,
+      "low": 0.0,
+      "mean": 0.0
+     },
+     "win_loss": {
+      "losses": 0,
+      "ties": 30,
+      "wins": 0
+     }
+    },
+    "rr": {
+     "diff": {
+      "high": 0.0,
+      "low": -0.017777777777777778,
+      "mean": -0.007407407407407407
+     },
+     "win_loss": {
+      "losses": 3,
+      "ties": 27,
+      "wins": 0
+     }
+    }
+   }
+  }
+ },
+ "config": {
+  "chunking": {
+   "fixed": {
+    "overlap_chars": 200,
+    "size_chars": 1200
+   }
+  },
+  "eval": {
+   "baseline": "hybrid-k60-d50/article",
+   "bootstrap": {
+    "confidence": 0.95,
+    "iterations": 1000,
+    "seed": 42
+   },
+   "depth": 20,
+   "ndcg_k": 10,
+   "pairs": [],
+   "recall_ks": [
+    5,
+    10
+   ],
+   "retrievers": [
+    "bm25-id-title",
+    "dense-e5-small",
+    "hybrid-k10-d20",
+    "hybrid-k10-d50",
+    "hybrid-k30-d20",
+    "hybrid-k30-d50",
+    "hybrid-k60-d20",
+    "hybrid-k60-d50"
+   ],
+   "splits": [
+    "dev"
+   ],
+   "strategies": [
+    "article"
+   ]
+  },
+  "logging": {
+   "level": "INFO",
+   "log_query_text": false
+  },
+  "paths": {
+   "cache": "data\\cache",
+   "chunks": "data\\chunks",
+   "dataset": "eval\\dataset.jsonl",
+   "manifest": "data\\manifest.json",
+   "processed": "data\\processed",
+   "raw": "data\\raw",
+   "results": "reports\\results"
+  },
+  "retrieval": {
+   "bm25": {
+    "b": 0.75,
+    "k1": 1.5
+   },
+   "retrievers": {
+    "bm25-basic": {
+     "index_title": false,
+     "preprocess": "basic",
+     "type": "bm25"
+    },
+    "bm25-id": {
+     "index_title": false,
+     "preprocess": "id",
+     "type": "bm25"
+    },
+    "bm25-id-title": {
+     "index_title": true,
+     "preprocess": "id",
+     "type": "bm25"
+    },
+    "dense-e5-base": {
+     "batch_size": 16,
+     "max_seq_length": 512,
+     "model": "intfloat/multilingual-e5-base",
+     "onnx_file": "onnx/model_qint8_avx512_vnni.onnx",
+     "passage_prefix": "passage: ",
+     "query_prefix": "query: ",
+     "revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+     "type": "dense"
+    },
+    "dense-e5-small": {
+     "batch_size": 16,
+     "max_seq_length": 512,
+     "model": "intfloat/multilingual-e5-small",
+     "onnx_file": "onnx/model_qint8_avx512_vnni.onnx",
+     "passage_prefix": "passage: ",
+     "query_prefix": "query: ",
+     "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+     "type": "dense"
+    },
+    "hybrid-k10-d20": {
+     "depth": 20,
+     "members": [
+      "bm25-id-title",
+      "dense-e5-small"
+     ],
+     "rrf_k": 10.0,
+     "type": "hybrid"
+    },
+    "hybrid-k10-d50": {
+     "depth": 50,
+     "members": [
+      "bm25-id-title",
+      "dense-e5-small"
+     ],
+     "rrf_k": 10.0,
+     "type": "hybrid"
+    },
+    "hybrid-k30-d20": {
+     "depth": 20,
+     "members": [
+      "bm25-id-title",
+      "dense-e5-small"
+     ],
+     "rrf_k": 30.0,
+     "type": "hybrid"
+    },
+    "hybrid-k30-d50": {
+     "depth": 50,
+     "members": [
+      "bm25-id-title",
+      "dense-e5-small"
+     ],
+     "rrf_k": 30.0,
+     "type": "hybrid"
+    },
+    "hybrid-k60-d20": {
+     "depth": 20,
+     "members": [
+      "bm25-id-title",
+      "dense-e5-small"
+     ],
+     "rrf_k": 60.0,
+     "type": "hybrid"
+    },
+    "hybrid-k60-d50": {
+     "depth": 50,
+     "members": [
+      "bm25-id-title",
+      "dense-e5-small"
+     ],
+     "rrf_k": 60.0,
+     "type": "hybrid"
+    }
+   }
+  },
+  "search": {
+   "default_top_k": 5,
+   "max_top_k": 20,
+   "retriever": "bm25-basic",
+   "strategy": "article"
+  }
+ },
+ "dataset": {
+  "labels_human_verified": false,
+  "path": "eval/dataset.jsonl",
+  "queries": 40,
+  "sha256": "b22ca6abf9604521d9384c877b4191cb288c5bb979927ae959bc45a4a2c12438",
+  "unverified_drafts": false
+ },
+ "git": {
+  "dirty": false,
+  "sha": "a07f39fd4dfc516594fcee21dbe63db7c3a2e57a"
+ },
+ "index_stats": {
+  "dense-e5-small/article": {
+   "cache_hit": true,
+   "dim": 384,
+   "embed_seconds": 0.003,
+   "index_bytes": 419328
+  }
+ },
+ "metric_keys": [
+  "recall@5",
+  "recall@10",
+  "rr",
+  "ndcg@10"
+ ],
+ "pair_comparisons": {
+  "dev": {}
+ },
+ "results": {
+  "dev": {
+   "bm25-id-title/article": {
+    "queries": [
+     {
+      "latency_ms": 0.7108999998308718,
+      "ndcg@10": 1.0,
+      "query_id": "q-003",
+      "ranking": [
+       "uu-11-2008:11",
+       "uu-11-2008:12",
+       "pp-71-2019:63",
+       "pp-71-2019:60",
+       "pp-71-2019:59",
+       "uu-11-2008:14",
+       "pp-71-2019:62",
+       "pp-71-2019:61",
+       "pp-71-2019:72",
+       "pp-71-2019:64"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:11": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 0.7779000006848946,
+      "ndcg@10": 1.0,
+      "query_id": "q-004",
+      "ranking": [
+       "uu-11-2008:26",
+       "uu-11-2008:23",
+       "uu-27-2022:26",
+       "permen-kominfo-20-2016:24",
+       "uu-11-2008:41",
+       "permen-kominfo-20-2016:26",
+       "uu-11-2008:4",
+       "uu-11-2008:29",
+       "uu-27-2022:11",
+       "uu-27-2022:34"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:26": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 0.8215000016207341,
+      "ndcg@10": 0.9639404333166532,
+      "query_id": "q-006",
+      "ranking": [
+       "pp-71-2019:15",
+       "pp-71-2019:17",
+       "pp-71-2019:16",
+       "pp-71-2019:18",
+       "permen-kominfo-20-2016:7",
+       "pp-71-2019:5",
+       "pp-71-2019:83",
+       "pp-71-2019:48",
+       "pp-71-2019:98",
+       "uu-11-2008:15"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 0.6679999969492201,
+      "ndcg@10": 0.5,
+      "query_id": "q-007",
+      "ranking": [
+       "permen-kominfo-20-2016:16",
+       "permen-kominfo-20-2016:20",
+       "permen-kominfo-20-2016:26",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:6",
+       "permen-kominfo-20-2016:8",
+       "permen-kominfo-20-2016:10",
+       "permen-kominfo-20-2016:34",
+       "permen-kominfo-20-2016:32",
+       "permen-kominfo-20-2016:29"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:26": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 0.6482999997388106,
+      "ndcg@10": 0.91311732856428,
+      "query_id": "q-008",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-11-2008:30",
+       "uu-27-2022:65",
+       "permen-kominfo-20-2016:26",
+       "uu-27-2022:33",
+       "uu-11-2008:7",
+       "uu-11-2008:48",
+       "uu-27-2022:67",
+       "uu-11-2008:27"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:32": 2,
+       "uu-11-2008:48": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 0.4666999993787613,
+      "ndcg@10": 1.0,
+      "query_id": "q-009",
+      "ranking": [
+       "permen-kominfo-20-2016:17",
+       "uu-11-2008:17",
+       "permen-kominfo-20-2016:20",
+       "permen-kominfo-20-2016:14",
+       "permen-kominfo-20-2016:39",
+       "permen-kominfo-20-2016:4",
+       "permen-kominfo-20-2016:13",
+       "permen-kominfo-20-2016:30",
+       "permen-kominfo-20-2016:6",
+       "permen-kominfo-20-2016:12"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 0.5321999997249804,
+      "ndcg@10": 0.52129602861432,
+      "query_id": "q-010",
+      "ranking": [
+       "uu-27-2022:69",
+       "uu-27-2022:67",
+       "uu-27-2022:70",
+       "uu-11-2008:52",
+       "uu-27-2022:68",
+       "uu-27-2022:66",
+       "uu-11-2008:29",
+       "uu-27-2022:53",
+       "uu-27-2022:73",
+       "uu-27-2022:71"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-27-2022:65": 1,
+       "uu-27-2022:67": 2
+      },
+      "rr": 0.5,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 0.3249000001233071,
+      "ndcg@10": 0.1564262420075855,
+      "query_id": "q-011",
+      "ranking": [
+       "pp-71-2019:20",
+       "uu-11-2008:43",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:2",
+       "uu-27-2022:1",
+       "uu-11-2008:2",
+       "pp-71-2019:21",
+       "uu-27-2022:59",
+       "uu-27-2022:55",
+       "uu-11-2008:37"
+      ],
+      "recall@10": 0.3333333333333333,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:22": 2,
+       "pp-71-2019:21": 2,
+       "uu-27-2022:56": 2
+      },
+      "rr": 0.14285714285714285,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 0.45509999836212955,
+      "ndcg@10": 0.4126007205321268,
+      "query_id": "q-014",
+      "ranking": [
+       "permen-kominfo-20-2016:6",
+       "uu-27-2022:22",
+       "permen-kominfo-20-2016:12",
+       "permen-kominfo-20-2016:22",
+       "pp-71-2019:47",
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:16",
+       "permen-kominfo-20-2016:20",
+       "pp-71-2019:48",
+       "uu-27-2022:23"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-27-2022:22": 1,
+       "uu-27-2022:23": 2
+      },
+      "rr": 0.5,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 0.32610000198474154,
+      "ndcg@10": 1.0,
+      "query_id": "q-015",
+      "ranking": [
+       "permen-kominfo-20-2016:37",
+       "uu-27-2022:25",
+       "permen-kominfo-20-2016:9",
+       "pp-71-2019:16",
+       "uu-11-2008:52",
+       "uu-27-2022:21",
+       "uu-27-2022:65",
+       "uu-27-2022:35",
+       "uu-27-2022:39",
+       "uu-27-2022:32"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:37": 2,
+       "uu-27-2022:25": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 0.36669999826699495,
+      "ndcg@10": 0.7967075809905066,
+      "query_id": "q-016",
+      "ranking": [
+       "uu-27-2022:53",
+       "uu-27-2022:54",
+       "uu-27-2022:52",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:20",
+       "uu-27-2022:1",
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:47",
+       "uu-27-2022:46"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:53": 1,
+       "uu-27-2022:54": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 0.3629000020737294,
+      "ndcg@10": 0.5,
+      "query_id": "q-017",
+      "ranking": [
+       "uu-27-2022:39",
+       "uu-27-2022:35",
+       "uu-27-2022:34",
+       "uu-27-2022:51",
+       "uu-27-2022:54",
+       "uu-27-2022:21",
+       "uu-27-2022:48",
+       "uu-27-2022:18",
+       "uu-27-2022:56",
+       "uu-27-2022:55"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:34": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 0.5469000025186688,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-019",
+      "ranking": [
+       "permen-kominfo-20-2016:15",
+       "permen-kominfo-20-2016:5",
+       "pp-71-2019:99",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:32",
+       "uu-27-2022:74",
+       "pp-71-2019:16",
+       "permen-kominfo-20-2016:38",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:7"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:15": 2,
+       "permen-kominfo-20-2016:16": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 0.354799998603994,
+      "ndcg@10": 0.9514426589871553,
+      "query_id": "q-020",
+      "ranking": [
+       "uu-11-2008:44",
+       "uu-27-2022:64",
+       "uu-11-2008:5",
+       "pp-71-2019:17",
+       "uu-11-2008:43",
+       "pp-71-2019:7",
+       "uu-11-2008:18",
+       "uu-27-2022:17",
+       "uu-27-2022:24",
+       "uu-11-2008:11"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:44": 2,
+       "uu-11-2008:5": 2,
+       "uu-27-2022:64": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 0.3744999994523823,
+      "ndcg@10": 0.6131471927654584,
+      "query_id": "q-021",
+      "ranking": [
+       "pp-71-2019:20",
+       "pp-71-2019:9",
+       "permen-kominfo-20-2016:36",
+       "permen-kominfo-20-2016:22",
+       "pp-71-2019:85",
+       "uu-11-2008:40",
+       "uu-11-2008:43",
+       "pp-71-2019:99",
+       "pp-71-2019:82",
+       "permen-kominfo-20-2016:16"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2,
+       "pp-71-2019:20": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 0.5137999978614971,
+      "ndcg@10": 1.0,
+      "query_id": "q-023",
+      "ranking": [
+       "permen-kominfo-20-2016:36",
+       "permen-kominfo-20-2016:35",
+       "pp-71-2019:101",
+       "uu-11-2008:27",
+       "permen-kominfo-20-2016:1",
+       "uu-11-2008:30",
+       "uu-11-2008:29",
+       "uu-11-2008:28",
+       "permen-kominfo-20-2016:26",
+       "uu-11-2008:32"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:36": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 0.2654000018083025,
+      "ndcg@10": 0.91311732856428,
+      "query_id": "q-024",
+      "ranking": [
+       "pp-71-2019:46",
+       "uu-11-2008:9",
+       "pp-71-2019:48",
+       "pp-71-2019:47",
+       "uu-11-2008:5",
+       "uu-11-2008:6",
+       "pp-71-2019:29",
+       "uu-11-2008:18",
+       "pp-71-2019:37",
+       "uu-11-2008:7"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "pp-71-2019:46": 2,
+       "uu-11-2008:18": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 0.4096999982721172,
+      "ndcg@10": 0.1608062983790299,
+      "query_id": "q-025",
+      "ranking": [
+       "pp-71-2019:18",
+       "pp-71-2019:16",
+       "pp-71-2019:51",
+       "permen-kominfo-20-2016:8",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:16",
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:97",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:29"
+      ],
+      "recall@10": 0.3333333333333333,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:29": 2,
+       "permen-kominfo-20-2016:30": 1,
+       "permen-kominfo-20-2016:31": 2
+      },
+      "rr": 0.1,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 0.4639999970095232,
+      "ndcg@10": 1.0,
+      "query_id": "q-026",
+      "ranking": [
+       "uu-27-2022:2",
+       "uu-27-2022:55",
+       "uu-11-2008:2",
+       "uu-27-2022:52",
+       "uu-27-2022:56",
+       "uu-27-2022:59",
+       "uu-27-2022:60",
+       "uu-27-2022:76",
+       "uu-27-2022:75",
+       "uu-27-2022:53"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:2": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 0.31459999809158035,
+      "ndcg@10": 0.0,
+      "query_id": "q-027",
+      "ranking": [
+       "permen-kominfo-20-2016:29",
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:14",
+       "uu-27-2022:70",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:8",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:46",
+       "permen-kominfo-20-2016:16",
+       "permen-kominfo-20-2016:25"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:22": 2
+      },
+      "rr": 0.058823529411764705,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 0.19260000044596381,
+      "ndcg@10": 1.0,
+      "query_id": "q-029",
+      "ranking": [
+       "uu-27-2022:17",
+       "uu-11-2008:43",
+       "pp-71-2019:90",
+       "pp-71-2019:94",
+       "uu-27-2022:3",
+       "uu-27-2022:4",
+       "uu-11-2008:40",
+       "pp-71-2019:96",
+       "pp-71-2019:46",
+       "uu-27-2022:70"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:17": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 0.28250000104890205,
+      "ndcg@10": 0.06934506308715421,
+      "query_id": "q-030",
+      "ranking": [
+       "pp-71-2019:40",
+       "pp-71-2019:48",
+       "pp-71-2019:16",
+       "uu-11-2008:28",
+       "pp-71-2019:2",
+       "pp-71-2019:74",
+       "pp-71-2019:39",
+       "uu-27-2022:16",
+       "permen-kominfo-20-2016:1",
+       "pp-71-2019:41"
+      ],
+      "recall@10": 0.2,
+      "recall@5": 0.2,
+      "relevant": {
+       "permen-kominfo-20-2016:20": 1,
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1,
+       "uu-27-2022:43": 2,
+       "uu-27-2022:8": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 0.22329999774228781,
+      "ndcg@10": 0.0,
+      "query_id": "q-031",
+      "ranking": [
+       "permen-kominfo-20-2016:5",
+       "uu-11-2008:5",
+       "uu-27-2022:69",
+       "permen-kominfo-20-2016:10",
+       "uu-11-2008:7",
+       "uu-27-2022:60",
+       "uu-27-2022:30",
+       "uu-11-2008:27",
+       "uu-11-2008:30",
+       "uu-11-2008:28"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "pp-71-2019:15": 1,
+       "pp-71-2019:17": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 0.28670000028796494,
+      "ndcg@10": 0.4126007205321268,
+      "query_id": "q-032",
+      "ranking": [
+       "permen-kominfo-20-2016:1",
+       "pp-71-2019:102",
+       "pp-71-2019:84",
+       "pp-71-2019:40",
+       "uu-27-2022:21",
+       "pp-71-2019:27",
+       "pp-71-2019:30",
+       "uu-11-2008:11",
+       "pp-71-2019:2",
+       "pp-71-2019:6"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "pp-71-2019:102": 1,
+       "pp-71-2019:6": 2
+      },
+      "rr": 0.5,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 0.36330000148154795,
+      "ndcg@10": 0.1934264036172708,
+      "query_id": "q-033",
+      "ranking": [
+       "uu-27-2022:67",
+       "uu-11-2008:46",
+       "uu-11-2008:48",
+       "uu-11-2008:45",
+       "uu-11-2008:51",
+       "uu-11-2008:49",
+       "uu-11-2008:50",
+       "uu-11-2008:47",
+       "uu-11-2008:32",
+       "uu-27-2022:66"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-11-2008:31": 2,
+       "uu-11-2008:47": 2
+      },
+      "rr": 0.125,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 0.2719000003708061,
+      "ndcg@10": 0.0,
+      "query_id": "q-034",
+      "ranking": [
+       "pp-71-2019:22",
+       "uu-11-2008:40",
+       "pp-71-2019:99",
+       "uu-27-2022:32",
+       "uu-27-2022:10",
+       "permen-kominfo-20-2016:21",
+       "permen-kominfo-20-2016:9",
+       "permen-kominfo-20-2016:37",
+       "uu-27-2022:51",
+       "permen-kominfo-20-2016:25"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:4": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 0.3260000012232922,
+      "ndcg@10": 0.2922946967013802,
+      "query_id": "q-036",
+      "ranking": [
+       "uu-27-2022:60",
+       "uu-27-2022:53",
+       "uu-27-2022:49",
+       "uu-27-2022:54",
+       "uu-27-2022:47",
+       "uu-27-2022:46",
+       "uu-27-2022:59",
+       "uu-27-2022:55",
+       "uu-27-2022:34",
+       "uu-27-2022:56"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.25,
+      "relevant": {
+       "permen-kominfo-20-2016:35": 1,
+       "uu-27-2022:58": 2,
+       "uu-27-2022:59": 1,
+       "uu-27-2022:60": 1
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 0.2963999977509957,
+      "ndcg@10": 0.3127697035039474,
+      "query_id": "q-037",
+      "ranking": [
+       "uu-27-2022:30",
+       "uu-27-2022:32",
+       "uu-27-2022:40",
+       "uu-27-2022:46",
+       "uu-27-2022:41",
+       "uu-27-2022:29",
+       "uu-27-2022:56",
+       "uu-27-2022:28",
+       "uu-27-2022:36",
+       "uu-27-2022:45"
+      ],
+      "recall@10": 0.3333333333333333,
+      "recall@5": 0.3333333333333333,
+      "relevant": {
+       "permen-kominfo-20-2016:28": 1,
+       "pp-71-2019:14": 1,
+       "uu-27-2022:46": 2
+      },
+      "rr": 0.25,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 0.30080000215093605,
+      "ndcg@10": 1.0,
+      "query_id": "q-039",
+      "ranking": [
+       "uu-27-2022:10",
+       "uu-27-2022:34",
+       "uu-11-2008:7",
+       "uu-27-2022:33",
+       "pp-71-2019:83",
+       "uu-11-2008:1",
+       "pp-71-2019:1",
+       "pp-71-2019:27",
+       "pp-71-2019:3",
+       "pp-71-2019:24"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:10": 2
+      },
+      "rr": 1.0,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 0.323499996738974,
+      "ndcg@10": 0.3562071871080222,
+      "query_id": "q-040",
+      "ranking": [
+       "uu-11-2008:7",
+       "uu-11-2008:32",
+       "uu-11-2008:23",
+       "uu-11-2008:30",
+       "uu-11-2008:36",
+       "uu-27-2022:13",
+       "permen-kominfo-20-2016:25",
+       "uu-11-2008:31",
+       "uu-27-2022:4",
+       "permen-kominfo-20-2016:36"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:13": 2
+      },
+      "rr": 0.16666666666666666,
+      "type": "mixed_id_en"
+     }
+    ],
+    "summary": {
+     "ci": {
+      "ndcg@10": {
+       "high": 0.7234146493588491,
+       "low": 0.4649962362286394,
+       "mean": 0.595516008146662
+      },
+      "recall@10": {
+       "high": 0.8511111111111112,
+       "low": 0.6,
+       "mean": 0.7233333333333334
+      },
+      "recall@5": {
+       "high": 0.7138888888888889,
+       "low": 0.42777777777777776,
+       "mean": 0.5761111111111111
+      },
+      "rr": {
+       "high": 0.7817063492063492,
+       "low": 0.49751633986928107,
+       "mean": 0.6447782446311858
+      }
+     },
+     "latency_p50_ms": 0.3629000020737294,
+     "latency_p95_ms": 0.7779000006848946,
+     "n": 30,
+     "ndcg@10": 0.595516008146662,
+     "recall@10": 0.7233333333333334,
+     "recall@5": 0.5761111111111111,
+     "rr": 0.6447782446311858
+    }
+   },
+   "dense-e5-small/article": {
+    "queries": [
+     {
+      "latency_ms": 67.01830000019982,
+      "ndcg@10": 1.0,
+      "query_id": "q-003",
+      "ranking": [
+       "uu-11-2008:11",
+       "uu-11-2008:1",
+       "uu-11-2008:12",
+       "pp-71-2019:1",
+       "pp-71-2019:59",
+       "uu-11-2008:19",
+       "pp-71-2019:62",
+       "uu-27-2022:14",
+       "pp-71-2019:60",
+       "pp-71-2019:61"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:11": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 43.682799998350674,
+      "ndcg@10": 0.0,
+      "query_id": "q-004",
+      "ranking": [
+       "uu-27-2022:28",
+       "uu-27-2022:11",
+       "uu-27-2022:1",
+       "uu-27-2022:38",
+       "uu-27-2022:31",
+       "uu-27-2022:9",
+       "uu-27-2022:14",
+       "uu-27-2022:36",
+       "permen-kominfo-20-2016:24",
+       "pp-71-2019:14"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-11-2008:26": 2
+      },
+      "rr": 0.09090909090909091,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 7.554499999969266,
+      "ndcg@10": 1.0,
+      "query_id": "q-006",
+      "ranking": [
+       "pp-71-2019:15",
+       "pp-71-2019:16",
+       "pp-71-2019:17",
+       "uu-27-2022:38",
+       "permen-kominfo-20-2016:19",
+       "uu-11-2008:53",
+       "uu-27-2022:60",
+       "pp-71-2019:14",
+       "uu-27-2022:31",
+       "pp-71-2019:95"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 6.728000000293832,
+      "ndcg@10": 0.3154648767857287,
+      "query_id": "q-007",
+      "ranking": [
+       "uu-27-2022:28",
+       "uu-27-2022:31",
+       "uu-27-2022:1",
+       "uu-27-2022:38",
+       "uu-27-2022:36",
+       "pp-71-2019:14",
+       "uu-27-2022:27",
+       "permen-kominfo-20-2016:26",
+       "uu-27-2022:21",
+       "permen-kominfo-20-2016:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:26": 2
+      },
+      "rr": 0.125,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 8.024700000532903,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-008",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-11-2008:29",
+       "uu-11-2008:35",
+       "uu-11-2008:33",
+       "uu-27-2022:31",
+       "uu-27-2022:28",
+       "uu-27-2022:11",
+       "uu-11-2008:19",
+       "pp-71-2019:23"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:32": 2,
+       "uu-11-2008:48": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 6.594799997401424,
+      "ndcg@10": 0.2890648263178878,
+      "query_id": "q-009",
+      "ranking": [
+       "uu-27-2022:17",
+       "pp-71-2019:1",
+       "pp-71-2019:100",
+       "permen-kominfo-20-2016:1",
+       "pp-71-2019:20",
+       "pp-71-2019:17",
+       "pp-71-2019:2",
+       "pp-71-2019:18",
+       "uu-11-2008:27",
+       "permen-kominfo-20-2016:17"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2
+      },
+      "rr": 0.1,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 18.420000000332948,
+      "ndcg@10": 0.9091417955461737,
+      "query_id": "q-010",
+      "ranking": [
+       "uu-27-2022:67",
+       "uu-27-2022:68",
+       "uu-27-2022:66",
+       "uu-27-2022:64",
+       "uu-27-2022:38",
+       "uu-27-2022:60",
+       "uu-27-2022:39",
+       "uu-27-2022:59",
+       "uu-27-2022:65",
+       "uu-27-2022:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-27-2022:65": 1,
+       "uu-27-2022:67": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 6.825699998444179,
+      "ndcg@10": 0.4161811555487309,
+      "query_id": "q-011",
+      "ranking": [
+       "uu-27-2022:55",
+       "pp-71-2019:20",
+       "uu-27-2022:56",
+       "pp-71-2019:2",
+       "permen-kominfo-20-2016:22",
+       "uu-27-2022:1",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:2",
+       "uu-27-2022:60"
+      ],
+      "recall@10": 0.6666666666666666,
+      "recall@5": 0.6666666666666666,
+      "relevant": {
+       "permen-kominfo-20-2016:22": 2,
+       "pp-71-2019:21": 2,
+       "uu-27-2022:56": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.381099996768171,
+      "ndcg@10": 0.91311732856428,
+      "query_id": "q-014",
+      "ranking": [
+       "uu-27-2022:23",
+       "pp-71-2019:47",
+       "uu-27-2022:38",
+       "uu-27-2022:65",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:6",
+       "uu-27-2022:22",
+       "uu-27-2022:27",
+       "uu-27-2022:36"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-27-2022:22": 1,
+       "uu-27-2022:23": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.4568000018189196,
+      "ndcg@10": 1.0,
+      "query_id": "q-015",
+      "ranking": [
+       "uu-27-2022:25",
+       "permen-kominfo-20-2016:37",
+       "uu-27-2022:21",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:6",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:26",
+       "uu-27-2022:51",
+       "uu-27-2022:54",
+       "permen-kominfo-20-2016:2"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:37": 2,
+       "uu-27-2022:25": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 13.741099999606377,
+      "ndcg@10": 1.0,
+      "query_id": "q-016",
+      "ranking": [
+       "uu-27-2022:54",
+       "uu-27-2022:53",
+       "uu-27-2022:52",
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:47",
+       "uu-27-2022:37",
+       "uu-27-2022:19",
+       "uu-27-2022:35",
+       "uu-27-2022:59"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:53": 1,
+       "uu-27-2022:54": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.01080000019283,
+      "ndcg@10": 1.0,
+      "query_id": "q-017",
+      "ranking": [
+       "uu-27-2022:34",
+       "uu-27-2022:35",
+       "uu-27-2022:39",
+       "permen-kominfo-20-2016:23",
+       "pp-71-2019:14",
+       "uu-27-2022:36",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:29",
+       "permen-kominfo-20-2016:8",
+       "uu-27-2022:54"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:34": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.066800000757212,
+      "ndcg@10": 1.0,
+      "query_id": "q-019",
+      "ranking": [
+       "permen-kominfo-20-2016:15",
+       "permen-kominfo-20-2016:16",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:38",
+       "permen-kominfo-20-2016:18",
+       "permen-kominfo-20-2016:23",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:39",
+       "permen-kominfo-20-2016:2"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:15": 2,
+       "permen-kominfo-20-2016:16": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.661999999778345,
+      "ndcg@10": 0.9072836011519267,
+      "query_id": "q-020",
+      "ranking": [
+       "uu-11-2008:5",
+       "uu-11-2008:44",
+       "uu-11-2008:1",
+       "pp-71-2019:17",
+       "uu-11-2008:6",
+       "uu-11-2008:7",
+       "pp-71-2019:59",
+       "pp-71-2019:25",
+       "uu-11-2008:43",
+       "uu-11-2008:31"
+      ],
+      "recall@10": 0.6666666666666666,
+      "recall@5": 0.6666666666666666,
+      "relevant": {
+       "uu-11-2008:44": 2,
+       "uu-11-2008:5": 2,
+       "uu-27-2022:64": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.306300001597265,
+      "ndcg@10": 0.6131471927654584,
+      "query_id": "q-021",
+      "ranking": [
+       "pp-71-2019:20",
+       "permen-kominfo-20-2016:22",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:1",
+       "pp-71-2019:99",
+       "uu-27-2022:2",
+       "pp-71-2019:92",
+       "uu-11-2008:40",
+       "uu-11-2008:43",
+       "uu-27-2022:56"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2,
+       "pp-71-2019:20": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.786800000554649,
+      "ndcg@10": 1.0,
+      "query_id": "q-023",
+      "ranking": [
+       "permen-kominfo-20-2016:36",
+       "uu-27-2022:1",
+       "pp-71-2019:97",
+       "uu-11-2008:32",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:60",
+       "permen-kominfo-20-2016:31",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:35",
+       "uu-11-2008:27"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:36": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.707799999276176,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-024",
+      "ranking": [
+       "pp-71-2019:46",
+       "pp-71-2019:47",
+       "pp-71-2019:48",
+       "uu-11-2008:9",
+       "uu-11-2008:6",
+       "uu-11-2008:27",
+       "uu-11-2008:5",
+       "uu-11-2008:25",
+       "pp-71-2019:11",
+       "uu-11-2008:1"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "pp-71-2019:46": 2,
+       "uu-11-2008:18": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.327999999688473,
+      "ndcg@10": 0.0,
+      "query_id": "q-025",
+      "ranking": [
+       "uu-27-2022:58",
+       "uu-27-2022:31",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:10",
+       "uu-27-2022:60",
+       "pp-71-2019:97",
+       "uu-27-2022:36",
+       "pp-71-2019:1",
+       "uu-27-2022:1",
+       "permen-kominfo-20-2016:26"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:29": 2,
+       "permen-kominfo-20-2016:30": 1,
+       "permen-kominfo-20-2016:31": 2
+      },
+      "rr": 0.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.1233999988180585,
+      "ndcg@10": 0.0,
+      "query_id": "q-026",
+      "ranking": [
+       "uu-27-2022:55",
+       "uu-27-2022:1",
+       "uu-27-2022:60",
+       "uu-27-2022:54",
+       "uu-27-2022:34",
+       "uu-27-2022:58",
+       "uu-27-2022:53",
+       "uu-27-2022:52",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:2"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:2": 2
+      },
+      "rr": 0.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.553900002472801,
+      "ndcg@10": 0.0,
+      "query_id": "q-027",
+      "ranking": [
+       "uu-27-2022:49",
+       "uu-27-2022:45",
+       "uu-27-2022:29",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:36",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:7",
+       "permen-kominfo-20-2016:10",
+       "permen-kominfo-20-2016:2",
+       "uu-27-2022:30"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:22": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 5.887400002393406,
+      "ndcg@10": 1.0,
+      "query_id": "q-029",
+      "ranking": [
+       "uu-27-2022:17",
+       "pp-71-2019:102",
+       "uu-11-2008:41",
+       "pp-71-2019:94",
+       "pp-71-2019:103",
+       "pp-71-2019:92",
+       "pp-71-2019:97",
+       "uu-11-2008:40",
+       "pp-71-2019:48",
+       "uu-11-2008:38"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:17": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 8.750599998165853,
+      "ndcg@10": 0.1110949511680433,
+      "query_id": "q-030",
+      "ranking": [
+       "permen-kominfo-20-2016:25",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:20",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:19",
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:97",
+       "pp-71-2019:16",
+       "pp-71-2019:18"
+      ],
+      "recall@10": 0.4,
+      "recall@5": 0.2,
+      "relevant": {
+       "permen-kominfo-20-2016:20": 1,
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1,
+       "uu-27-2022:43": 2,
+       "uu-27-2022:8": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.229400001757313,
+      "ndcg@10": 0.0,
+      "query_id": "q-031",
+      "ranking": [
+       "uu-11-2008:26",
+       "uu-11-2008:30",
+       "permen-kominfo-20-2016:32",
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-11-2008:35",
+       "uu-11-2008:25",
+       "uu-11-2008:28",
+       "uu-11-2008:23",
+       "uu-11-2008:27"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "pp-71-2019:15": 1,
+       "pp-71-2019:17": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 7.051099997624988,
+      "ndcg@10": 0.52129602861432,
+      "query_id": "q-032",
+      "ranking": [
+       "pp-71-2019:1",
+       "pp-71-2019:6",
+       "uu-11-2008:43",
+       "pp-71-2019:5",
+       "pp-71-2019:29",
+       "pp-71-2019:2",
+       "permen-kominfo-20-2016:1",
+       "pp-71-2019:37",
+       "uu-11-2008:1",
+       "uu-11-2008:23"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "pp-71-2019:102": 1,
+       "pp-71-2019:6": 2
+      },
+      "rr": 0.5,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.558299999596784,
+      "ndcg@10": 0.26406812257259094,
+      "query_id": "q-033",
+      "ranking": [
+       "uu-11-2008:38",
+       "uu-11-2008:43",
+       "pp-71-2019:17",
+       "uu-11-2008:31",
+       "permen-kominfo-20-2016:33",
+       "uu-11-2008:32",
+       "uu-11-2008:27",
+       "pp-71-2019:1",
+       "pp-71-2019:97",
+       "uu-11-2008:26"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:31": 2,
+       "uu-11-2008:47": 2
+      },
+      "rr": 0.25,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.608399999095127,
+      "ndcg@10": 0.0,
+      "query_id": "q-034",
+      "ranking": [
+       "pp-71-2019:99",
+       "pp-71-2019:61",
+       "pp-71-2019:64",
+       "pp-71-2019:22",
+       "uu-11-2008:40",
+       "permen-kominfo-20-2016:31",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:15",
+       "uu-11-2008:1",
+       "permen-kominfo-20-2016:1"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:4": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 5.877399999008048,
+      "ndcg@10": 0.1383130657200343,
+      "query_id": "q-036",
+      "ranking": [
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:1",
+       "permen-kominfo-20-2016:27",
+       "uu-27-2022:37",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:5",
+       "uu-27-2022:35",
+       "uu-27-2022:54"
+      ],
+      "recall@10": 0.25,
+      "recall@5": 0.25,
+      "relevant": {
+       "permen-kominfo-20-2016:35": 1,
+       "uu-27-2022:58": 2,
+       "uu-27-2022:59": 1,
+       "uu-27-2022:60": 1
+      },
+      "rr": 0.5,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.295999999565538,
+      "ndcg@10": 0.6144043654932556,
+      "query_id": "q-037",
+      "ranking": [
+       "uu-27-2022:30",
+       "uu-27-2022:46",
+       "uu-27-2022:40",
+       "permen-kominfo-20-2016:31",
+       "uu-27-2022:32",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:41",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:25",
+       "pp-71-2019:14"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.3333333333333333,
+      "relevant": {
+       "permen-kominfo-20-2016:28": 1,
+       "pp-71-2019:14": 1,
+       "uu-27-2022:46": 2
+      },
+      "rr": 0.5,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 6.388099998730468,
+      "ndcg@10": 0.4306765580733931,
+      "query_id": "q-039",
+      "ranking": [
+       "permen-kominfo-20-2016:33",
+       "uu-11-2008:30",
+       "uu-11-2008:34",
+       "uu-27-2022:10",
+       "uu-11-2008:38",
+       "permen-kominfo-20-2016:32",
+       "permen-kominfo-20-2016:13",
+       "pp-71-2019:98",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:21"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:10": 2
+      },
+      "rr": 0.25,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 5.819099998916499,
+      "ndcg@10": 0.2890648263178878,
+      "query_id": "q-040",
+      "ranking": [
+       "uu-27-2022:55",
+       "uu-27-2022:27",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:8",
+       "permen-kominfo-20-2016:2",
+       "uu-27-2022:31",
+       "uu-11-2008:31",
+       "uu-27-2022:38",
+       "permen-kominfo-20-2016:11",
+       "uu-27-2022:13"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:13": 2
+      },
+      "rr": 0.1,
+      "type": "mixed_id_en"
+     }
+    ],
+    "summary": {
+     "ci": {
+      "ndcg@10": {
+       "high": 0.6846075876992723,
+       "low": 0.41400463128420195,
+       "mean": 0.5461596002965611
+      },
+      "recall@10": {
+       "high": 0.7855555555555556,
+       "low": 0.5133333333333333,
+       "mean": 0.6494444444444445
+      },
+      "recall@5": {
+       "high": 0.6388888888888888,
+       "low": 0.3427777777777778,
+       "mean": 0.4872222222222222
+      },
+      "rr": {
+       "high": 0.7177272727272728,
+       "low": 0.42522727272727273,
+       "mean": 0.5694191919191919
+      }
+     },
+     "latency_p50_ms": 6.786800000554649,
+     "latency_p95_ms": 43.682799998350674,
+     "n": 30,
+     "ndcg@10": 0.5461596002965611,
+     "recall@10": 0.6494444444444445,
+     "recall@5": 0.4872222222222222,
+     "rr": 0.5694191919191919
+    }
+   },
+   "hybrid-k10-d20/article": {
+    "queries": [
+     {
+      "latency_ms": 11.387200000172015,
+      "ndcg@10": 1.0,
+      "query_id": "q-003",
+      "ranking": [
+       "uu-11-2008:11",
+       "uu-11-2008:12",
+       "pp-71-2019:59",
+       "uu-11-2008:1",
+       "pp-71-2019:60",
+       "pp-71-2019:62",
+       "pp-71-2019:1",
+       "pp-71-2019:61",
+       "pp-71-2019:72",
+       "pp-71-2019:57"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:11": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 7.432800000970019,
+      "ndcg@10": 1.0,
+      "query_id": "q-004",
+      "ranking": [
+       "uu-11-2008:26",
+       "uu-27-2022:11",
+       "permen-kominfo-20-2016:24",
+       "permen-kominfo-20-2016:26",
+       "uu-27-2022:14",
+       "uu-27-2022:28",
+       "uu-11-2008:23",
+       "uu-27-2022:1",
+       "uu-27-2022:26",
+       "uu-27-2022:38"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:26": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 9.43330000154674,
+      "ndcg@10": 1.0,
+      "query_id": "q-006",
+      "ranking": [
+       "pp-71-2019:15",
+       "pp-71-2019:16",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:7",
+       "permen-kominfo-20-2016:16",
+       "pp-71-2019:18",
+       "uu-27-2022:38",
+       "permen-kominfo-20-2016:19",
+       "pp-71-2019:5",
+       "uu-11-2008:53"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 8.15850000071805,
+      "ndcg@10": 1.0,
+      "query_id": "q-007",
+      "ranking": [
+       "permen-kominfo-20-2016:26",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:16",
+       "uu-27-2022:28",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:20",
+       "uu-27-2022:31",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:26": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 11.27239999914309,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-008",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-11-2008:35",
+       "uu-11-2008:29",
+       "pp-71-2019:1",
+       "uu-11-2008:30",
+       "uu-27-2022:65",
+       "permen-kominfo-20-2016:26",
+       "pp-71-2019:17",
+       "uu-11-2008:33"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:32": 2,
+       "uu-11-2008:48": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 10.332899997592904,
+      "ndcg@10": 1.0,
+      "query_id": "q-009",
+      "ranking": [
+       "permen-kominfo-20-2016:17",
+       "permen-kominfo-20-2016:20",
+       "uu-27-2022:17",
+       "pp-71-2019:1",
+       "uu-11-2008:17",
+       "pp-71-2019:100",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:14",
+       "permen-kominfo-20-2016:39",
+       "pp-71-2019:20"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 11.082000000897096,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-010",
+      "ranking": [
+       "uu-27-2022:67",
+       "uu-27-2022:68",
+       "uu-27-2022:66",
+       "uu-27-2022:60",
+       "uu-27-2022:59",
+       "uu-27-2022:69",
+       "uu-27-2022:47",
+       "uu-27-2022:70",
+       "uu-11-2008:52",
+       "uu-27-2022:64"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-27-2022:65": 1,
+       "uu-27-2022:67": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 7.982099999935599,
+      "ndcg@10": 0.48600899002787085,
+      "query_id": "q-011",
+      "ranking": [
+       "pp-71-2019:20",
+       "uu-27-2022:55",
+       "uu-27-2022:1",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:56",
+       "uu-27-2022:2",
+       "permen-kominfo-20-2016:22",
+       "pp-71-2019:21",
+       "uu-27-2022:60",
+       "uu-11-2008:43"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.3333333333333333,
+      "relevant": {
+       "permen-kominfo-20-2016:22": 2,
+       "pp-71-2019:21": 2,
+       "uu-27-2022:56": 2
+      },
+      "rr": 0.2,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.221100000810111,
+      "ndcg@10": 0.531730627995306,
+      "query_id": "q-014",
+      "ranking": [
+       "pp-71-2019:47",
+       "permen-kominfo-20-2016:6",
+       "uu-27-2022:23",
+       "uu-27-2022:22",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:12",
+       "pp-71-2019:14",
+       "pp-71-2019:48",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:9"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:22": 1,
+       "uu-27-2022:23": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.9609999993408564,
+      "ndcg@10": 1.0,
+      "query_id": "q-015",
+      "ranking": [
+       "permen-kominfo-20-2016:37",
+       "uu-27-2022:25",
+       "uu-27-2022:21",
+       "permen-kominfo-20-2016:9",
+       "permen-kominfo-20-2016:6",
+       "uu-27-2022:22",
+       "pp-71-2019:14",
+       "pp-71-2019:16",
+       "uu-11-2008:52",
+       "permen-kominfo-20-2016:28"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:37": 2,
+       "uu-27-2022:25": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.709099998464808,
+      "ndcg@10": 0.7967075809905066,
+      "query_id": "q-016",
+      "ranking": [
+       "uu-27-2022:53",
+       "uu-27-2022:54",
+       "uu-27-2022:52",
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:47",
+       "uu-27-2022:59",
+       "uu-27-2022:1",
+       "uu-27-2022:36",
+       "permen-kominfo-20-2016:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:53": 1,
+       "uu-27-2022:54": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.310799999686424,
+      "ndcg@10": 1.0,
+      "query_id": "q-017",
+      "ranking": [
+       "uu-27-2022:34",
+       "uu-27-2022:39",
+       "uu-27-2022:35",
+       "uu-27-2022:54",
+       "uu-27-2022:48",
+       "uu-27-2022:29",
+       "uu-27-2022:37",
+       "uu-27-2022:53",
+       "permen-kominfo-20-2016:23",
+       "uu-27-2022:51"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:34": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.891799999924842,
+      "ndcg@10": 0.9091417955461737,
+      "query_id": "q-019",
+      "ranking": [
+       "permen-kominfo-20-2016:15",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:5",
+       "permen-kominfo-20-2016:38",
+       "uu-27-2022:74",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:16",
+       "pp-71-2019:99"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:15": 2,
+       "permen-kominfo-20-2016:16": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.5593000001390465,
+      "ndcg@10": 0.9657811358291746,
+      "query_id": "q-020",
+      "ranking": [
+       "uu-11-2008:44",
+       "uu-11-2008:5",
+       "pp-71-2019:17",
+       "uu-11-2008:1",
+       "uu-11-2008:43",
+       "pp-71-2019:59",
+       "uu-11-2008:7",
+       "uu-27-2022:64",
+       "pp-71-2019:97",
+       "uu-11-2008:35"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.6666666666666666,
+      "relevant": {
+       "uu-11-2008:44": 2,
+       "uu-11-2008:5": 2,
+       "uu-27-2022:64": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.310700002562953,
+      "ndcg@10": 0.6131471927654584,
+      "query_id": "q-021",
+      "ranking": [
+       "pp-71-2019:20",
+       "permen-kominfo-20-2016:22",
+       "pp-71-2019:99",
+       "uu-11-2008:40",
+       "uu-27-2022:1",
+       "permen-kominfo-20-2016:36",
+       "uu-11-2008:43",
+       "uu-27-2022:2",
+       "pp-71-2019:21",
+       "pp-71-2019:9"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2,
+       "pp-71-2019:20": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.448199998383643,
+      "ndcg@10": 1.0,
+      "query_id": "q-023",
+      "ranking": [
+       "permen-kominfo-20-2016:36",
+       "permen-kominfo-20-2016:35",
+       "permen-kominfo-20-2016:1",
+       "uu-11-2008:27",
+       "uu-11-2008:32",
+       "uu-11-2008:30",
+       "permen-kominfo-20-2016:26",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:36": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.89069999862113,
+      "ndcg@10": 0.9180385079206221,
+      "query_id": "q-024",
+      "ranking": [
+       "pp-71-2019:46",
+       "pp-71-2019:47",
+       "uu-11-2008:9",
+       "pp-71-2019:48",
+       "uu-11-2008:6",
+       "uu-11-2008:5",
+       "uu-11-2008:18",
+       "uu-11-2008:35",
+       "permen-kominfo-20-2016:36",
+       "uu-11-2008:27"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "pp-71-2019:46": 2,
+       "uu-11-2008:18": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.541500003047986,
+      "ndcg@10": 0.0,
+      "query_id": "q-025",
+      "ranking": [
+       "pp-71-2019:14",
+       "pp-71-2019:18",
+       "pp-71-2019:97",
+       "permen-kominfo-20-2016:10",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:58",
+       "permen-kominfo-20-2016:2",
+       "pp-71-2019:16",
+       "uu-27-2022:31",
+       "permen-kominfo-20-2016:1"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:29": 2,
+       "permen-kominfo-20-2016:30": 1,
+       "permen-kominfo-20-2016:31": 2
+      },
+      "rr": 0.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.8594999977212865,
+      "ndcg@10": 0.3010299956639812,
+      "query_id": "q-026",
+      "ranking": [
+       "uu-27-2022:55",
+       "uu-27-2022:60",
+       "uu-27-2022:52",
+       "uu-27-2022:1",
+       "uu-27-2022:53",
+       "uu-27-2022:59",
+       "uu-27-2022:56",
+       "uu-27-2022:54",
+       "uu-27-2022:2",
+       "uu-27-2022:64"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:2": 2
+      },
+      "rr": 0.1111111111111111,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.987100001424551,
+      "ndcg@10": 0.0,
+      "query_id": "q-027",
+      "ranking": [
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:8",
+       "permen-kominfo-20-2016:10",
+       "pp-71-2019:16",
+       "permen-kominfo-20-2016:29",
+       "uu-27-2022:49",
+       "uu-27-2022:46",
+       "uu-27-2022:45"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:22": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.826500000897795,
+      "ndcg@10": 1.0,
+      "query_id": "q-029",
+      "ranking": [
+       "uu-27-2022:17",
+       "pp-71-2019:94",
+       "uu-11-2008:43",
+       "uu-11-2008:40",
+       "pp-71-2019:90",
+       "pp-71-2019:96",
+       "pp-71-2019:102",
+       "uu-11-2008:41",
+       "pp-71-2019:103",
+       "uu-27-2022:3"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:17": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 8.29149999844958,
+      "ndcg@10": 0.3007113259589448,
+      "query_id": "q-030",
+      "ranking": [
+       "pp-71-2019:16",
+       "pp-71-2019:14",
+       "pp-71-2019:48",
+       "uu-11-2008:28",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:25",
+       "pp-71-2019:40",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:20",
+       "uu-27-2022:43"
+      ],
+      "recall@10": 0.6,
+      "recall@5": 0.2,
+      "relevant": {
+       "permen-kominfo-20-2016:20": 1,
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1,
+       "uu-27-2022:43": 2,
+       "uu-27-2022:8": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.9007999991299585,
+      "ndcg@10": 0.0,
+      "query_id": "q-031",
+      "ranking": [
+       "uu-11-2008:30",
+       "uu-11-2008:32",
+       "uu-11-2008:27",
+       "uu-11-2008:28",
+       "uu-11-2008:23",
+       "uu-11-2008:25",
+       "permen-kominfo-20-2016:5",
+       "uu-11-2008:26",
+       "uu-11-2008:5",
+       "uu-27-2022:14"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "pp-71-2019:15": 1,
+       "pp-71-2019:17": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 7.441699999617413,
+      "ndcg@10": 0.6590018048024133,
+      "query_id": "q-032",
+      "ranking": [
+       "permen-kominfo-20-2016:1",
+       "pp-71-2019:6",
+       "pp-71-2019:102",
+       "pp-71-2019:2",
+       "pp-71-2019:37",
+       "pp-71-2019:1",
+       "uu-11-2008:1",
+       "pp-71-2019:84",
+       "uu-11-2008:43",
+       "pp-71-2019:62"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:102": 1,
+       "pp-71-2019:6": 2
+      },
+      "rr": 0.5,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 7.761400000163121,
+      "ndcg@10": 0.6131471927654584,
+      "query_id": "q-033",
+      "ranking": [
+       "uu-11-2008:31",
+       "uu-11-2008:32",
+       "uu-11-2008:38",
+       "uu-27-2022:67",
+       "uu-11-2008:26",
+       "uu-11-2008:43",
+       "uu-11-2008:46",
+       "pp-71-2019:17",
+       "uu-11-2008:48",
+       "uu-11-2008:45"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:31": 2,
+       "uu-11-2008:47": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.6047999971488025,
+      "ndcg@10": 0.0,
+      "query_id": "q-034",
+      "ranking": [
+       "pp-71-2019:99",
+       "pp-71-2019:22",
+       "uu-11-2008:40",
+       "permen-kominfo-20-2016:28",
+       "uu-11-2008:1",
+       "pp-71-2019:61",
+       "pp-71-2019:64",
+       "pp-71-2019:1",
+       "uu-27-2022:32",
+       "uu-27-2022:10"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:4": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.560499998158775,
+      "ndcg@10": 0.2973091263149785,
+      "query_id": "q-036",
+      "ranking": [
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:53",
+       "uu-27-2022:54",
+       "uu-27-2022:47",
+       "uu-27-2022:59",
+       "uu-27-2022:37",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:52",
+       "uu-27-2022:36"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.25,
+      "relevant": {
+       "permen-kominfo-20-2016:35": 1,
+       "uu-27-2022:58": 2,
+       "uu-27-2022:59": 1,
+       "uu-27-2022:60": 1
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 7.721499998297077,
+      "ndcg@10": 0.5310715473875232,
+      "query_id": "q-037",
+      "ranking": [
+       "uu-27-2022:30",
+       "uu-27-2022:46",
+       "uu-27-2022:40",
+       "uu-27-2022:32",
+       "uu-27-2022:41",
+       "uu-11-2008:43",
+       "uu-27-2022:21",
+       "permen-kominfo-20-2016:31",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:29"
+      ],
+      "recall@10": 0.6666666666666666,
+      "recall@5": 0.3333333333333333,
+      "relevant": {
+       "permen-kominfo-20-2016:28": 1,
+       "pp-71-2019:14": 1,
+       "uu-27-2022:46": 2
+      },
+      "rr": 0.5,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 7.642199998372234,
+      "ndcg@10": 1.0,
+      "query_id": "q-039",
+      "ranking": [
+       "uu-27-2022:10",
+       "uu-27-2022:34",
+       "uu-27-2022:33",
+       "uu-11-2008:7",
+       "permen-kominfo-20-2016:33",
+       "uu-11-2008:30",
+       "uu-11-2008:34",
+       "pp-71-2019:83",
+       "uu-11-2008:38",
+       "permen-kominfo-20-2016:32"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:10": 2
+      },
+      "rr": 1.0,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 6.795500001317123,
+      "ndcg@10": 0.5,
+      "query_id": "q-040",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-27-2022:13",
+       "uu-11-2008:7",
+       "uu-27-2022:55",
+       "uu-27-2022:27",
+       "pp-71-2019:14",
+       "uu-11-2008:23",
+       "permen-kominfo-20-2016:8",
+       "uu-11-2008:30"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:13": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "mixed_id_en"
+     }
+    ],
+    "summary": {
+     "ci": {
+      "ndcg@10": {
+       "high": 0.7941980401652037,
+       "low": 0.5434726683710566,
+       "mean": 0.6691765379408511
+      },
+      "recall@10": {
+       "high": 0.8788888888888888,
+       "low": 0.6255555555555555,
+       "mean": 0.7588888888888888
+      },
+      "recall@5": {
+       "high": 0.7555555555555555,
+       "low": 0.49,
+       "mean": 0.6261111111111111
+      },
+      "rr": {
+       "high": 0.8707407407407407,
+       "low": 0.5985185185185186,
+       "mean": 0.7325925925925926
+      }
+     },
+     "latency_p50_ms": 7.721499998297077,
+     "latency_p95_ms": 11.27239999914309,
+     "n": 30,
+     "ndcg@10": 0.6691765379408511,
+     "recall@10": 0.7588888888888888,
+     "recall@5": 0.6261111111111111,
+     "rr": 0.7325925925925926
+    }
+   },
+   "hybrid-k10-d50/article": {
+    "queries": [
+     {
+      "latency_ms": 11.274299999058712,
+      "ndcg@10": 1.0,
+      "query_id": "q-003",
+      "ranking": [
+       "uu-11-2008:11",
+       "uu-11-2008:12",
+       "pp-71-2019:59",
+       "uu-11-2008:1",
+       "pp-71-2019:60",
+       "pp-71-2019:62",
+       "pp-71-2019:1",
+       "pp-71-2019:61",
+       "pp-71-2019:63",
+       "uu-11-2008:19"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:11": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 8.737999996810686,
+      "ndcg@10": 1.0,
+      "query_id": "q-004",
+      "ranking": [
+       "uu-11-2008:26",
+       "uu-27-2022:11",
+       "permen-kominfo-20-2016:24",
+       "permen-kominfo-20-2016:26",
+       "uu-27-2022:14",
+       "uu-27-2022:26",
+       "uu-27-2022:28",
+       "uu-11-2008:23",
+       "uu-11-2008:29",
+       "uu-27-2022:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:26": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 10.14029999714694,
+      "ndcg@10": 1.0,
+      "query_id": "q-006",
+      "ranking": [
+       "pp-71-2019:15",
+       "pp-71-2019:16",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:7",
+       "pp-71-2019:18",
+       "permen-kominfo-20-2016:19",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:16",
+       "uu-27-2022:8",
+       "uu-27-2022:38"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 9.091600000829203,
+      "ndcg@10": 1.0,
+      "query_id": "q-007",
+      "ranking": [
+       "permen-kominfo-20-2016:26",
+       "permen-kominfo-20-2016:16",
+       "permen-kominfo-20-2016:20",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:25",
+       "uu-27-2022:28",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:31",
+       "permen-kominfo-20-2016:10"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:26": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 8.858500001224456,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-008",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-11-2008:35",
+       "uu-11-2008:29",
+       "uu-11-2008:30",
+       "uu-11-2008:7",
+       "uu-11-2008:27",
+       "pp-71-2019:1",
+       "uu-11-2008:26",
+       "uu-27-2022:65"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:32": 2,
+       "uu-11-2008:48": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 12.510200001997873,
+      "ndcg@10": 1.0,
+      "query_id": "q-009",
+      "ranking": [
+       "permen-kominfo-20-2016:17",
+       "uu-27-2022:17",
+       "permen-kominfo-20-2016:20",
+       "uu-11-2008:17",
+       "permen-kominfo-20-2016:1",
+       "pp-71-2019:20",
+       "pp-71-2019:1",
+       "pp-71-2019:17",
+       "pp-71-2019:100",
+       "permen-kominfo-20-2016:7"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 9.32969999848865,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-010",
+      "ranking": [
+       "uu-27-2022:67",
+       "uu-27-2022:68",
+       "uu-27-2022:66",
+       "uu-27-2022:69",
+       "uu-27-2022:60",
+       "uu-11-2008:52",
+       "uu-27-2022:59",
+       "uu-27-2022:38",
+       "uu-27-2022:47",
+       "uu-27-2022:53"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-27-2022:65": 1,
+       "uu-27-2022:67": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 7.631200001924299,
+      "ndcg@10": 0.47084972088011434,
+      "query_id": "q-011",
+      "ranking": [
+       "pp-71-2019:20",
+       "uu-27-2022:55",
+       "uu-27-2022:1",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:56",
+       "uu-27-2022:2",
+       "uu-11-2008:43",
+       "permen-kominfo-20-2016:22",
+       "pp-71-2019:21",
+       "pp-71-2019:14"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.3333333333333333,
+      "relevant": {
+       "permen-kominfo-20-2016:22": 2,
+       "pp-71-2019:21": 2,
+       "uu-27-2022:56": 2
+      },
+      "rr": 0.2,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 9.423200001037912,
+      "ndcg@10": 0.531730627995306,
+      "query_id": "q-014",
+      "ranking": [
+       "pp-71-2019:47",
+       "permen-kominfo-20-2016:6",
+       "uu-27-2022:23",
+       "uu-27-2022:22",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:12",
+       "pp-71-2019:14",
+       "pp-71-2019:48",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:9"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:22": 1,
+       "uu-27-2022:23": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.452999998553423,
+      "ndcg@10": 1.0,
+      "query_id": "q-015",
+      "ranking": [
+       "permen-kominfo-20-2016:37",
+       "uu-27-2022:25",
+       "uu-27-2022:21",
+       "permen-kominfo-20-2016:9",
+       "permen-kominfo-20-2016:6",
+       "pp-71-2019:14",
+       "pp-71-2019:16",
+       "uu-27-2022:26",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:2"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:37": 2,
+       "uu-27-2022:25": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 11.651900000288151,
+      "ndcg@10": 0.7967075809905066,
+      "query_id": "q-016",
+      "ranking": [
+       "uu-27-2022:53",
+       "uu-27-2022:54",
+       "uu-27-2022:52",
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:47",
+       "uu-27-2022:59",
+       "uu-27-2022:1",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:37"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:53": 1,
+       "uu-27-2022:54": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.23099999979604,
+      "ndcg@10": 1.0,
+      "query_id": "q-017",
+      "ranking": [
+       "uu-27-2022:34",
+       "uu-27-2022:39",
+       "uu-27-2022:35",
+       "uu-27-2022:54",
+       "uu-27-2022:48",
+       "uu-27-2022:51",
+       "uu-27-2022:21",
+       "uu-27-2022:36",
+       "uu-27-2022:29",
+       "pp-71-2019:14"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:34": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.710799997061258,
+      "ndcg@10": 0.9243382314975351,
+      "query_id": "q-019",
+      "ranking": [
+       "permen-kominfo-20-2016:15",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:5",
+       "permen-kominfo-20-2016:38",
+       "permen-kominfo-20-2016:16",
+       "pp-71-2019:99",
+       "uu-27-2022:74",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:15": 2,
+       "permen-kominfo-20-2016:16": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.246099998359568,
+      "ndcg@10": 0.9733360964168419,
+      "query_id": "q-020",
+      "ranking": [
+       "uu-11-2008:44",
+       "uu-11-2008:5",
+       "pp-71-2019:17",
+       "uu-11-2008:1",
+       "uu-11-2008:43",
+       "uu-27-2022:64",
+       "pp-71-2019:59",
+       "uu-11-2008:7",
+       "uu-11-2008:6",
+       "uu-11-2008:11"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.6666666666666666,
+      "relevant": {
+       "uu-11-2008:44": 2,
+       "uu-11-2008:5": 2,
+       "uu-27-2022:64": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 9.567699999024626,
+      "ndcg@10": 0.6131471927654584,
+      "query_id": "q-021",
+      "ranking": [
+       "pp-71-2019:20",
+       "permen-kominfo-20-2016:22",
+       "pp-71-2019:99",
+       "uu-11-2008:40",
+       "uu-27-2022:1",
+       "pp-71-2019:9",
+       "permen-kominfo-20-2016:36",
+       "uu-11-2008:43",
+       "uu-27-2022:2",
+       "permen-kominfo-20-2016:1"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2,
+       "pp-71-2019:20": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 9.41650000095251,
+      "ndcg@10": 1.0,
+      "query_id": "q-023",
+      "ranking": [
+       "permen-kominfo-20-2016:36",
+       "permen-kominfo-20-2016:35",
+       "permen-kominfo-20-2016:1",
+       "uu-11-2008:27",
+       "uu-11-2008:32",
+       "uu-11-2008:30",
+       "permen-kominfo-20-2016:26",
+       "permen-kominfo-20-2016:25",
+       "uu-27-2022:60",
+       "permen-kominfo-20-2016:28"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:36": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.337899998878129,
+      "ndcg@10": 0.9180385079206221,
+      "query_id": "q-024",
+      "ranking": [
+       "pp-71-2019:46",
+       "pp-71-2019:47",
+       "uu-11-2008:9",
+       "pp-71-2019:48",
+       "uu-11-2008:6",
+       "uu-11-2008:5",
+       "uu-11-2008:18",
+       "uu-11-2008:35",
+       "permen-kominfo-20-2016:36",
+       "pp-71-2019:37"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "pp-71-2019:46": 2,
+       "uu-11-2008:18": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 9.818600003200117,
+      "ndcg@10": 0.0,
+      "query_id": "q-025",
+      "ranking": [
+       "pp-71-2019:14",
+       "pp-71-2019:18",
+       "pp-71-2019:97",
+       "permen-kominfo-20-2016:10",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:58",
+       "permen-kominfo-20-2016:2",
+       "pp-71-2019:16",
+       "uu-27-2022:31",
+       "permen-kominfo-20-2016:25"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:29": 2,
+       "permen-kominfo-20-2016:30": 1,
+       "permen-kominfo-20-2016:31": 2
+      },
+      "rr": 0.07142857142857142,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.644100002129562,
+      "ndcg@10": 0.38685280723454163,
+      "query_id": "q-026",
+      "ranking": [
+       "uu-27-2022:55",
+       "uu-27-2022:60",
+       "uu-27-2022:52",
+       "uu-27-2022:1",
+       "uu-27-2022:2",
+       "uu-27-2022:53",
+       "uu-27-2022:59",
+       "uu-27-2022:56",
+       "uu-27-2022:54",
+       "uu-27-2022:34"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:2": 2
+      },
+      "rr": 0.2,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.58190000144532,
+      "ndcg@10": 0.0,
+      "query_id": "q-027",
+      "ranking": [
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:8",
+       "permen-kominfo-20-2016:10",
+       "pp-71-2019:16",
+       "permen-kominfo-20-2016:29",
+       "uu-27-2022:49",
+       "uu-27-2022:46",
+       "uu-27-2022:45"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:22": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 7.055099998979131,
+      "ndcg@10": 1.0,
+      "query_id": "q-029",
+      "ranking": [
+       "uu-27-2022:17",
+       "pp-71-2019:94",
+       "uu-11-2008:43",
+       "uu-11-2008:40",
+       "pp-71-2019:90",
+       "pp-71-2019:96",
+       "pp-71-2019:102",
+       "uu-11-2008:41",
+       "pp-71-2019:56",
+       "pp-71-2019:103"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:17": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 12.683600001764717,
+      "ndcg@10": 0.13869012617430843,
+      "query_id": "q-030",
+      "ranking": [
+       "pp-71-2019:16",
+       "pp-71-2019:40",
+       "pp-71-2019:14",
+       "pp-71-2019:48",
+       "uu-11-2008:28",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:2",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:28"
+      ],
+      "recall@10": 0.2,
+      "recall@5": 0.2,
+      "relevant": {
+       "permen-kominfo-20-2016:20": 1,
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1,
+       "uu-27-2022:43": 2,
+       "uu-27-2022:8": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 8.411099999648286,
+      "ndcg@10": 0.0,
+      "query_id": "q-031",
+      "ranking": [
+       "uu-11-2008:30",
+       "uu-11-2008:32",
+       "uu-11-2008:27",
+       "uu-11-2008:28",
+       "uu-11-2008:23",
+       "uu-11-2008:7",
+       "uu-11-2008:31",
+       "uu-11-2008:35",
+       "uu-11-2008:25",
+       "permen-kominfo-20-2016:5"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "pp-71-2019:15": 1,
+       "pp-71-2019:17": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 7.760100001178216,
+      "ndcg@10": 0.6590018048024133,
+      "query_id": "q-032",
+      "ranking": [
+       "permen-kominfo-20-2016:1",
+       "pp-71-2019:6",
+       "pp-71-2019:102",
+       "pp-71-2019:1",
+       "pp-71-2019:2",
+       "pp-71-2019:5",
+       "pp-71-2019:37",
+       "pp-71-2019:40",
+       "uu-11-2008:1",
+       "uu-27-2022:21"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:102": 1,
+       "pp-71-2019:6": 2
+      },
+      "rr": 0.5,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 10.439699999551522,
+      "ndcg@10": 0.6131471927654584,
+      "query_id": "q-033",
+      "ranking": [
+       "uu-11-2008:31",
+       "uu-11-2008:32",
+       "uu-11-2008:38",
+       "uu-27-2022:67",
+       "uu-11-2008:43",
+       "pp-71-2019:17",
+       "uu-11-2008:27",
+       "pp-71-2019:1",
+       "uu-11-2008:26",
+       "uu-11-2008:46"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:31": 2,
+       "uu-11-2008:47": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 7.987100001628278,
+      "ndcg@10": 0.0,
+      "query_id": "q-034",
+      "ranking": [
+       "pp-71-2019:99",
+       "pp-71-2019:22",
+       "uu-11-2008:40",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:32",
+       "uu-11-2008:1",
+       "pp-71-2019:61",
+       "pp-71-2019:64",
+       "permen-kominfo-20-2016:9",
+       "pp-71-2019:1"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:4": 2
+      },
+      "rr": 0.07142857142857142,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 8.540900002117269,
+      "ndcg@10": 0.2973091263149785,
+      "query_id": "q-036",
+      "ranking": [
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:53",
+       "uu-27-2022:54",
+       "uu-27-2022:47",
+       "uu-27-2022:59",
+       "uu-27-2022:37",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:52",
+       "uu-27-2022:55"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.25,
+      "relevant": {
+       "permen-kominfo-20-2016:35": 1,
+       "uu-27-2022:58": 2,
+       "uu-27-2022:59": 1,
+       "uu-27-2022:60": 1
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 9.52529999995022,
+      "ndcg@10": 0.5310715473875232,
+      "query_id": "q-037",
+      "ranking": [
+       "uu-27-2022:30",
+       "uu-27-2022:46",
+       "uu-27-2022:40",
+       "uu-27-2022:32",
+       "uu-27-2022:41",
+       "uu-11-2008:43",
+       "uu-27-2022:21",
+       "permen-kominfo-20-2016:31",
+       "pp-71-2019:14",
+       "pp-71-2019:40"
+      ],
+      "recall@10": 0.6666666666666666,
+      "recall@5": 0.3333333333333333,
+      "relevant": {
+       "permen-kominfo-20-2016:28": 1,
+       "pp-71-2019:14": 1,
+       "uu-27-2022:46": 2
+      },
+      "rr": 0.5,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 10.774200000014389,
+      "ndcg@10": 1.0,
+      "query_id": "q-039",
+      "ranking": [
+       "uu-27-2022:10",
+       "uu-27-2022:34",
+       "uu-27-2022:33",
+       "uu-11-2008:7",
+       "permen-kominfo-20-2016:33",
+       "uu-11-2008:30",
+       "pp-71-2019:1",
+       "uu-11-2008:34",
+       "permen-kominfo-20-2016:21",
+       "pp-71-2019:17"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:10": 2
+      },
+      "rr": 1.0,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 7.705399999395013,
+      "ndcg@10": 0.5,
+      "query_id": "q-040",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-27-2022:13",
+       "uu-27-2022:55",
+       "pp-71-2019:14",
+       "uu-11-2008:7",
+       "uu-11-2008:30",
+       "uu-27-2022:27",
+       "uu-11-2008:23",
+       "permen-kominfo-20-2016:25"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:13": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "mixed_id_en"
+     }
+    ],
+    "summary": {
+     "ci": {
+      "ndcg@10": {
+       "high": 0.794004104817657,
+       "low": 0.5377206505798,
+       "mean": 0.666889662580091
+      },
+      "recall@10": {
+       "high": 0.8666666666666667,
+       "low": 0.6066666666666667,
+       "mean": 0.7455555555555555
+      },
+      "recall@5": {
+       "high": 0.7927777777777778,
+       "low": 0.5327777777777778,
+       "mean": 0.6594444444444444
+      },
+      "rr": {
+       "high": 0.8746031746031746,
+       "low": 0.6115873015873016,
+       "mean": 0.7403174603174603
+      }
+     },
+     "latency_p50_ms": 8.737999996810686,
+     "latency_p95_ms": 12.510200001997873,
+     "n": 30,
+     "ndcg@10": 0.666889662580091,
+     "recall@10": 0.7455555555555555,
+     "recall@5": 0.6594444444444444,
+     "rr": 0.7403174603174603
+    }
+   },
+   "hybrid-k30-d20/article": {
+    "queries": [
+     {
+      "latency_ms": 8.721700000023702,
+      "ndcg@10": 1.0,
+      "query_id": "q-003",
+      "ranking": [
+       "uu-11-2008:11",
+       "uu-11-2008:12",
+       "pp-71-2019:59",
+       "pp-71-2019:60",
+       "pp-71-2019:62",
+       "uu-11-2008:1",
+       "pp-71-2019:61",
+       "pp-71-2019:1",
+       "pp-71-2019:57",
+       "pp-71-2019:65"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:11": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 10.970200000883779,
+      "ndcg@10": 0.6309297535714574,
+      "query_id": "q-004",
+      "ranking": [
+       "uu-27-2022:11",
+       "uu-11-2008:26",
+       "permen-kominfo-20-2016:24",
+       "permen-kominfo-20-2016:26",
+       "uu-27-2022:14",
+       "uu-27-2022:28",
+       "uu-11-2008:23",
+       "uu-27-2022:1",
+       "uu-27-2022:26",
+       "uu-27-2022:38"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:26": 2
+      },
+      "rr": 0.5,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 12.013399998977548,
+      "ndcg@10": 1.0,
+      "query_id": "q-006",
+      "ranking": [
+       "pp-71-2019:15",
+       "pp-71-2019:16",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:7",
+       "permen-kominfo-20-2016:16",
+       "pp-71-2019:18",
+       "uu-27-2022:38",
+       "permen-kominfo-20-2016:19",
+       "pp-71-2019:5",
+       "uu-11-2008:53"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 10.95750000240514,
+      "ndcg@10": 1.0,
+      "query_id": "q-007",
+      "ranking": [
+       "permen-kominfo-20-2016:26",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:16",
+       "uu-27-2022:28",
+       "permen-kominfo-20-2016:20",
+       "uu-27-2022:31",
+       "uu-27-2022:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:26": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 13.060799999948358,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-008",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-11-2008:35",
+       "uu-11-2008:29",
+       "pp-71-2019:1",
+       "pp-71-2019:17",
+       "uu-11-2008:30",
+       "uu-27-2022:65",
+       "permen-kominfo-20-2016:26",
+       "uu-11-2008:33"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:32": 2,
+       "uu-11-2008:48": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 8.808399998088134,
+      "ndcg@10": 1.0,
+      "query_id": "q-009",
+      "ranking": [
+       "permen-kominfo-20-2016:17",
+       "permen-kominfo-20-2016:20",
+       "uu-27-2022:17",
+       "pp-71-2019:1",
+       "uu-11-2008:17",
+       "pp-71-2019:100",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:14",
+       "permen-kominfo-20-2016:39",
+       "pp-71-2019:20"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 12.086500002624234,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-010",
+      "ranking": [
+       "uu-27-2022:67",
+       "uu-27-2022:68",
+       "uu-27-2022:66",
+       "uu-27-2022:60",
+       "uu-27-2022:59",
+       "uu-27-2022:47",
+       "uu-27-2022:55",
+       "uu-27-2022:69",
+       "uu-27-2022:70",
+       "uu-11-2008:52"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-27-2022:65": 1,
+       "uu-27-2022:67": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 10.604099999909522,
+      "ndcg@10": 0.47162765245672045,
+      "query_id": "q-011",
+      "ranking": [
+       "pp-71-2019:20",
+       "uu-27-2022:55",
+       "uu-27-2022:1",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:2",
+       "uu-27-2022:56",
+       "permen-kominfo-20-2016:22",
+       "pp-71-2019:21",
+       "uu-27-2022:60",
+       "pp-71-2019:17"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:22": 2,
+       "pp-71-2019:21": 2,
+       "uu-27-2022:56": 2
+      },
+      "rr": 0.16666666666666666,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 11.40769999983604,
+      "ndcg@10": 0.4935456744811716,
+      "query_id": "q-014",
+      "ranking": [
+       "pp-71-2019:47",
+       "permen-kominfo-20-2016:6",
+       "uu-27-2022:22",
+       "uu-27-2022:23",
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:12",
+       "pp-71-2019:48",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:9"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:22": 1,
+       "uu-27-2022:23": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.575700001325458,
+      "ndcg@10": 1.0,
+      "query_id": "q-015",
+      "ranking": [
+       "permen-kominfo-20-2016:37",
+       "uu-27-2022:25",
+       "uu-27-2022:21",
+       "permen-kominfo-20-2016:9",
+       "permen-kominfo-20-2016:6",
+       "uu-27-2022:22",
+       "pp-71-2019:14",
+       "pp-71-2019:16",
+       "uu-11-2008:52",
+       "permen-kominfo-20-2016:28"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:37": 2,
+       "uu-27-2022:25": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.102800001826836,
+      "ndcg@10": 0.7967075809905066,
+      "query_id": "q-016",
+      "ranking": [
+       "uu-27-2022:53",
+       "uu-27-2022:54",
+       "uu-27-2022:52",
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:47",
+       "uu-27-2022:59",
+       "uu-27-2022:1",
+       "uu-27-2022:36",
+       "uu-27-2022:58"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:53": 1,
+       "uu-27-2022:54": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 9.236400001100264,
+      "ndcg@10": 1.0,
+      "query_id": "q-017",
+      "ranking": [
+       "uu-27-2022:34",
+       "uu-27-2022:39",
+       "uu-27-2022:35",
+       "uu-27-2022:54",
+       "uu-27-2022:48",
+       "uu-27-2022:29",
+       "uu-27-2022:37",
+       "uu-27-2022:53",
+       "permen-kominfo-20-2016:23",
+       "uu-27-2022:51"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:34": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.612999997945735,
+      "ndcg@10": 0.9091417955461737,
+      "query_id": "q-019",
+      "ranking": [
+       "permen-kominfo-20-2016:15",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:38",
+       "permen-kominfo-20-2016:5",
+       "uu-27-2022:74",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:16",
+       "pp-71-2019:99"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:15": 2,
+       "permen-kominfo-20-2016:16": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.201799999165814,
+      "ndcg@10": 0.9608857006116033,
+      "query_id": "q-020",
+      "ranking": [
+       "uu-11-2008:44",
+       "uu-11-2008:5",
+       "pp-71-2019:17",
+       "uu-11-2008:43",
+       "uu-11-2008:1",
+       "pp-71-2019:59",
+       "uu-11-2008:7",
+       "pp-71-2019:97",
+       "uu-11-2008:35",
+       "uu-27-2022:64"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.6666666666666666,
+      "relevant": {
+       "uu-11-2008:44": 2,
+       "uu-11-2008:5": 2,
+       "uu-27-2022:64": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.179100000736071,
+      "ndcg@10": 0.6131471927654584,
+      "query_id": "q-021",
+      "ranking": [
+       "pp-71-2019:20",
+       "permen-kominfo-20-2016:22",
+       "pp-71-2019:99",
+       "uu-11-2008:40",
+       "uu-27-2022:1",
+       "uu-11-2008:43",
+       "permen-kominfo-20-2016:36",
+       "uu-27-2022:2",
+       "pp-71-2019:21",
+       "pp-71-2019:9"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2,
+       "pp-71-2019:20": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.9320999975607265,
+      "ndcg@10": 1.0,
+      "query_id": "q-023",
+      "ranking": [
+       "permen-kominfo-20-2016:36",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:35",
+       "uu-11-2008:27",
+       "uu-11-2008:32",
+       "permen-kominfo-20-2016:26",
+       "uu-11-2008:30",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:28",
+       "uu-11-2008:35"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:36": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 5.67820000287611,
+      "ndcg@10": 0.9180385079206221,
+      "query_id": "q-024",
+      "ranking": [
+       "pp-71-2019:46",
+       "pp-71-2019:47",
+       "uu-11-2008:9",
+       "pp-71-2019:48",
+       "uu-11-2008:6",
+       "uu-11-2008:5",
+       "uu-11-2008:18",
+       "uu-11-2008:35",
+       "permen-kominfo-20-2016:36",
+       "uu-11-2008:27"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "pp-71-2019:46": 2,
+       "uu-11-2008:18": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.00359999993816,
+      "ndcg@10": 0.0,
+      "query_id": "q-025",
+      "ranking": [
+       "pp-71-2019:14",
+       "pp-71-2019:18",
+       "pp-71-2019:97",
+       "permen-kominfo-20-2016:10",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:20",
+       "uu-27-2022:58",
+       "pp-71-2019:16"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:29": 2,
+       "permen-kominfo-20-2016:30": 1,
+       "permen-kominfo-20-2016:31": 2
+      },
+      "rr": 0.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.089700000506127,
+      "ndcg@10": 0.2890648263178878,
+      "query_id": "q-026",
+      "ranking": [
+       "uu-27-2022:55",
+       "uu-27-2022:60",
+       "uu-27-2022:52",
+       "uu-27-2022:1",
+       "uu-27-2022:53",
+       "uu-27-2022:59",
+       "uu-27-2022:56",
+       "uu-27-2022:54",
+       "uu-27-2022:64",
+       "uu-27-2022:2"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:2": 2
+      },
+      "rr": 0.1,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.142099999124184,
+      "ndcg@10": 0.0,
+      "query_id": "q-027",
+      "ranking": [
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:8",
+       "permen-kominfo-20-2016:10",
+       "pp-71-2019:16",
+       "uu-27-2022:46",
+       "permen-kominfo-20-2016:29",
+       "uu-27-2022:49",
+       "uu-27-2022:45"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:22": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 5.734800000936957,
+      "ndcg@10": 1.0,
+      "query_id": "q-029",
+      "ranking": [
+       "uu-27-2022:17",
+       "pp-71-2019:94",
+       "uu-11-2008:43",
+       "uu-11-2008:40",
+       "pp-71-2019:90",
+       "pp-71-2019:96",
+       "pp-71-2019:102",
+       "uu-11-2008:41",
+       "pp-71-2019:103",
+       "uu-27-2022:3"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:17": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 5.909199997404357,
+      "ndcg@10": 0.3269878225815121,
+      "query_id": "q-030",
+      "ranking": [
+       "pp-71-2019:16",
+       "pp-71-2019:14",
+       "uu-11-2008:28",
+       "pp-71-2019:48",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:43",
+       "permen-kominfo-20-2016:25",
+       "pp-71-2019:40",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:20"
+      ],
+      "recall@10": 0.6,
+      "recall@5": 0.2,
+      "relevant": {
+       "permen-kominfo-20-2016:20": 1,
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1,
+       "uu-27-2022:43": 2,
+       "uu-27-2022:8": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.286599997110898,
+      "ndcg@10": 0.0,
+      "query_id": "q-031",
+      "ranking": [
+       "uu-11-2008:30",
+       "uu-11-2008:32",
+       "uu-11-2008:27",
+       "uu-11-2008:28",
+       "uu-11-2008:23",
+       "uu-11-2008:25",
+       "uu-27-2022:14",
+       "permen-kominfo-20-2016:5",
+       "uu-11-2008:26",
+       "uu-11-2008:5"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "pp-71-2019:15": 1,
+       "pp-71-2019:17": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.101900002249749,
+      "ndcg@10": 0.6590018048024133,
+      "query_id": "q-032",
+      "ranking": [
+       "permen-kominfo-20-2016:1",
+       "pp-71-2019:6",
+       "pp-71-2019:102",
+       "pp-71-2019:2",
+       "pp-71-2019:37",
+       "uu-11-2008:1",
+       "pp-71-2019:62",
+       "pp-71-2019:1",
+       "pp-71-2019:84",
+       "uu-11-2008:43"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:102": 1,
+       "pp-71-2019:6": 2
+      },
+      "rr": 0.5,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.2686000019311905,
+      "ndcg@10": 0.3868528072345416,
+      "query_id": "q-033",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-11-2008:26",
+       "uu-11-2008:38",
+       "uu-27-2022:67",
+       "uu-11-2008:43",
+       "uu-11-2008:46",
+       "pp-71-2019:17",
+       "uu-11-2008:48",
+       "uu-11-2008:45"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:31": 2,
+       "uu-11-2008:47": 2
+      },
+      "rr": 0.5,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 9.960100000171224,
+      "ndcg@10": 0.0,
+      "query_id": "q-034",
+      "ranking": [
+       "pp-71-2019:99",
+       "pp-71-2019:22",
+       "uu-11-2008:40",
+       "permen-kominfo-20-2016:28",
+       "uu-11-2008:1",
+       "pp-71-2019:1",
+       "pp-71-2019:61",
+       "pp-71-2019:64",
+       "uu-27-2022:32",
+       "uu-27-2022:10"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:4": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 7.0850000010977965,
+      "ndcg@10": 0.2973091263149785,
+      "query_id": "q-036",
+      "ranking": [
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:53",
+       "uu-27-2022:54",
+       "uu-27-2022:47",
+       "uu-27-2022:59",
+       "uu-27-2022:37",
+       "uu-27-2022:52",
+       "uu-27-2022:36",
+       "uu-27-2022:38"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.25,
+      "relevant": {
+       "permen-kominfo-20-2016:35": 1,
+       "uu-27-2022:58": 2,
+       "uu-27-2022:59": 1,
+       "uu-27-2022:60": 1
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.189299998368369,
+      "ndcg@10": 0.5310715473875232,
+      "query_id": "q-037",
+      "ranking": [
+       "uu-27-2022:30",
+       "uu-27-2022:46",
+       "uu-27-2022:40",
+       "uu-27-2022:32",
+       "uu-27-2022:41",
+       "uu-11-2008:43",
+       "uu-27-2022:21",
+       "permen-kominfo-20-2016:31",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:29"
+      ],
+      "recall@10": 0.6666666666666666,
+      "recall@5": 0.3333333333333333,
+      "relevant": {
+       "permen-kominfo-20-2016:28": 1,
+       "pp-71-2019:14": 1,
+       "uu-27-2022:46": 2
+      },
+      "rr": 0.5,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 6.101900002249749,
+      "ndcg@10": 1.0,
+      "query_id": "q-039",
+      "ranking": [
+       "uu-27-2022:10",
+       "uu-27-2022:33",
+       "uu-27-2022:34",
+       "uu-11-2008:7",
+       "permen-kominfo-20-2016:33",
+       "uu-11-2008:30",
+       "uu-11-2008:34",
+       "pp-71-2019:83",
+       "uu-11-2008:38",
+       "permen-kominfo-20-2016:32"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:10": 2
+      },
+      "rr": 1.0,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 8.373599997867132,
+      "ndcg@10": 0.5,
+      "query_id": "q-040",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-27-2022:13",
+       "uu-11-2008:7",
+       "uu-27-2022:55",
+       "uu-27-2022:27",
+       "pp-71-2019:14",
+       "uu-11-2008:23",
+       "permen-kominfo-20-2016:8",
+       "uu-11-2008:30"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:13": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "mixed_id_en"
+     }
+    ],
+    "summary": {
+     "ci": {
+      "ndcg@10": {
+       "high": 0.7729671465517981,
+       "low": 0.5198085271429522,
+       "mean": 0.6478927035746563
+      },
+      "recall@10": {
+       "high": 0.8788888888888888,
+       "low": 0.6255555555555555,
+       "mean": 0.7588888888888888
+      },
+      "recall@5": {
+       "high": 0.7527777777777778,
+       "low": 0.4777777777777778,
+       "mean": 0.615
+      },
+      "rr": {
+       "high": 0.8311111111111111,
+       "low": 0.5666666666666667,
+       "mean": 0.6977777777777778
+      }
+     },
+     "latency_p50_ms": 7.575700001325458,
+     "latency_p95_ms": 12.086500002624234,
+     "n": 30,
+     "ndcg@10": 0.6478927035746563,
+     "recall@10": 0.7588888888888888,
+     "recall@5": 0.615,
+     "rr": 0.6977777777777778
+    }
+   },
+   "hybrid-k30-d50/article": {
+    "queries": [
+     {
+      "latency_ms": 17.97660000011092,
+      "ndcg@10": 1.0,
+      "query_id": "q-003",
+      "ranking": [
+       "uu-11-2008:11",
+       "uu-11-2008:12",
+       "pp-71-2019:59",
+       "pp-71-2019:60",
+       "pp-71-2019:62",
+       "uu-11-2008:1",
+       "pp-71-2019:61",
+       "pp-71-2019:1",
+       "pp-71-2019:63",
+       "uu-11-2008:19"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:11": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 20.15419999952428,
+      "ndcg@10": 0.6309297535714574,
+      "query_id": "q-004",
+      "ranking": [
+       "uu-27-2022:11",
+       "uu-11-2008:26",
+       "permen-kominfo-20-2016:24",
+       "permen-kominfo-20-2016:26",
+       "uu-27-2022:14",
+       "uu-27-2022:26",
+       "uu-11-2008:29",
+       "uu-27-2022:34",
+       "uu-27-2022:28",
+       "uu-11-2008:23"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:26": 2
+      },
+      "rr": 0.5,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 25.5180999993172,
+      "ndcg@10": 1.0,
+      "query_id": "q-006",
+      "ranking": [
+       "pp-71-2019:15",
+       "pp-71-2019:16",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:7",
+       "pp-71-2019:18",
+       "permen-kominfo-20-2016:19",
+       "permen-kominfo-20-2016:16",
+       "pp-71-2019:14",
+       "uu-27-2022:8",
+       "pp-71-2019:98"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 11.443399998825043,
+      "ndcg@10": 1.0,
+      "query_id": "q-007",
+      "ranking": [
+       "permen-kominfo-20-2016:26",
+       "permen-kominfo-20-2016:20",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:16",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:10",
+       "uu-11-2008:26"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:26": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 13.049900000623893,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-008",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-11-2008:35",
+       "uu-11-2008:29",
+       "uu-11-2008:30",
+       "uu-11-2008:27",
+       "pp-71-2019:1",
+       "uu-11-2008:7",
+       "uu-11-2008:26",
+       "pp-71-2019:17"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:32": 2,
+       "uu-11-2008:48": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 14.452100000198698,
+      "ndcg@10": 1.0,
+      "query_id": "q-009",
+      "ranking": [
+       "permen-kominfo-20-2016:17",
+       "permen-kominfo-20-2016:20",
+       "uu-27-2022:17",
+       "uu-11-2008:17",
+       "pp-71-2019:20",
+       "permen-kominfo-20-2016:1",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:7",
+       "permen-kominfo-20-2016:19",
+       "permen-kominfo-20-2016:36"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 13.110400002915412,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-010",
+      "ranking": [
+       "uu-27-2022:67",
+       "uu-27-2022:68",
+       "uu-27-2022:66",
+       "uu-27-2022:60",
+       "uu-11-2008:52",
+       "uu-27-2022:59",
+       "uu-27-2022:69",
+       "uu-27-2022:47",
+       "uu-27-2022:38",
+       "uu-27-2022:53"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-27-2022:65": 1,
+       "uu-27-2022:67": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 10.532899999816436,
+      "ndcg@10": 0.46485366983361687,
+      "query_id": "q-011",
+      "ranking": [
+       "pp-71-2019:20",
+       "uu-27-2022:55",
+       "uu-27-2022:1",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:2",
+       "uu-27-2022:56",
+       "permen-kominfo-20-2016:22",
+       "uu-11-2008:43",
+       "pp-71-2019:21",
+       "uu-27-2022:60"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:22": 2,
+       "pp-71-2019:21": 2,
+       "uu-27-2022:56": 2
+      },
+      "rr": 0.16666666666666666,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 12.537199996586423,
+      "ndcg@10": 0.4935456744811716,
+      "query_id": "q-014",
+      "ranking": [
+       "pp-71-2019:47",
+       "permen-kominfo-20-2016:6",
+       "uu-27-2022:22",
+       "uu-27-2022:23",
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:12",
+       "pp-71-2019:48",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:9"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:22": 1,
+       "uu-27-2022:23": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 11.351900000590831,
+      "ndcg@10": 1.0,
+      "query_id": "q-015",
+      "ranking": [
+       "permen-kominfo-20-2016:37",
+       "uu-27-2022:25",
+       "uu-27-2022:21",
+       "permen-kominfo-20-2016:9",
+       "permen-kominfo-20-2016:6",
+       "uu-27-2022:26",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:2",
+       "uu-27-2022:22",
+       "permen-kominfo-20-2016:28"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:37": 2,
+       "uu-27-2022:25": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 10.606599997117883,
+      "ndcg@10": 0.7967075809905066,
+      "query_id": "q-016",
+      "ranking": [
+       "uu-27-2022:53",
+       "uu-27-2022:54",
+       "uu-27-2022:52",
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:47",
+       "uu-27-2022:59",
+       "uu-27-2022:1",
+       "uu-27-2022:37",
+       "permen-kominfo-20-2016:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:53": 1,
+       "uu-27-2022:54": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 9.963799999241019,
+      "ndcg@10": 1.0,
+      "query_id": "q-017",
+      "ranking": [
+       "uu-27-2022:34",
+       "uu-27-2022:39",
+       "uu-27-2022:35",
+       "uu-27-2022:54",
+       "uu-27-2022:48",
+       "uu-27-2022:51",
+       "uu-27-2022:29",
+       "uu-27-2022:21",
+       "uu-27-2022:36",
+       "uu-27-2022:37"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:34": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.270599999377737,
+      "ndcg@10": 0.9180385079206221,
+      "query_id": "q-019",
+      "ranking": [
+       "permen-kominfo-20-2016:15",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:38",
+       "permen-kominfo-20-2016:5",
+       "uu-27-2022:74",
+       "permen-kominfo-20-2016:16",
+       "pp-71-2019:99",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:15": 2,
+       "permen-kominfo-20-2016:16": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.13480000194977,
+      "ndcg@10": 0.9657811358291746,
+      "query_id": "q-020",
+      "ranking": [
+       "uu-11-2008:44",
+       "uu-11-2008:5",
+       "pp-71-2019:17",
+       "uu-11-2008:43",
+       "uu-11-2008:1",
+       "pp-71-2019:59",
+       "uu-11-2008:7",
+       "uu-27-2022:64",
+       "uu-11-2008:11",
+       "uu-11-2008:6"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.6666666666666666,
+      "relevant": {
+       "uu-11-2008:44": 2,
+       "uu-11-2008:5": 2,
+       "uu-27-2022:64": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.9097999985388014,
+      "ndcg@10": 0.6131471927654584,
+      "query_id": "q-021",
+      "ranking": [
+       "pp-71-2019:20",
+       "permen-kominfo-20-2016:22",
+       "pp-71-2019:99",
+       "uu-11-2008:40",
+       "uu-27-2022:1",
+       "uu-11-2008:43",
+       "permen-kominfo-20-2016:36",
+       "pp-71-2019:9",
+       "uu-27-2022:2",
+       "pp-71-2019:21"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2,
+       "pp-71-2019:20": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.321000000956701,
+      "ndcg@10": 1.0,
+      "query_id": "q-023",
+      "ranking": [
+       "permen-kominfo-20-2016:36",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:35",
+       "uu-11-2008:27",
+       "uu-11-2008:32",
+       "permen-kominfo-20-2016:26",
+       "uu-11-2008:30",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:60"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:36": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.001500001933891,
+      "ndcg@10": 0.9180385079206221,
+      "query_id": "q-024",
+      "ranking": [
+       "pp-71-2019:46",
+       "pp-71-2019:47",
+       "uu-11-2008:9",
+       "pp-71-2019:48",
+       "uu-11-2008:6",
+       "uu-11-2008:5",
+       "uu-11-2008:18",
+       "uu-11-2008:35",
+       "permen-kominfo-20-2016:36",
+       "uu-11-2008:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "pp-71-2019:46": 2,
+       "uu-11-2008:18": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.125000000291038,
+      "ndcg@10": 0.1608062983790299,
+      "query_id": "q-025",
+      "ranking": [
+       "pp-71-2019:14",
+       "pp-71-2019:18",
+       "pp-71-2019:97",
+       "permen-kominfo-20-2016:10",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:20",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:29"
+      ],
+      "recall@10": 0.3333333333333333,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:29": 2,
+       "permen-kominfo-20-2016:30": 1,
+       "permen-kominfo-20-2016:31": 2
+      },
+      "rr": 0.1,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.642399999895133,
+      "ndcg@10": 0.3154648767857287,
+      "query_id": "q-026",
+      "ranking": [
+       "uu-27-2022:55",
+       "uu-27-2022:60",
+       "uu-27-2022:52",
+       "uu-27-2022:1",
+       "uu-27-2022:53",
+       "uu-27-2022:59",
+       "uu-27-2022:56",
+       "uu-27-2022:2",
+       "uu-27-2022:54",
+       "uu-27-2022:64"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:2": 2
+      },
+      "rr": 0.125,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.5720000020519365,
+      "ndcg@10": 0.0,
+      "query_id": "q-027",
+      "ranking": [
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:8",
+       "permen-kominfo-20-2016:10",
+       "pp-71-2019:16",
+       "uu-27-2022:46",
+       "uu-27-2022:51",
+       "permen-kominfo-20-2016:20",
+       "permen-kominfo-20-2016:6"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:22": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.050799998774892,
+      "ndcg@10": 1.0,
+      "query_id": "q-029",
+      "ranking": [
+       "uu-27-2022:17",
+       "pp-71-2019:94",
+       "uu-11-2008:43",
+       "uu-11-2008:40",
+       "pp-71-2019:90",
+       "pp-71-2019:96",
+       "pp-71-2019:56",
+       "pp-71-2019:1",
+       "pp-71-2019:102",
+       "uu-11-2008:41"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:17": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 11.038299999199808,
+      "ndcg@10": 0.2699457168692346,
+      "query_id": "q-030",
+      "ranking": [
+       "pp-71-2019:16",
+       "pp-71-2019:14",
+       "uu-11-2008:28",
+       "pp-71-2019:48",
+       "pp-71-2019:40",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:2",
+       "uu-27-2022:43",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:8"
+      ],
+      "recall@10": 0.4,
+      "recall@5": 0.2,
+      "relevant": {
+       "permen-kominfo-20-2016:20": 1,
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1,
+       "uu-27-2022:43": 2,
+       "uu-27-2022:8": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 8.979800000815885,
+      "ndcg@10": 0.0,
+      "query_id": "q-031",
+      "ranking": [
+       "uu-11-2008:30",
+       "uu-11-2008:32",
+       "uu-11-2008:27",
+       "uu-11-2008:28",
+       "uu-11-2008:23",
+       "uu-11-2008:7",
+       "uu-11-2008:25",
+       "uu-11-2008:31",
+       "uu-11-2008:35",
+       "uu-27-2022:14"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "pp-71-2019:15": 1,
+       "pp-71-2019:17": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 10.280899998178938,
+      "ndcg@10": 0.6590018048024133,
+      "query_id": "q-032",
+      "ranking": [
+       "permen-kominfo-20-2016:1",
+       "pp-71-2019:6",
+       "pp-71-2019:102",
+       "pp-71-2019:2",
+       "pp-71-2019:1",
+       "pp-71-2019:37",
+       "uu-11-2008:1",
+       "pp-71-2019:5",
+       "uu-27-2022:21",
+       "pp-71-2019:40"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:102": 1,
+       "pp-71-2019:6": 2
+      },
+      "rr": 0.5,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 10.275099997670623,
+      "ndcg@10": 0.3868528072345416,
+      "query_id": "q-033",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-11-2008:38",
+       "uu-27-2022:67",
+       "uu-11-2008:26",
+       "uu-11-2008:43",
+       "uu-11-2008:27",
+       "pp-71-2019:1",
+       "uu-11-2008:1",
+       "pp-71-2019:17"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:31": 2,
+       "uu-11-2008:47": 2
+      },
+      "rr": 0.5,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 9.651500000472879,
+      "ndcg@10": 0.3010299956639812,
+      "query_id": "q-034",
+      "ranking": [
+       "pp-71-2019:99",
+       "pp-71-2019:22",
+       "uu-11-2008:40",
+       "permen-kominfo-20-2016:28",
+       "uu-11-2008:1",
+       "uu-27-2022:32",
+       "pp-71-2019:1",
+       "permen-kominfo-20-2016:9",
+       "uu-27-2022:4",
+       "uu-27-2022:60"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:4": 2
+      },
+      "rr": 0.1111111111111111,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 9.482900000875816,
+      "ndcg@10": 0.2973091263149785,
+      "query_id": "q-036",
+      "ranking": [
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:53",
+       "uu-27-2022:54",
+       "uu-27-2022:47",
+       "uu-27-2022:59",
+       "uu-27-2022:37",
+       "uu-27-2022:52",
+       "uu-27-2022:36",
+       "uu-27-2022:38"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.25,
+      "relevant": {
+       "permen-kominfo-20-2016:35": 1,
+       "uu-27-2022:58": 2,
+       "uu-27-2022:59": 1,
+       "uu-27-2022:60": 1
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 11.715500000718748,
+      "ndcg@10": 0.5345658893354267,
+      "query_id": "q-037",
+      "ranking": [
+       "uu-27-2022:30",
+       "uu-27-2022:46",
+       "uu-27-2022:40",
+       "uu-27-2022:32",
+       "uu-27-2022:41",
+       "uu-11-2008:43",
+       "uu-27-2022:21",
+       "pp-71-2019:14",
+       "pp-71-2019:40",
+       "uu-27-2022:51"
+      ],
+      "recall@10": 0.6666666666666666,
+      "recall@5": 0.3333333333333333,
+      "relevant": {
+       "permen-kominfo-20-2016:28": 1,
+       "pp-71-2019:14": 1,
+       "uu-27-2022:46": 2
+      },
+      "rr": 0.5,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 8.56980000025942,
+      "ndcg@10": 1.0,
+      "query_id": "q-039",
+      "ranking": [
+       "uu-27-2022:10",
+       "uu-27-2022:33",
+       "uu-27-2022:34",
+       "uu-11-2008:7",
+       "uu-11-2008:30",
+       "permen-kominfo-20-2016:33",
+       "pp-71-2019:1",
+       "permen-kominfo-20-2016:21",
+       "pp-71-2019:5",
+       "pp-71-2019:17"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:10": 2
+      },
+      "rr": 1.0,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 7.176700000854908,
+      "ndcg@10": 0.5,
+      "query_id": "q-040",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-27-2022:13",
+       "uu-27-2022:55",
+       "pp-71-2019:14",
+       "uu-11-2008:30",
+       "uu-27-2022:1",
+       "permen-kominfo-20-2016:25",
+       "uu-27-2022:20",
+       "uu-11-2008:27"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:13": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "mixed_id_en"
+     }
+    ],
+    "summary": {
+     "ci": {
+      "ndcg@10": {
+       "high": 0.7809729948465294,
+       "low": 0.5452597546115009,
+       "mean": 0.6626162617651695
+      },
+      "recall@10": {
+       "high": 0.8988888888888888,
+       "low": 0.6766666666666666,
+       "mean": 0.7966666666666666
+      },
+      "recall@5": {
+       "high": 0.7527777777777778,
+       "low": 0.4777777777777778,
+       "mean": 0.615
+      },
+      "rr": {
+       "high": 0.8333333333333334,
+       "low": 0.5773148148148148,
+       "mean": 0.7056481481481481
+      }
+     },
+     "latency_p50_ms": 9.963799999241019,
+     "latency_p95_ms": 20.15419999952428,
+     "n": 30,
+     "ndcg@10": 0.6626162617651695,
+     "recall@10": 0.7966666666666666,
+     "recall@5": 0.615,
+     "rr": 0.7056481481481481
+    }
+   },
+   "hybrid-k60-d20/article": {
+    "queries": [
+     {
+      "latency_ms": 22.644799999397947,
+      "ndcg@10": 1.0,
+      "query_id": "q-003",
+      "ranking": [
+       "uu-11-2008:11",
+       "uu-11-2008:12",
+       "pp-71-2019:59",
+       "pp-71-2019:60",
+       "pp-71-2019:62",
+       "uu-11-2008:1",
+       "pp-71-2019:61",
+       "pp-71-2019:1",
+       "pp-71-2019:57",
+       "pp-71-2019:65"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:11": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 10.298900000634603,
+      "ndcg@10": 0.6309297535714574,
+      "query_id": "q-004",
+      "ranking": [
+       "uu-27-2022:11",
+       "uu-11-2008:26",
+       "permen-kominfo-20-2016:24",
+       "permen-kominfo-20-2016:26",
+       "uu-27-2022:14",
+       "uu-27-2022:28",
+       "uu-11-2008:23",
+       "uu-27-2022:1",
+       "uu-27-2022:26",
+       "uu-27-2022:38"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:26": 2
+      },
+      "rr": 0.5,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 8.017099997232435,
+      "ndcg@10": 1.0,
+      "query_id": "q-006",
+      "ranking": [
+       "pp-71-2019:15",
+       "pp-71-2019:16",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:7",
+       "permen-kominfo-20-2016:16",
+       "pp-71-2019:18",
+       "uu-27-2022:38",
+       "permen-kominfo-20-2016:19",
+       "pp-71-2019:5",
+       "uu-11-2008:53"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 7.104699998308206,
+      "ndcg@10": 1.0,
+      "query_id": "q-007",
+      "ranking": [
+       "permen-kominfo-20-2016:26",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:16",
+       "uu-27-2022:28",
+       "permen-kominfo-20-2016:20",
+       "uu-27-2022:31",
+       "uu-27-2022:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:26": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 8.378999998967629,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-008",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-11-2008:35",
+       "uu-11-2008:29",
+       "pp-71-2019:1",
+       "pp-71-2019:17",
+       "uu-11-2008:30",
+       "uu-27-2022:65",
+       "permen-kominfo-20-2016:26",
+       "uu-11-2008:33"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:32": 2,
+       "uu-11-2008:48": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 6.965000000491273,
+      "ndcg@10": 1.0,
+      "query_id": "q-009",
+      "ranking": [
+       "permen-kominfo-20-2016:17",
+       "permen-kominfo-20-2016:20",
+       "uu-27-2022:17",
+       "pp-71-2019:1",
+       "uu-11-2008:17",
+       "pp-71-2019:100",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:14",
+       "permen-kominfo-20-2016:39",
+       "pp-71-2019:20"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 7.167899999330984,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-010",
+      "ranking": [
+       "uu-27-2022:67",
+       "uu-27-2022:68",
+       "uu-27-2022:66",
+       "uu-27-2022:60",
+       "uu-27-2022:59",
+       "uu-27-2022:47",
+       "uu-27-2022:55",
+       "uu-27-2022:69",
+       "uu-27-2022:70",
+       "uu-11-2008:52"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-27-2022:65": 1,
+       "uu-27-2022:67": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 6.229800001165131,
+      "ndcg@10": 0.47162765245672045,
+      "query_id": "q-011",
+      "ranking": [
+       "pp-71-2019:20",
+       "uu-27-2022:55",
+       "uu-27-2022:1",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:2",
+       "uu-27-2022:56",
+       "permen-kominfo-20-2016:22",
+       "pp-71-2019:21",
+       "uu-27-2022:60",
+       "pp-71-2019:17"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:22": 2,
+       "pp-71-2019:21": 2,
+       "uu-27-2022:56": 2
+      },
+      "rr": 0.16666666666666666,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.970599999680417,
+      "ndcg@10": 0.4935456744811716,
+      "query_id": "q-014",
+      "ranking": [
+       "pp-71-2019:47",
+       "permen-kominfo-20-2016:6",
+       "uu-27-2022:22",
+       "uu-27-2022:23",
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:14",
+       "pp-71-2019:48",
+       "permen-kominfo-20-2016:12",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:9"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:22": 1,
+       "uu-27-2022:23": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.481699998606928,
+      "ndcg@10": 1.0,
+      "query_id": "q-015",
+      "ranking": [
+       "permen-kominfo-20-2016:37",
+       "uu-27-2022:25",
+       "uu-27-2022:21",
+       "permen-kominfo-20-2016:6",
+       "permen-kominfo-20-2016:9",
+       "uu-27-2022:22",
+       "pp-71-2019:14",
+       "pp-71-2019:16",
+       "uu-11-2008:52",
+       "permen-kominfo-20-2016:28"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:37": 2,
+       "uu-27-2022:25": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.649999999353895,
+      "ndcg@10": 0.7967075809905066,
+      "query_id": "q-016",
+      "ranking": [
+       "uu-27-2022:53",
+       "uu-27-2022:54",
+       "uu-27-2022:52",
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:47",
+       "uu-27-2022:59",
+       "uu-27-2022:1",
+       "uu-27-2022:36",
+       "uu-27-2022:58"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:53": 1,
+       "uu-27-2022:54": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.5704000007826835,
+      "ndcg@10": 1.0,
+      "query_id": "q-017",
+      "ranking": [
+       "uu-27-2022:34",
+       "uu-27-2022:39",
+       "uu-27-2022:35",
+       "uu-27-2022:54",
+       "uu-27-2022:48",
+       "uu-27-2022:29",
+       "uu-27-2022:37",
+       "uu-27-2022:53",
+       "permen-kominfo-20-2016:23",
+       "uu-27-2022:51"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:34": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.464300000719959,
+      "ndcg@10": 0.9091417955461737,
+      "query_id": "q-019",
+      "ranking": [
+       "permen-kominfo-20-2016:15",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:38",
+       "permen-kominfo-20-2016:5",
+       "uu-27-2022:74",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:16",
+       "pp-71-2019:99"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:15": 2,
+       "permen-kominfo-20-2016:16": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.093299998814473,
+      "ndcg@10": 0.9608857006116033,
+      "query_id": "q-020",
+      "ranking": [
+       "uu-11-2008:44",
+       "uu-11-2008:5",
+       "pp-71-2019:17",
+       "uu-11-2008:43",
+       "uu-11-2008:1",
+       "pp-71-2019:59",
+       "uu-11-2008:7",
+       "pp-71-2019:97",
+       "uu-11-2008:35",
+       "uu-27-2022:64"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.6666666666666666,
+      "relevant": {
+       "uu-11-2008:44": 2,
+       "uu-11-2008:5": 2,
+       "uu-27-2022:64": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.531699997140095,
+      "ndcg@10": 0.6131471927654584,
+      "query_id": "q-021",
+      "ranking": [
+       "pp-71-2019:20",
+       "permen-kominfo-20-2016:22",
+       "pp-71-2019:99",
+       "uu-11-2008:40",
+       "uu-27-2022:1",
+       "uu-11-2008:43",
+       "permen-kominfo-20-2016:36",
+       "uu-27-2022:2",
+       "pp-71-2019:21",
+       "pp-71-2019:9"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2,
+       "pp-71-2019:20": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.3284999998577405,
+      "ndcg@10": 1.0,
+      "query_id": "q-023",
+      "ranking": [
+       "permen-kominfo-20-2016:36",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:35",
+       "uu-11-2008:27",
+       "uu-11-2008:32",
+       "permen-kominfo-20-2016:26",
+       "uu-11-2008:30",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:28",
+       "uu-11-2008:35"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:36": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.136799998785136,
+      "ndcg@10": 0.9180385079206221,
+      "query_id": "q-024",
+      "ranking": [
+       "pp-71-2019:46",
+       "pp-71-2019:47",
+       "uu-11-2008:9",
+       "pp-71-2019:48",
+       "uu-11-2008:6",
+       "uu-11-2008:5",
+       "uu-11-2008:18",
+       "uu-11-2008:35",
+       "permen-kominfo-20-2016:36",
+       "uu-11-2008:27"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "pp-71-2019:46": 2,
+       "uu-11-2008:18": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.753999998385552,
+      "ndcg@10": 0.0,
+      "query_id": "q-025",
+      "ranking": [
+       "pp-71-2019:14",
+       "pp-71-2019:18",
+       "pp-71-2019:97",
+       "permen-kominfo-20-2016:10",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:20",
+       "uu-27-2022:58",
+       "pp-71-2019:16"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:29": 2,
+       "permen-kominfo-20-2016:30": 1,
+       "permen-kominfo-20-2016:31": 2
+      },
+      "rr": 0.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.555300002422882,
+      "ndcg@10": 0.2890648263178878,
+      "query_id": "q-026",
+      "ranking": [
+       "uu-27-2022:55",
+       "uu-27-2022:60",
+       "uu-27-2022:52",
+       "uu-27-2022:1",
+       "uu-27-2022:53",
+       "uu-27-2022:59",
+       "uu-27-2022:56",
+       "uu-27-2022:54",
+       "uu-27-2022:64",
+       "uu-27-2022:2"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:2": 2
+      },
+      "rr": 0.1,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.600999997317558,
+      "ndcg@10": 0.0,
+      "query_id": "q-027",
+      "ranking": [
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:8",
+       "permen-kominfo-20-2016:10",
+       "pp-71-2019:16",
+       "uu-27-2022:46",
+       "permen-kominfo-20-2016:29",
+       "uu-27-2022:49",
+       "uu-27-2022:45"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:22": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 5.987700002151541,
+      "ndcg@10": 1.0,
+      "query_id": "q-029",
+      "ranking": [
+       "uu-27-2022:17",
+       "pp-71-2019:94",
+       "uu-11-2008:43",
+       "uu-11-2008:40",
+       "pp-71-2019:90",
+       "pp-71-2019:96",
+       "pp-71-2019:102",
+       "uu-11-2008:41",
+       "pp-71-2019:103",
+       "uu-27-2022:3"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:17": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.234600001334911,
+      "ndcg@10": 0.3269878225815121,
+      "query_id": "q-030",
+      "ranking": [
+       "pp-71-2019:16",
+       "pp-71-2019:14",
+       "uu-11-2008:28",
+       "pp-71-2019:48",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:43",
+       "permen-kominfo-20-2016:25",
+       "pp-71-2019:40",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:20"
+      ],
+      "recall@10": 0.6,
+      "recall@5": 0.2,
+      "relevant": {
+       "permen-kominfo-20-2016:20": 1,
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1,
+       "uu-27-2022:43": 2,
+       "uu-27-2022:8": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 7.6938999991398305,
+      "ndcg@10": 0.0,
+      "query_id": "q-031",
+      "ranking": [
+       "uu-11-2008:30",
+       "uu-11-2008:32",
+       "uu-11-2008:27",
+       "uu-11-2008:28",
+       "uu-11-2008:23",
+       "uu-11-2008:25",
+       "uu-27-2022:14",
+       "permen-kominfo-20-2016:5",
+       "uu-11-2008:26",
+       "uu-11-2008:5"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "pp-71-2019:15": 1,
+       "pp-71-2019:17": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 7.446999999956461,
+      "ndcg@10": 0.6590018048024133,
+      "query_id": "q-032",
+      "ranking": [
+       "permen-kominfo-20-2016:1",
+       "pp-71-2019:6",
+       "pp-71-2019:102",
+       "pp-71-2019:2",
+       "pp-71-2019:37",
+       "uu-11-2008:1",
+       "pp-71-2019:62",
+       "pp-71-2019:1",
+       "pp-71-2019:84",
+       "uu-11-2008:43"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:102": 1,
+       "pp-71-2019:6": 2
+      },
+      "rr": 0.5,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 7.820400001946837,
+      "ndcg@10": 0.3868528072345416,
+      "query_id": "q-033",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-11-2008:26",
+       "uu-11-2008:38",
+       "uu-27-2022:67",
+       "uu-11-2008:43",
+       "uu-11-2008:46",
+       "pp-71-2019:17",
+       "uu-11-2008:48",
+       "uu-11-2008:45"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:31": 2,
+       "uu-11-2008:47": 2
+      },
+      "rr": 0.5,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.391200000507524,
+      "ndcg@10": 0.0,
+      "query_id": "q-034",
+      "ranking": [
+       "pp-71-2019:99",
+       "pp-71-2019:22",
+       "uu-11-2008:40",
+       "permen-kominfo-20-2016:28",
+       "uu-11-2008:1",
+       "pp-71-2019:1",
+       "pp-71-2019:61",
+       "pp-71-2019:64",
+       "uu-27-2022:32",
+       "uu-27-2022:10"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:4": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.224199998541735,
+      "ndcg@10": 0.30402729049505856,
+      "query_id": "q-036",
+      "ranking": [
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:53",
+       "uu-27-2022:54",
+       "uu-27-2022:59",
+       "uu-27-2022:47",
+       "uu-27-2022:37",
+       "uu-27-2022:52",
+       "uu-27-2022:36",
+       "uu-27-2022:38"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:35": 1,
+       "uu-27-2022:58": 2,
+       "uu-27-2022:59": 1,
+       "uu-27-2022:60": 1
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 9.504999998171115,
+      "ndcg@10": 0.5310715473875232,
+      "query_id": "q-037",
+      "ranking": [
+       "uu-27-2022:30",
+       "uu-27-2022:46",
+       "uu-27-2022:40",
+       "uu-27-2022:32",
+       "uu-27-2022:41",
+       "uu-11-2008:43",
+       "uu-27-2022:21",
+       "permen-kominfo-20-2016:31",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:29"
+      ],
+      "recall@10": 0.6666666666666666,
+      "recall@5": 0.3333333333333333,
+      "relevant": {
+       "permen-kominfo-20-2016:28": 1,
+       "pp-71-2019:14": 1,
+       "uu-27-2022:46": 2
+      },
+      "rr": 0.5,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 9.466499999689404,
+      "ndcg@10": 1.0,
+      "query_id": "q-039",
+      "ranking": [
+       "uu-27-2022:10",
+       "uu-27-2022:33",
+       "uu-27-2022:34",
+       "uu-11-2008:7",
+       "permen-kominfo-20-2016:33",
+       "uu-11-2008:30",
+       "uu-11-2008:34",
+       "pp-71-2019:83",
+       "uu-11-2008:38",
+       "permen-kominfo-20-2016:32"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:10": 2
+      },
+      "rr": 1.0,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 8.988199999294011,
+      "ndcg@10": 0.5,
+      "query_id": "q-040",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-27-2022:13",
+       "uu-11-2008:7",
+       "uu-27-2022:55",
+       "uu-27-2022:27",
+       "pp-71-2019:14",
+       "uu-11-2008:23",
+       "permen-kominfo-20-2016:8",
+       "uu-11-2008:30"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:13": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "mixed_id_en"
+     }
+    ],
+    "summary": {
+     "ci": {
+      "ndcg@10": {
+       "high": 0.7731910853578008,
+       "low": 0.5198085271429522,
+       "mean": 0.648116642380659
+      },
+      "recall@10": {
+       "high": 0.8788888888888888,
+       "low": 0.6255555555555555,
+       "mean": 0.7588888888888888
+      },
+      "recall@5": {
+       "high": 0.7555555555555555,
+       "low": 0.4888888888888889,
+       "mean": 0.6233333333333333
+      },
+      "rr": {
+       "high": 0.8311111111111111,
+       "low": 0.5666666666666667,
+       "mean": 0.6977777777777778
+      }
+     },
+     "latency_p50_ms": 7.3284999998577405,
+     "latency_p95_ms": 10.298900000634603,
+     "n": 30,
+     "ndcg@10": 0.648116642380659,
+     "recall@10": 0.7588888888888888,
+     "recall@5": 0.6233333333333333,
+     "rr": 0.6977777777777778
+    }
+   },
+   "hybrid-k60-d50/article": {
+    "queries": [
+     {
+      "latency_ms": 19.715700000233483,
+      "ndcg@10": 1.0,
+      "query_id": "q-003",
+      "ranking": [
+       "uu-11-2008:11",
+       "uu-11-2008:12",
+       "pp-71-2019:59",
+       "pp-71-2019:60",
+       "pp-71-2019:62",
+       "uu-11-2008:1",
+       "pp-71-2019:61",
+       "pp-71-2019:1",
+       "pp-71-2019:57",
+       "pp-71-2019:65"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:11": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 17.242799996893154,
+      "ndcg@10": 0.6309297535714574,
+      "query_id": "q-004",
+      "ranking": [
+       "uu-27-2022:11",
+       "uu-11-2008:26",
+       "permen-kominfo-20-2016:24",
+       "permen-kominfo-20-2016:26",
+       "uu-27-2022:14",
+       "uu-11-2008:29",
+       "uu-27-2022:26",
+       "uu-27-2022:34",
+       "permen-kominfo-20-2016:11",
+       "uu-27-2022:28"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-11-2008:26": 2
+      },
+      "rr": 0.5,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 20.071400002052542,
+      "ndcg@10": 1.0,
+      "query_id": "q-006",
+      "ranking": [
+       "pp-71-2019:15",
+       "pp-71-2019:16",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:7",
+       "permen-kominfo-20-2016:16",
+       "pp-71-2019:18",
+       "permen-kominfo-20-2016:19",
+       "pp-71-2019:14",
+       "uu-27-2022:8",
+       "pp-71-2019:98"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 20.03359999798704,
+      "ndcg@10": 1.0,
+      "query_id": "q-007",
+      "ranking": [
+       "permen-kominfo-20-2016:26",
+       "permen-kominfo-20-2016:20",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:16",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:10",
+       "uu-11-2008:26"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:26": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 18.396399998891866,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-008",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-11-2008:35",
+       "uu-11-2008:29",
+       "uu-11-2008:30",
+       "uu-11-2008:27",
+       "pp-71-2019:1",
+       "uu-11-2008:7",
+       "uu-11-2008:26",
+       "pp-71-2019:17"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:32": 2,
+       "uu-11-2008:48": 1
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 14.804300000832882,
+      "ndcg@10": 1.0,
+      "query_id": "q-009",
+      "ranking": [
+       "permen-kominfo-20-2016:17",
+       "permen-kominfo-20-2016:20",
+       "uu-27-2022:17",
+       "uu-11-2008:17",
+       "permen-kominfo-20-2016:7",
+       "pp-71-2019:20",
+       "pp-71-2019:17",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:19",
+       "permen-kominfo-20-2016:36"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 11.967900001764065,
+      "ndcg@10": 0.8262346571285599,
+      "query_id": "q-010",
+      "ranking": [
+       "uu-27-2022:67",
+       "uu-27-2022:68",
+       "uu-27-2022:66",
+       "uu-27-2022:60",
+       "uu-11-2008:52",
+       "uu-27-2022:59",
+       "uu-27-2022:47",
+       "uu-27-2022:38",
+       "uu-27-2022:69",
+       "uu-27-2022:53"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-27-2022:65": 1,
+       "uu-27-2022:67": 2
+      },
+      "rr": 1.0,
+      "type": "exact_ref"
+     },
+     {
+      "latency_ms": 8.474700000078883,
+      "ndcg@10": 0.47162765245672045,
+      "query_id": "q-011",
+      "ranking": [
+       "pp-71-2019:20",
+       "uu-27-2022:55",
+       "uu-27-2022:1",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:2",
+       "uu-27-2022:56",
+       "permen-kominfo-20-2016:22",
+       "pp-71-2019:21",
+       "uu-11-2008:43",
+       "uu-27-2022:60"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:22": 2,
+       "pp-71-2019:21": 2,
+       "uu-27-2022:56": 2
+      },
+      "rr": 0.16666666666666666,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 9.394099997734884,
+      "ndcg@10": 0.4935456744811716,
+      "query_id": "q-014",
+      "ranking": [
+       "pp-71-2019:47",
+       "permen-kominfo-20-2016:6",
+       "uu-27-2022:22",
+       "uu-27-2022:23",
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:14",
+       "pp-71-2019:48",
+       "permen-kominfo-20-2016:12",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:9"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:22": 1,
+       "uu-27-2022:23": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.893500002159271,
+      "ndcg@10": 1.0,
+      "query_id": "q-015",
+      "ranking": [
+       "permen-kominfo-20-2016:37",
+       "uu-27-2022:25",
+       "uu-27-2022:21",
+       "permen-kominfo-20-2016:6",
+       "permen-kominfo-20-2016:9",
+       "uu-27-2022:26",
+       "permen-kominfo-20-2016:2",
+       "uu-27-2022:22",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:28"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:37": 2,
+       "uu-27-2022:25": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 9.272400002373615,
+      "ndcg@10": 0.7967075809905066,
+      "query_id": "q-016",
+      "ranking": [
+       "uu-27-2022:53",
+       "uu-27-2022:54",
+       "uu-27-2022:52",
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:47",
+       "uu-27-2022:59",
+       "uu-27-2022:1",
+       "uu-27-2022:37",
+       "permen-kominfo-20-2016:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:53": 1,
+       "uu-27-2022:54": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 10.489600001164945,
+      "ndcg@10": 1.0,
+      "query_id": "q-017",
+      "ranking": [
+       "uu-27-2022:34",
+       "uu-27-2022:39",
+       "uu-27-2022:35",
+       "uu-27-2022:54",
+       "uu-27-2022:48",
+       "uu-27-2022:29",
+       "uu-27-2022:51",
+       "uu-27-2022:21",
+       "uu-27-2022:37",
+       "uu-27-2022:36"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:34": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 9.653299999627052,
+      "ndcg@10": 0.91311732856428,
+      "query_id": "q-019",
+      "ranking": [
+       "permen-kominfo-20-2016:15",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:38",
+       "permen-kominfo-20-2016:5",
+       "uu-27-2022:74",
+       "pp-71-2019:99",
+       "permen-kominfo-20-2016:16",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:15": 2,
+       "permen-kominfo-20-2016:16": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.619200001499848,
+      "ndcg@10": 0.9072836011519267,
+      "query_id": "q-020",
+      "ranking": [
+       "uu-11-2008:44",
+       "uu-11-2008:5",
+       "pp-71-2019:17",
+       "uu-11-2008:43",
+       "uu-11-2008:1",
+       "pp-71-2019:59",
+       "uu-11-2008:7",
+       "uu-11-2008:11",
+       "pp-71-2019:97",
+       "uu-11-2008:35"
+      ],
+      "recall@10": 0.6666666666666666,
+      "recall@5": 0.6666666666666666,
+      "relevant": {
+       "uu-11-2008:44": 2,
+       "uu-11-2008:5": 2,
+       "uu-27-2022:64": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.005999999819323,
+      "ndcg@10": 0.6131471927654584,
+      "query_id": "q-021",
+      "ranking": [
+       "pp-71-2019:20",
+       "permen-kominfo-20-2016:22",
+       "pp-71-2019:99",
+       "uu-11-2008:40",
+       "uu-27-2022:1",
+       "uu-11-2008:43",
+       "permen-kominfo-20-2016:36",
+       "pp-71-2019:9",
+       "uu-27-2022:2",
+       "pp-71-2019:21"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:17": 2,
+       "pp-71-2019:20": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.299999997689156,
+      "ndcg@10": 1.0,
+      "query_id": "q-023",
+      "ranking": [
+       "permen-kominfo-20-2016:36",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:35",
+       "uu-11-2008:27",
+       "uu-11-2008:32",
+       "permen-kominfo-20-2016:26",
+       "uu-11-2008:30",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:28",
+       "uu-27-2022:60"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "permen-kominfo-20-2016:36": 2
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 5.876100000023143,
+      "ndcg@10": 0.9180385079206221,
+      "query_id": "q-024",
+      "ranking": [
+       "pp-71-2019:46",
+       "pp-71-2019:47",
+       "uu-11-2008:9",
+       "pp-71-2019:48",
+       "uu-11-2008:6",
+       "uu-11-2008:5",
+       "uu-11-2008:18",
+       "uu-11-2008:35",
+       "permen-kominfo-20-2016:36",
+       "uu-11-2008:1"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.5,
+      "relevant": {
+       "pp-71-2019:46": 2,
+       "uu-11-2008:18": 1
+      },
+      "rr": 1.0,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 8.179100001143524,
+      "ndcg@10": 0.1608062983790299,
+      "query_id": "q-025",
+      "ranking": [
+       "pp-71-2019:14",
+       "pp-71-2019:18",
+       "pp-71-2019:97",
+       "permen-kominfo-20-2016:10",
+       "permen-kominfo-20-2016:28",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:1",
+       "permen-kominfo-20-2016:20",
+       "permen-kominfo-20-2016:25",
+       "permen-kominfo-20-2016:29"
+      ],
+      "recall@10": 0.3333333333333333,
+      "recall@5": 0.0,
+      "relevant": {
+       "permen-kominfo-20-2016:29": 2,
+       "permen-kominfo-20-2016:30": 1,
+       "permen-kominfo-20-2016:31": 2
+      },
+      "rr": 0.1,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 7.130800000595627,
+      "ndcg@10": 0.3010299956639812,
+      "query_id": "q-026",
+      "ranking": [
+       "uu-27-2022:55",
+       "uu-27-2022:60",
+       "uu-27-2022:52",
+       "uu-27-2022:1",
+       "uu-27-2022:53",
+       "uu-27-2022:59",
+       "uu-27-2022:56",
+       "uu-27-2022:54",
+       "uu-27-2022:2",
+       "uu-27-2022:64"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:2": 2
+      },
+      "rr": 0.1111111111111111,
+      "type": "paraphrase"
+     },
+     {
+      "latency_ms": 6.456999999500113,
+      "ndcg@10": 0.0,
+      "query_id": "q-027",
+      "ranking": [
+       "permen-kominfo-20-2016:28",
+       "pp-71-2019:14",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:8",
+       "permen-kominfo-20-2016:10",
+       "pp-71-2019:16",
+       "uu-27-2022:46",
+       "uu-27-2022:51",
+       "permen-kominfo-20-2016:6",
+       "permen-kominfo-20-2016:20"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:22": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 5.487200000061421,
+      "ndcg@10": 1.0,
+      "query_id": "q-029",
+      "ranking": [
+       "uu-27-2022:17",
+       "pp-71-2019:94",
+       "uu-11-2008:43",
+       "uu-11-2008:40",
+       "pp-71-2019:90",
+       "pp-71-2019:96",
+       "pp-71-2019:56",
+       "pp-71-2019:1",
+       "pp-71-2019:102",
+       "uu-11-2008:41"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:17": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.487700000434415,
+      "ndcg@10": 0.27738025234861685,
+      "query_id": "q-030",
+      "ranking": [
+       "pp-71-2019:16",
+       "pp-71-2019:14",
+       "uu-11-2008:28",
+       "pp-71-2019:48",
+       "pp-71-2019:40",
+       "permen-kominfo-20-2016:1",
+       "uu-27-2022:43",
+       "permen-kominfo-20-2016:2",
+       "permen-kominfo-20-2016:8",
+       "uu-27-2022:30"
+      ],
+      "recall@10": 0.4,
+      "recall@5": 0.2,
+      "relevant": {
+       "permen-kominfo-20-2016:20": 1,
+       "pp-71-2019:15": 2,
+       "pp-71-2019:16": 1,
+       "uu-27-2022:43": 2,
+       "uu-27-2022:8": 2
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.207599999470403,
+      "ndcg@10": 0.0,
+      "query_id": "q-031",
+      "ranking": [
+       "uu-11-2008:30",
+       "uu-11-2008:32",
+       "uu-11-2008:27",
+       "uu-11-2008:28",
+       "uu-11-2008:23",
+       "uu-11-2008:25",
+       "uu-11-2008:7",
+       "uu-11-2008:35",
+       "uu-11-2008:31",
+       "uu-27-2022:14"
+      ],
+      "recall@10": 0.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "pp-71-2019:15": 1,
+       "pp-71-2019:17": 2
+      },
+      "rr": 0.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.526199998916127,
+      "ndcg@10": 0.6590018048024133,
+      "query_id": "q-032",
+      "ranking": [
+       "permen-kominfo-20-2016:1",
+       "pp-71-2019:6",
+       "pp-71-2019:102",
+       "pp-71-2019:2",
+       "pp-71-2019:1",
+       "pp-71-2019:37",
+       "uu-11-2008:1",
+       "pp-71-2019:5",
+       "pp-71-2019:62",
+       "pp-71-2019:48"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "pp-71-2019:102": 1,
+       "pp-71-2019:6": 2
+      },
+      "rr": 0.5,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 7.088100002874853,
+      "ndcg@10": 0.3868528072345416,
+      "query_id": "q-033",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-11-2008:26",
+       "pp-71-2019:1",
+       "uu-11-2008:27",
+       "uu-11-2008:1",
+       "uu-11-2008:38",
+       "uu-27-2022:67",
+       "uu-11-2008:43",
+       "pp-71-2019:17"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "uu-11-2008:31": 2,
+       "uu-11-2008:47": 2
+      },
+      "rr": 0.5,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.040899999788962,
+      "ndcg@10": 0.3010299956639812,
+      "query_id": "q-034",
+      "ranking": [
+       "pp-71-2019:99",
+       "pp-71-2019:22",
+       "uu-11-2008:40",
+       "permen-kominfo-20-2016:28",
+       "uu-11-2008:1",
+       "pp-71-2019:1",
+       "uu-27-2022:32",
+       "permen-kominfo-20-2016:9",
+       "uu-27-2022:4",
+       "uu-27-2022:60"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 0.0,
+      "relevant": {
+       "uu-27-2022:4": 2
+      },
+      "rr": 0.1111111111111111,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 6.020199998602038,
+      "ndcg@10": 0.30402729049505856,
+      "query_id": "q-036",
+      "ranking": [
+       "uu-27-2022:60",
+       "uu-27-2022:49",
+       "uu-27-2022:53",
+       "uu-27-2022:54",
+       "uu-27-2022:59",
+       "uu-27-2022:47",
+       "uu-27-2022:37",
+       "uu-27-2022:52",
+       "uu-27-2022:36",
+       "uu-27-2022:38"
+      ],
+      "recall@10": 0.5,
+      "recall@5": 0.5,
+      "relevant": {
+       "permen-kominfo-20-2016:35": 1,
+       "uu-27-2022:58": 2,
+       "uu-27-2022:59": 1,
+       "uu-27-2022:60": 1
+      },
+      "rr": 1.0,
+      "type": "terminology"
+     },
+     {
+      "latency_ms": 5.98339999851305,
+      "ndcg@10": 0.5310715473875232,
+      "query_id": "q-037",
+      "ranking": [
+       "uu-27-2022:30",
+       "uu-27-2022:46",
+       "uu-27-2022:40",
+       "uu-27-2022:32",
+       "uu-27-2022:41",
+       "uu-11-2008:43",
+       "uu-27-2022:21",
+       "uu-27-2022:51",
+       "pp-71-2019:14",
+       "pp-71-2019:40"
+      ],
+      "recall@10": 0.6666666666666666,
+      "recall@5": 0.3333333333333333,
+      "relevant": {
+       "permen-kominfo-20-2016:28": 1,
+       "pp-71-2019:14": 1,
+       "uu-27-2022:46": 2
+      },
+      "rr": 0.5,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 6.209500003024004,
+      "ndcg@10": 1.0,
+      "query_id": "q-039",
+      "ranking": [
+       "uu-27-2022:10",
+       "uu-27-2022:33",
+       "uu-27-2022:34",
+       "uu-11-2008:7",
+       "uu-11-2008:30",
+       "permen-kominfo-20-2016:33",
+       "permen-kominfo-20-2016:21",
+       "pp-71-2019:1",
+       "pp-71-2019:5",
+       "permen-kominfo-20-2016:23"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:10": 2
+      },
+      "rr": 1.0,
+      "type": "mixed_id_en"
+     },
+     {
+      "latency_ms": 7.426100000884617,
+      "ndcg@10": 0.5,
+      "query_id": "q-040",
+      "ranking": [
+       "uu-11-2008:32",
+       "uu-11-2008:31",
+       "uu-27-2022:13",
+       "uu-27-2022:55",
+       "pp-71-2019:14",
+       "uu-27-2022:1",
+       "uu-11-2008:30",
+       "uu-27-2022:20",
+       "uu-11-2008:27",
+       "permen-kominfo-20-2016:25"
+      ],
+      "recall@10": 1.0,
+      "recall@5": 1.0,
+      "relevant": {
+       "uu-27-2022:13": 2
+      },
+      "rr": 0.3333333333333333,
+      "type": "mixed_id_en"
+     }
+    ],
+    "summary": {
+     "ci": {
+      "ndcg@10": {
+       "high": 0.778852353524998,
+       "low": 0.5438927754148488,
+       "mean": 0.6606022199378137
+      },
+      "recall@10": {
+       "high": 0.8911111111111111,
+       "low": 0.6666666666666666,
+       "mean": 0.7855555555555556
+      },
+      "recall@5": {
+       "high": 0.7555555555555555,
+       "low": 0.4888888888888889,
+       "mean": 0.6233333333333333
+      },
+      "rr": {
+       "high": 0.8333333333333334,
+       "low": 0.575925925925926,
+       "mean": 0.7051851851851851
+      }
+     },
+     "latency_p50_ms": 7.619200001499848,
+     "latency_p95_ms": 20.03359999798704,
+     "n": 30,
+     "ndcg@10": 0.6606022199378137,
+     "recall@10": 0.7855555555555556,
+     "recall@5": 0.6233333333333333,
+     "rr": 0.7051851851851851
+    }
+   }
+  }
+ },
+ "run_id": "20261023T073543Z-a07f39f",
+ "strategy_comparisons": {
+  "dev": {}
+ },
+ "strategy_reference": "article",
+ "timestamp": "2026-10-23T07:35:43.073400+00:00"
+}
