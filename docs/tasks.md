@@ -32,14 +32,13 @@ Links: Assumptions, Risks
 - Acceptance: at least 3 documents with clean extractable article structure, or a decision to switch topic recorded in `docs/decisions.md`
 - Output: feasibility notes: ADR-009 table and `scratch/` reports (local, not committed)
 
-### [ ] T-02 Repository and spec docs (Day 1, 0.75h)
+### [x] T-02 Repository and spec docs (Day 1, 0.75h)
 Links: BR5, NFR4, NFR9
-- [ ] Create public repo `indoreg-rag-eval`
-- [ ] Add requirements.md, timeline.md, tasks.md under `docs/`
-- [ ] README stub with problem statement and the "not legal advice" note
-- [ ] `.gitignore`, license, pre-commit with ruff and a secret scanner
-- Acceptance: repo is public, docs committed, pre-commit runs
-- Status: repo exists with docs, license, pre-commit; it is PRIVATE as of 23 Oct 2026 (Aldi), so "public" is not met. T-02 stays open until Aldi makes it public.
+- [x] Create public repo `indoreg-rag-eval`
+- [x] Add requirements.md, timeline.md, tasks.md under `docs/` (plus design.md and decisions.md)
+- [x] README stub with problem statement and the "not legal advice" note
+- [x] `.gitignore`, license (MIT), pre-commit with ruff and a secret scanner (gitleaks)
+- Acceptance: repo is public, docs committed, pre-commit runs (public confirmed 23 Oct 2026 via the GitHub API: visibility public, license MIT, default branch main)
 - Output: initial commit
 
 ### [x] T-03 Source collection and manifest (Day 2, 1h)
