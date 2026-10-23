@@ -139,7 +139,7 @@ Contains: run ID, git SHA, timestamp, config snapshot, dataset version, per-quer
 Labels reference (doc_id, article). A retrieved chunk is mapped to article units through the span table: article chunks map directly, fixed chunks map to every article whose span they overlap. Metrics are computed over deduplicated article units, keeping the best rank per unit. This keeps the chunking ablation fair, because labels do not change when chunking changes. This supersedes the "chunk or article" wording in FR-EVAL-1 and T-10 (recorded as ADR-002).
 
 ### 4.2 Local index, no vector database
-Corpus is small (expected under 10k chunks). Dense search is brute-force cosine over a numpy matrix. Embeddings are cached under `data/cache/` keyed by `sha256(model_name + chunk file hash)`. Revisit only if a measured latency problem appears.
+Corpus is small (expected under 10k chunks). Dense search is brute-force cosine over a numpy matrix. Embeddings are cached under `data/cache/embeddings/` keyed by `sha256(model, revision, ONNX file, prefixes, max length, chunk ids and texts)`. Models run with onnxruntime, not torch (ADR-016). Revisit only if a measured latency problem appears.
 
 ### 4.3 Single Retriever interface
 ```python
@@ -184,7 +184,7 @@ Response:
 {
   "request_id": "...",
   "query": "...",
-  "retriever": "hybrid-bge-m3",
+  "retriever": "hybrid",
   "results": [
     {
       "rank": 1,
@@ -218,7 +218,7 @@ chunking:
   fixed: {size_chars: 1200, overlap_chars: 200}
 retrievers:
   bm25-basic: {type: bm25, preprocess: basic}
-  dense-model-a: {type: dense, model: TBD, revision: TBD}
+  dense-e5-small: {type: dense, model: intfloat/multilingual-e5-small, revision: <sha>, onnx_file: onnx/<file>.onnx}
   hybrid: {type: hybrid, members: [bm25-basic, dense-model-a], rrf_k: 60, depth: 50}
 serving: {retriever: hybrid, strategy: article}
 ```
@@ -243,7 +243,7 @@ Workflow `ci.yml`: install with cached pip, ruff, type check, pytest, fixture ev
 
 ## 9. Deployment
 
-Dockerfile with slim base, non-root user, pinned lockfile install. PROVISIONAL: whether the model and prebuilt index are baked into the image or mounted as a volume. Decide at T-26 based on image size and cold-start latency, record in decisions.md.
+Dockerfile with slim base, non-root user, pinned lockfile install. Public deployment is a Vercel Hobby Python function (ADR-016, T-35); the Docker image is for local reproduction. PROVISIONAL: whether the model and prebuilt index are baked into the image or mounted as a volume. Decide at T-26 based on image size and cold-start latency, record in decisions.md.
 
 ## 10. Observability
 
@@ -261,4 +261,4 @@ JSON logs with request ID, query length (not query text by default), retriever n
 - DI1: Extractor choice and article regex robustness (T-04). PROVISIONAL until tested on real documents.
 - DI2: Handling of ayat-level relevance. Default is article-level only, revisit if error analysis shows many near-misses within long articles.
 - DI3: Whether the Indonesian-aware BM25 variant uses a stemmer library, and which. Decide at T-13.
-- DI4: Embedding models and revisions (OD2 in requirements.md).
+- DI4: Embedding models and revisions (OD2 in requirements.md). Model 1 decided in ADR-006.
