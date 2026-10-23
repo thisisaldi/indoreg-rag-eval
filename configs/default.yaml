@@ -59,6 +59,9 @@ eval:
   retrievers: [bm25-basic, bm25-id, bm25-id-title, dense-e5-small, dense-e5-base]
   strategies: [article, fixed]
   baseline: bm25-basic/article
+  # Extra paired comparisons [run, reference], e.g. to pick the dense model.
+  pairs:
+    - [dense-e5-base/article, dense-e5-small/article]
   bootstrap: {iterations: 1000, seed: 42, confidence: 0.95}
   splits: [dev, test]
   recall_ks: [5, 10]
