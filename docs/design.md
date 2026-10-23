@@ -156,7 +156,7 @@ class Retriever(Protocol):
 Retrievers are constructed from config by `registry.py`. Adding a model or variant is a config change.
 
 ### 4.4 Hybrid fusion
-Reciprocal rank fusion: `score(d) = sum over retrievers r of 1 / (k + rank_r(d))`, default `k = 60`. Candidate depth per retriever is a config value (default 50). Tune `k` and depth on dev only.
+Reciprocal rank fusion: `score(d) = sum over retrievers r of 1 / (k + rank_r(d))`, default `k = 60`. Candidate depth per retriever is a config value (default 50). Tune `k` and depth on dev only. T-18 grid (k 10/30/60 x depth 20/50, dev only) found no setting better than k 60 / depth 50 with a CI excluding 0, so the default is used.
 
 ### 4.5 Metrics
 - Recall@k: fraction of relevant article units found in top k.

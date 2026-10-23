@@ -165,11 +165,14 @@ Links: FR-RET-3
 - Acceptance: model comparison table with latency per model: `reports/results/20261023T073208Z-cfff220.md` (rows, latency, index size, cold embedding time, and the paired `dense-e5-base/article vs dense-e5-small/article` table)
 - Dev reading: no established difference between the two models or between either model and `bm25-basic/article` (all CIs include 0). e5-small is the hybrid member (ADR-006). Model 3 skipped: BGE-M3 does not fit this machine's memory (ADR-016).
 
-### [ ] T-18 Hybrid retrieval with RRF (Day 8, 0.75h)
+### [x] T-18 Hybrid retrieval with RRF (Day 8, 0.75h)
 Links: FR-RET-4
-- [ ] Reciprocal rank fusion over BM25 and best dense model
-- [ ] Tune the single constant on dev only
-- Acceptance: hybrid evaluated on dev and test, tuning decisions logged
+- [x] Reciprocal rank fusion over BM25 and best dense model (`retrieval/hybrid.py`; members `bm25-id-title`, the BM25 variant with the best dev nDCG@10, and `dense-e5-small`, ADR-006)
+- [x] Tune the single constant on dev only (grid `rrf_k` 10/30/60 x `depth` 20/50 with `configs/tune-hybrid.yaml`, which runs the dev split only: `reports/results/20261023T073543Z-a07f39f`)
+- Tuning log: against the design default k 60 / depth 50, no grid point differs on dev nDCG@10 with a CI excluding 0 (largest: k10-d20 +0.009 [-0.03, +0.05]; k30-d20 -0.013 [-0.04, +0.00]). Default kept; the test split was not read during tuning.
+- Acceptance: hybrid evaluated on dev and test, tuning decisions logged: `reports/results/20261023T073624Z-a0d608d.md`
+- Dev reading: `hybrid/article` beats `bm25-basic/article` on recall@10 (+0.102 [+0.01, +0.20]), MRR (+0.124 [+0.02, +0.25]) and nDCG@10 (+0.103 [+0.02, +0.20], 13/7/10), and beats `dense-e5-small/article` on recall@10, MRR and nDCG@10 (+0.114 [+0.02, +0.21]). Against its BM25 member `bm25-id-title/article` the gain is not established (nDCG@10 +0.065 [-0.01, +0.14], 15/4/11). Hybrid p50 latency on dev is 12.09 ms vs 0.50 ms for bm25-id-title. Labels are LLM-checked, not human-verified (ADR-015).
+- Open for Aldi (serving choice, ADR-016): ADR-016 serves BM25 unless hybrid beats BM25 with a CI excluding 0. Hybrid clears that bar against the baseline `bm25-basic` but not against the best BM25 variant `bm25-id-title`. Decide which comparison counts before T-24/T-35; `search.retriever` is unchanged (`bm25-basic`).
 
 ---
 
@@ -293,3 +296,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-20: per-retriever paired fixed-vs-article comparison in the runner (1 test), rerun on clean commit 0cb8d5c (metrics identical to the a20cbfe file, whose commit is no longer in history; that file is superseded by 20261023T065417Z-0cb8d5c), write-up in `reports/chunking_ablation.md`. | None. | T-16 dense retrieval: ask Aldi about sentence-transformers and torch first. |
 | 23 Oct 2026 | T-16: torch blocked by Application Control and too big for Vercel Hobby, so dense runs on onnxruntime (ADR-016, approved by Aldi); model 1 multilingual-e5-small int8 ONNX (ADR-006). Results `reports/results/20261023T072143Z-28cc2a8`. Added T-35 (Vercel deploy). | Portfolio origin for CORS needed by T-35. BGE-M3 does not fit this machine's memory. | T-17 second model. |
 | 23 Oct 2026 | T-17: `dense-e5-base` added by config; `eval.pairs` for direct paired comparisons (1 test). Clean cold run `reports/results/20261023T073208Z-cfff220` (embedding from scratch reproduced the cached metrics exactly). e5-small chosen for hybrid on dev (ADR-006). | None. | T-18 hybrid RRF, k and depth tuned on dev only. |
+| 23 Oct 2026 | T-18: hybrid RRF retriever (6 tests); dev-only grid `reports/results/20261023T073543Z-a07f39f` kept k 60 / depth 50; full run `reports/results/20261023T073624Z-a0d608d`. Hybrid beats bm25-basic and dense-e5-small on dev, not established against bm25-id-title. | Serving choice (bm25-id-title vs hybrid) needs Aldi, see T-18. | T-20 is done; next T-21 error analysis. |
