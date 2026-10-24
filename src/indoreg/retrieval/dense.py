@@ -75,11 +75,19 @@ class OnnxEncoder:
         self._batch_size = batch_size
 
     def encode(self, texts: list[str]) -> Matrix:
+        # Batches of similar length pad less: about 3x faster on CPU. Rows are
+        # put back in input order.
+        order = sorted(range(len(texts)), key=lambda i: len(texts[i]))
         out = [
-            self._encode_batch(texts[i : i + self._batch_size])
+            self._encode_batch([texts[j] for j in order[i : i + self._batch_size]])
             for i in range(0, len(texts), self._batch_size)
         ]
-        return np.concatenate(out) if out else np.zeros((0, 0), dtype=np.float32)
+        if not out:
+            return np.zeros((0, 0), dtype=np.float32)
+        sorted_rows = np.concatenate(out)
+        rows = np.empty_like(sorted_rows)
+        rows[order] = sorted_rows
+        return rows
 
     def _encode_batch(self, texts: list[str]) -> Matrix:
         enc = self._tokenizer.encode_batch(texts)
@@ -113,8 +121,10 @@ class DenseRetriever:
         cache_dir: Path,
         query_prefix: str = "",
         passage_prefix: str = "",
+        shard_size: int = 20_000,
     ) -> None:
         self.name = name
+        self.shard_size = shard_size  # chunks per resumable part file
         self.encoder = encoder
         self.model_key = model_key  # model name + revision + prefixes
         self.cache_dir = cache_dir
@@ -138,11 +148,7 @@ class DenseRetriever:
         if hit:
             self._matrix = np.load(path)
         else:
-            self._matrix = self.encoder.encode(
-                [self.passage_prefix + c.text for c in chunks]
-            )
-            path.parent.mkdir(parents=True, exist_ok=True)
-            np.save(path, self._matrix)
+            self._matrix = self._encode_resumable(chunks, path)
         if self._matrix.shape[0] != len(chunks):
             raise ValueError(
                 f"{path}: {self._matrix.shape[0]} vectors for {len(chunks)} chunks"
@@ -157,12 +163,52 @@ class DenseRetriever:
             "dense index built", extra={"fields": {"name": self.name, **self.stats}}
         )
 
+    def _encode_resumable(self, chunks: Sequence[Chunk], path: Path) -> Matrix:
+        """Encode in parts saved next to the cache file, so a long run (700k+
+        chunks take hours on CPU) resumes after a crash. Parts are deleted once
+        the full matrix is saved."""
+        parts_dir = path.with_suffix(".parts")
+        parts_dir.mkdir(parents=True, exist_ok=True)
+        parts: list[Matrix] = []
+        for n, i in enumerate(range(0, len(chunks), self.shard_size)):
+            part = parts_dir / f"{n:05d}.npy"
+            if part.is_file():
+                parts.append(np.load(part))
+                continue
+            batch = chunks[i : i + self.shard_size]
+            m = self.encoder.encode([self.passage_prefix + c.text for c in batch])
+            np.save(part, m)
+            parts.append(m)
+            log.info(
+                "dense part encoded",
+                extra={
+                    "fields": {
+                        "name": self.name,
+                        "done": i + len(batch),
+                        "total": len(chunks),
+                    }
+                },
+            )
+        matrix = np.concatenate(parts) if parts else np.zeros((0, 0), dtype=np.float32)
+        np.save(path, matrix)
+        for part in sorted(parts_dir.glob("*.npy")):
+            part.unlink()
+        parts_dir.rmdir()
+        return matrix
+
     def search(self, query: str, top_k: int) -> list[RetrievalResult]:
-        if not self._ids:
+        if not self._ids or top_k <= 0:
             return []
         q = self.encoder.encode([self.query_prefix + query])[0]
         scores = self._matrix @ q
-        ranked = sorted(zip(scores.tolist(), self._ids, strict=True), key=_order)
+        # Partial sort: keep every chunk scoring at least the k-th best, so the
+        # chunk_id tie-break below sees all ties at the cut.
+        k = min(top_k, len(self._ids))
+        kth = np.partition(scores, len(scores) - k)[len(scores) - k]
+        cand = np.flatnonzero(scores >= kth)
+        ranked = sorted(
+            ((float(scores[i]), self._ids[i]) for i in cand.tolist()), key=_order
+        )
         return [
             RetrievalResult(chunk_id=cid, score=s, rank=r)
             for r, (s, cid) in enumerate(ranked[:top_k], 1)

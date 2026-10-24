@@ -113,3 +113,25 @@ def test_baked_model_file_is_used_without_the_hub(
     assert model_file("org/m", "abc", "onnx/model.onnx", tmp_path) == baked
     with pytest.raises(AssertionError, match="must not call the hub"):
         model_file("org/m", "other-rev", "onnx/model.onnx", tmp_path)
+
+
+def test_resumes_from_saved_parts_and_cleans_up(tmp_path: Path) -> None:
+    enc = BagOfWords()
+    r = DenseRetriever("d", enc, "m", tmp_path, shard_size=2)
+    path = r.cache_path(CHUNKS)
+    parts = path.with_suffix(".parts")
+    parts.mkdir(parents=True)
+    np.save(parts / "00000.npy", BagOfWords().encode([c.text for c in CHUNKS[:2]]))
+    r.build(CHUNKS)
+    assert enc.calls == [[c.text for c in CHUNKS[2:]]]  # only the missing part
+    assert path.is_file() and not parts.exists()
+    full = DenseRetriever("d", BagOfWords(), "x", tmp_path)
+    full.build(CHUNKS)
+    assert np.array_equal(r._matrix, full._matrix)
+
+
+def test_top_k_cut_keeps_ties_ordered_by_chunk_id(tmp_path: Path) -> None:
+    r = DenseRetriever("d", BagOfWords(), "m", tmp_path)
+    r.build(CHUNKS)
+    assert [x.chunk_id for x in r.search("transfer data", 1)] == ["1"]
+    assert [x.chunk_id for x in r.search("transfer data", 2)] == ["1", "2"]
