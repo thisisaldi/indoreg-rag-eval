@@ -1,0 +1,188 @@
+
+dev q-004 ndcg 0.63->0.43 relevant={'uu-11-2008:26': 2}
+   ext-uu-19-2016:26                jac=0.47 vs uu-11-2008:26 similar
+   * uu-11-2008:26
+
+dev q-007 ndcg 0.63->0.00 relevant={'permen-kominfo-20-2016:26': 2}
+   ext-uu-19-2016:26                jac=0.15 vs permen-kominfo-20-2016:26 
+   ext-pp-46-2012:26                jac=0.07 vs permen-kominfo-20-2016:26 
+   ext-uu-38-2009:26                jac=0.03 vs permen-kominfo-20-2016:26 
+   ext-perpres-122-2012:26          jac=0.03 vs permen-kominfo-20-2016:26 
+   ext-pp-12-1988:27                jac=0.03 vs permen-kominfo-20-2016:26 
+
+dev q-009 ndcg 1.00->0.00 relevant={'permen-kominfo-20-2016:17': 2}
+   ext-perpres-13-2010:17           jac=0.17 vs permen-kominfo-20-2016:17 
+   ext-pp-58-2016:20                jac=0.14 vs permen-kominfo-20-2016:17 
+   ext-perpres-20-2016:17           jac=0.09 vs permen-kominfo-20-2016:17 
+   ext-uu-14-2008:18                jac=0.11 vs permen-kominfo-20-2016:17 
+   ext-keppres-101-2001:31          jac=0.05 vs permen-kominfo-20-2016:17 
+   ext-pp-23-2016:17                jac=0.13 vs permen-kominfo-20-2016:17 
+   ext-uu-17-2016:18                jac=0.03 vs permen-kominfo-20-2016:17 
+   ext-uu-20-2016:80                jac=0.11 vs permen-kominfo-20-2016:17 
+   ext-pp-20-2016:10                jac=0.12 vs permen-kominfo-20-2016:17 
+   ext-uu-38-2004:20                jac=0.06 vs permen-kominfo-20-2016:17 
+
+dev q-011 ndcg 0.55->0.20 relevant={'permen-kominfo-20-2016:22': 2, 'pp-71-2019:21': 2, 'uu-27-2022:56': 2}
+   ext-keppres-56-1998:1            jac=0.16 vs uu-27-2022:56 
+   ext-uu-39-2004:26                jac=0.17 vs uu-27-2022:56 
+   ext-pp-46-2012:76                jac=0.15 vs permen-kominfo-20-2016:22 
+   * uu-27-2022:56
+   ext-pp-54-1945:14                jac=0.15 vs permen-kominfo-20-2016:22 
+   ext-uu-44-2008:26                jac=0.12 vs uu-27-2022:56 
+   ext-pp-77-1991:3                 jac=0.12 vs permen-kominfo-20-2016:22 
+   ext-pp-tahun-1995-e95d74:6       jac=0.16 vs pp-71-2019:21 
+   ext-uu-21-2014:57                jac=0.16 vs uu-27-2022:56 
+
+dev q-015 ndcg 1.00->0.88 relevant={'permen-kominfo-20-2016:37': 2, 'uu-27-2022:25': 2}
+   * permen-kominfo-20-2016:37
+   ext-pp-9-2012:5                  jac=0.33 vs uu-27-2022:25 similar
+   * uu-27-2022:25
+   ext-pp-9-2012:18                 jac=0.23 vs uu-27-2022:25 
+   ext-pp-9-2012:17                 jac=0.12 vs uu-27-2022:25 
+   ext-pp-9-2012:2                  jac=0.16 vs permen-kominfo-20-2016:37 
+   ext-pp-9-2012:16                 jac=0.18 vs uu-27-2022:25 
+   ext-pp-54-2007:15                jac=0.16 vs uu-27-2022:25 
+
+dev q-017 ndcg 1.00->0.50 relevant={'uu-27-2022:34': 2}
+   * uu-27-2022:34
+
+dev q-020 ndcg 0.97->0.83 relevant={'uu-11-2008:44': 2, 'uu-11-2008:5': 2, 'uu-27-2022:64': 1}
+   * uu-11-2008:44
+   ext-uu-3-2011:76                 jac=0.47 vs uu-11-2008:5 similar
+   * uu-11-2008:5
+   ext-uu-28-2014:111               jac=0.36 vs uu-11-2008:44 similar
+   ext-uu-2-2007:14                 jac=0.36 vs uu-11-2008:5 similar
+   ext-uu-8-2010:73                 jac=0.28 vs uu-11-2008:44 
+   ext-perpres-27-2009:20           jac=0.38 vs uu-27-2022:64 similar
+   ext-uu-18-2013:37                jac=0.38 vs uu-11-2008:44 similar
+   ext-uu-7-2011:31                 jac=0.19 vs uu-27-2022:64 
+   ext-uu-1-2002:27                 jac=0.19 vs uu-27-2022:64 
+
+dev q-021 ndcg 0.61->0.00 relevant={'permen-kominfo-20-2016:17': 2, 'pp-71-2019:20': 2}
+   ext-perpres-25-2008:44           jac=0.11 vs pp-71-2019:20 
+   ext-pp-22-2010:9                 jac=0.19 vs permen-kominfo-20-2016:17 
+   ext-perpres-25-2008:39           jac=0.12 vs pp-71-2019:20 
+   ext-pp-23-2015:8                 jac=0.07 vs pp-71-2019:20 
+   ext-pp-31-2013:44                jac=0.27 vs pp-71-2019:20 
+   ext-pp-11-2017:226               jac=0.16 vs permen-kominfo-20-2016:17 
+   ext-perpres-10-2008:1            jac=0.11 vs pp-71-2019:20 
+   ext-pp-46-2012:76                jac=0.10 vs permen-kominfo-20-2016:17 
+   ext-perpres-35-2012:1            jac=0.12 vs pp-71-2019:20 
+   ext-pp-9-2014:39                 jac=0.12 vs permen-kominfo-20-2016:17 
+
+dev q-024 ndcg 0.91->0.83 relevant={'pp-71-2019:46': 2, 'uu-11-2008:18': 1}
+   * pp-71-2019:46
+   ext-pp-82-2012:48                jac=0.26 vs pp-71-2019:46 
+   ext-pp-tahun-1994-76bc1d:2       jac=0.12 vs pp-71-2019:46 
+   ext-pp-tahun-1994-76bc1d:3       jac=0.12 vs pp-71-2019:46 
+   ext-pp-49-2014:127               jac=0.10 vs uu-11-2008:18 
+   ext-pp-82-2012:49                jac=0.14 vs pp-71-2019:46 
+   ext-pp-tahun-1994-76bc1d:30      jac=0.09 vs uu-11-2008:18 
+
+dev q-025 ndcg 0.17->0.00 relevant={'permen-kominfo-20-2016:29': 2, 'permen-kominfo-20-2016:30': 1, 'permen-kominfo-20-2016:31': 2}
+   ext-keppres-101-2001:31          jac=0.06 vs permen-kominfo-20-2016:30 
+   ext-uu-13-2011:10                jac=0.17 vs permen-kominfo-20-2016:31 
+   ext-uu-7-2014:90                 jac=0.15 vs permen-kominfo-20-2016:30 
+   ext-pp-58-2016:29                jac=0.17 vs permen-kominfo-20-2016:29 
+   ext-pp-31-2013:186               jac=0.14 vs permen-kominfo-20-2016:29 
+   ext-keppres-61-2001:7            jac=0.13 vs permen-kominfo-20-2016:31 
+   ext-pp-26-2002:12                jac=0.15 vs permen-kominfo-20-2016:31 
+
+dev q-026 ndcg 0.33->0.30 relevant={'uu-27-2022:2': 2}
+   * uu-27-2022:2
+
+dev q-030 ndcg 0.27->0.05 relevant={'permen-kominfo-20-2016:20': 1, 'pp-71-2019:15': 2, 'pp-71-2019:16': 1, 'uu-27-2022:43': 2, 'uu-27-2022:8': 2}
+   ext-uu-44-2008:27                jac=0.14 vs pp-71-2019:16 
+   ext-uu-7-2014:30                 jac=0.11 vs uu-27-2022:8 
+   ext-uu-7-2014:65                 jac=0.18 vs pp-71-2019:16 
+   ext-uu-7-2011:32                 jac=0.16 vs uu-27-2022:43 
+   * permen-kominfo-20-2016:20
+   ext-pp-82-2012:39                jac=0.11 vs pp-71-2019:16 
+   ext-perpres-50-2011:12           jac=0.17 vs pp-71-2019:16 
+
+dev q-032 ndcg 0.80->0.00 relevant={'pp-71-2019:102': 1, 'pp-71-2019:6': 2}
+   ext-keppres-101-2001:31          jac=0.05 vs pp-71-2019:6 
+   ext-perpres-54-2015:16           jac=0.14 vs pp-71-2019:6 
+   ext-perpres-24-2010:527          jac=0.14 vs pp-71-2019:6 
+   ext-uu-3-1982:11                 jac=0.16 vs pp-71-2019:6 
+   ext-pp-12-1998:11                jac=0.16 vs pp-71-2019:102 
+   ext-pp-39-2003:5                 jac=0.14 vs pp-71-2019:102 
+   ext-keppres-101-2001:33          jac=0.08 vs pp-71-2019:6 
+   ext-pp-tahun-1995-894ecf:13      jac=0.13 vs pp-71-2019:6 
+   ext-uu-3-1982:22                 jac=0.20 vs pp-71-2019:102 
+   ext-perpres-46-2013:13           jac=0.12 vs pp-71-2019:6 
+
+dev q-034 ndcg 0.32->0.00 relevant={'uu-27-2022:4': 2}
+   ext-perpres-35-2010:6            jac=0.13 vs uu-27-2022:4 
+   ext-uu-29-2004:47                jac=0.15 vs uu-27-2022:4 
+   ext-perpres-26-2009:6            jac=0.15 vs uu-27-2022:4 
+   ext-uu-29-2004:46                jac=0.15 vs uu-27-2022:4 
+   ext-uu-36-2014:70                jac=0.13 vs uu-27-2022:4 
+   ext-perpres-19-2016:39           jac=0.19 vs uu-27-2022:4 
+   ext-uu-36-2014:72                jac=0.08 vs uu-27-2022:4 
+   ext-pp-7-2011:17                 jac=0.05 vs uu-27-2022:4 
+   ext-pp-46-2014:17                jac=0.17 vs uu-27-2022:4 
+   ext-uu-36-2014:7                 jac=0.06 vs uu-27-2022:4 
+
+dev q-036 ndcg 0.29->0.22 relevant={'permen-kominfo-20-2016:35': 1, 'uu-27-2022:58': 2, 'uu-27-2022:59': 1, 'uu-27-2022:60': 1}
+   * uu-27-2022:60
+   * uu-27-2022:59
+
+dev q-040 ndcg 0.50->0.00 relevant={'uu-27-2022:13': 2}
+   ext-perpres-25-2008:39           jac=0.11 vs uu-27-2022:13 
+   ext-uu-23-2003:23                jac=0.16 vs uu-27-2022:13 
+   ext-perpres-25-2008:36           jac=0.12 vs uu-27-2022:13 
+   ext-uu-32-2004:73                jac=0.16 vs uu-27-2022:13 
+   ext-pp-tahun-1997-952637:36      jac=0.13 vs uu-27-2022:13 
+   ext-pp-2-2016:7                  jac=0.19 vs uu-27-2022:13 
+   ext-perpres-25-2008:34           jac=0.11 vs uu-27-2022:13 
+   ext-uu-tahun-1995:16             jac=0.28 vs uu-27-2022:13 
+
+test q-001 ndcg 0.50->0.00 relevant={'uu-27-2022:40': 2}
+   ext-pp-40-2013:9                 jac=0.04 vs uu-27-2022:40 
+   ext-uu-34-2004:40                jac=0.03 vs uu-27-2022:40 
+   ext-pp-45-2005:40                jac=0.02 vs uu-27-2022:40 
+   ext-uu-22-2014:40                jac=0.04 vs uu-27-2022:40 
+   ext-uu-14-1992:40                jac=0.02 vs uu-27-2022:40 
+   ext-uu-24-2012:165               jac=0.03 vs uu-27-2022:40 
+   ext-keppres-9-2004:40            jac=0.03 vs uu-27-2022:40 
+   ext-pp-4-1988:40                 jac=0.08 vs uu-27-2022:40 
+   ext-pp-40-2015:3                 jac=0.12 vs uu-27-2022:40 
+   ext-uu-19-2003:40                jac=0.07 vs uu-27-2022:40 
+
+test q-002 ndcg 1.00->0.00 relevant={'uu-27-2022:56': 2}
+   ext-perpres-10-2006:56           jac=0.07 vs uu-27-2022:56 
+   ext-uu-7-2013:18                 jac=0.14 vs uu-27-2022:56 
+   ext-pp-79-2013:56                jac=0.13 vs uu-27-2022:56 
+   ext-pp-5-2010:56                 jac=0.05 vs uu-27-2022:56 
+   ext-uu-tahun-2003-8a3551:192     jac=0.16 vs uu-27-2022:56 
+
+test q-005 ndcg 0.50->0.36 relevant={'pp-71-2019:14': 2}
+   ext-pp-17-1999:14                jac=0.03 vs pp-71-2019:14 
+   * pp-71-2019:14
+   ext-uu-4-1982:14                 jac=0.02 vs pp-71-2019:14 
+
+test q-018 ndcg 0.94->0.00 relevant={'uu-27-2022:57': 2, 'uu-27-2022:60': 1}
+   ext-pp-48-2016:11                jac=0.12 vs uu-27-2022:57 
+   ext-pp-48-2016:2                 jac=0.16 vs uu-27-2022:57 
+   ext-pp-6-0:398                   jac=0.18 vs uu-27-2022:57 
+   ext-pp-12-2017:45                jac=0.23 vs uu-27-2022:57 
+   ext-pp-12-2017:46                jac=0.19 vs uu-27-2022:57 
+   ext-pp-12-2017:38                jac=0.17 vs uu-27-2022:60 
+   ext-uu-25-2009:41                jac=0.15 vs uu-27-2022:57 
+   ext-pp-12-2017:44                jac=0.17 vs uu-27-2022:57 
+   ext-perpres-4-1945:21            jac=0.24 vs uu-27-2022:57 
+   ext-uu-23-2007:77                jac=0.17 vs uu-27-2022:57 
+
+test q-028 ndcg 0.78->0.75 relevant={'pp-71-2019:59': 2, 'pp-71-2019:60': 1, 'uu-11-2008:11': 2}
+   * pp-71-2019:60
+   * uu-11-2008:11
+   ext-pp-82-2012:53                jac=0.68 vs pp-71-2019:59 NEAR-DUP
+   * pp-71-2019:59
+   ext-pp-82-2012:58                jac=0.19 vs pp-71-2019:59 
+   ext-pp-82-2012:52                jac=0.39 vs pp-71-2019:60 similar
+   ext-pp-82-2012:55                jac=0.25 vs uu-11-2008:11 
+   ext-pp-82-2012:57                jac=0.22 vs pp-71-2019:60 
+
+queries worse: 21 ext units in their top10 by tag: {'similar': 8, 'other': 118, 'NEAR-DUP': 1}
+most frequent ext docs: [('ext-pp-82-2012', 8), ('ext-pp-9-2012', 5), ('ext-perpres-25-2008', 5), ('ext-keppres-101-2001', 4), ('ext-pp-12-2017', 4), ('ext-pp-46-2012', 3), ('ext-pp-tahun-1994-76bc1d', 3), ('ext-uu-7-2014', 3), ('ext-uu-36-2014', 3), ('ext-uu-19-2016', 2)]

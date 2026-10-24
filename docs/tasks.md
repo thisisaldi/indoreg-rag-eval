@@ -304,6 +304,15 @@ Links: BR5, BR8
 
 ---
 
+### [x] T-37 Big-corpus stress test (added 24 Oct 2026, Aldi)
+Links: ADR-020, ADR-013
+- [x] Check API sources for full text: none (Pasal.id metadata only, peraturan.go.id no API, BPK down for maintenance); Aldi approved the dump `Azzindani/ID_REG_DB_2511`
+- [x] Download the dump at a pinned revision, verify sha256, profile it (ends about 2017, mostly regional, no status or URL)
+- [x] National-level subset as a separate corpus: `src/indoreg/ingest/external.py`, `configs/full.yaml`, `make ingest-full`, test `tests/test_external.py`; 95,173 external chunks from 7,727 documents plus the 273 PDF articles
+- [x] Scale the retrievers: BM25 inverted index with compact postings (default 4-document eval rerun: all 480 query rankings identical to `20261023T074949Z-ed9dbfc`), resumable and length-sorted dense encoding, partial-sort dense search (tests in `tests/test_dense.py`)
+- [x] Rerun the eval on the big corpus and compare with the 4-document run: `reports/results/20261024T094427Z-5415577` and `.vs-ed9dbfc.md`; displaced-result check in `.displacement.txt`
+- Acceptance: results with CIs against the 4-document run, cause of the drop investigated, deployed API unchanged. Dev hybrid/article nDCG@10 -0.174 [-0.28, -0.07]; 1 of 127 displacing chunks is a near-duplicate of a labeled article. Not done: labels for dump documents, status for dump documents, serving the big corpus.
+
 ## Progress log
 
 | Date | Done | Blockers | Next |
@@ -334,3 +343,4 @@ Links: BR5, BR8
 | 23 Oct 2026 | T-35: deployed at https://indoreg-rag-eval.vercel.app (hybrid); read-only filesystem fix; remote latency `reports/results/20261023T092147Z-25c0f58-remote`. | Suggest Aldi sets the function region to sin1 (Singapore) to cut the round trip. | T-32 demo, T-33 resume bullets, T-34 audit; T-04 open. |
 | 23 Oct 2026 | Local environment: Windows Application Control started blocking Python's `_ctypes` (import ctypes fails), so `huggingface_hub` and the dense path no longer run on Aldi's laptop; the read-only model test fails locally for that reason only, all other tests pass. T-35 close-out pushed with Aldi's OK, relying on CI (Linux). | Aldi: check Windows Security protection history; local dense runs need WSL or the block lifted. | CI result for this push. |
 | 23 Oct 2026 | T-33: resume bullets and talking points; portfolio brief for the site's agent. | None. | T-32 demo (Aldi records), T-34 audit. |
+| 24 Oct 2026 | T-37: big-corpus stress test from the external dump `Azzindani/ID_REG_DB_2511` (national level, 95,446 chunks, ADR-020); BM25 inverted index; resumable dense encoding; `make ingest-full eval-full`. Results `reports/results/20261024T094427Z-5415577`: every retriever drops (dev hybrid nDCG@10 -0.174 [-0.28, -0.07]), mostly distractors rather than missing labels. | Dump ends about 2017 and has no status or source URL per document; big corpus not served (too big for Vercel Hobby). | Decide whether to label dump documents or serve the big corpus elsewhere. |

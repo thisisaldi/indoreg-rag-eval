@@ -47,6 +47,19 @@ What the paired comparisons show (difference [95% CI], per-query wins/losses/tie
 
 Latency (warm, in-process HTTP, this laptop): about 5 ms per query for BM25 and 18 ms for the hybrid at p50; cold start about 1 s for BM25 and 3 to 4 s with the model ([latency report](reports/latency.md)). Cash cost: none.
 
+### Big-corpus stress test (local only)
+
+The same 40 queries rerun on a corpus of 95,446 articles: the 4 labeled regulations plus 95,173 national-level articles (7,727 regulations, up to 2017) from the Hugging Face dump [`Azzindani/ID_REG_DB_2511`](https://huggingface.co/datasets/Azzindani/ID_REG_DB_2511) ([ADR-020](docs/decisions.md)). Numbers from [`reports/results/20261024T094427Z-5415577.md`](reports/results/20261024T094427Z-5415577.md); paired differences against the 4-document run in [`...vs-ed9dbfc.md`](reports/results/20261024T094427Z-5415577.vs-ed9dbfc.md).
+
+| retriever (dev, 30 queries) | nDCG@10 | Recall@10 | nDCG@10 change vs 4 documents |
+|---|---|---|---|
+| bm25-basic | 0.321 [0.19, 0.46] | 0.394 [0.24, 0.54] | -0.244 [-0.37, -0.14] |
+| bm25-id-title | 0.398 [0.27, 0.53] | 0.489 [0.34, 0.63] | -0.183 [-0.30, -0.08] |
+| dense-e5-small | 0.401 [0.27, 0.54] | 0.471 [0.33, 0.62] | -0.142 [-0.23, -0.06] |
+| hybrid | 0.484 [0.35, 0.63] | 0.562 [0.41, 0.71] | -0.174 [-0.28, -0.07] |
+
+Every retriever drops. Labels cover only the 4 regulations, so a relevant article elsewhere counts as a miss, but a word-overlap check of the displaced results found 1 near-duplicate of a labeled article among 127 (8 more similar): most of the drop is distractors outranking the right article. Hybrid still beats bm25-basic on dev (+0.163 [+0.07, +0.27]). Reproduce with `make ingest-full eval-full` (11 GB download, about 1 hour of CPU embedding). The served API stays on the 4 regulations.
+
 ## Architecture
 
 ```mermaid
@@ -169,13 +182,14 @@ docker run --rm -p 8000:8000 indoreg-search
 - **Explanations (Penjelasan) are not indexed** ([ADR-012](docs/decisions.md)).
 - **OCR noise.** Two of the four PDFs are page images with a text layer that contains character errors (for example "Persetqiuan" for "Persetujuan"). Article segmentation tolerates them ([ADR-010](docs/decisions.md)); retrieval sometimes does not.
 - **Models.** multilingual-e5 reads at most 512 tokens (one labeled article is longer); int8 quantization may cost some quality against the full model (not measured).
+- **Big corpus.** The external dump ends around 2017, has no status or per-document source URL (its articles are returned with status `unknown`), and its provenance and OCR quality are undocumented ([ADR-020](docs/decisions.md)).
 - **Reproduction** is verified on one Windows machine only.
 
 ## Documentation
 
 - [docs/requirements.md](docs/requirements.md): goals and requirements
 - [docs/design.md](docs/design.md): architecture, schemas, repository layout
-- [docs/decisions.md](docs/decisions.md): decision log (ADR-001 to ADR-018)
+- [docs/decisions.md](docs/decisions.md): decision log (ADR-001 to ADR-020)
 - [docs/tasks.md](docs/tasks.md): tasks, acceptance criteria and progress log
 - [reports/case_study.md](reports/case_study.md): the project write-up
 - [reports/error_analysis.md](reports/error_analysis.md), [reports/chunking_ablation.md](reports/chunking_ablation.md), [reports/latency.md](reports/latency.md)
@@ -184,4 +198,4 @@ docker run --rm -p 8000:8000 indoreg-search
 
 The code is released under the [MIT License](LICENSE). The license does not cover the regulation texts or the third-party models, which have their own terms. All sources are public official regulations; each source URL, retrieval date and status is recorded in [`data/manifest.json`](data/manifest.json).
 
-The PDFs are not redistributed. The extracted article text, `data/chunks/article.jsonl`, is committed so the API can be deployed from Git ([ADR-019](docs/decisions.md)); it contains OCR errors and is not an authoritative copy of the law. Check the official source for the text in force. The CI uses a small fictional corpus.
+The PDFs are not redistributed. The extracted article text, `data/chunks/article.jsonl`, is committed so the API can be deployed from Git ([ADR-019](docs/decisions.md)); it contains OCR errors and is not an authoritative copy of the law. Check the official source for the text in force. The CI uses a small fictional corpus. The optional big corpus uses the CC-BY-4.0 dataset [`Azzindani/ID_REG_DB_2511`](https://huggingface.co/datasets/Azzindani/ID_REG_DB_2511) by Azzindani, downloaded locally and not redistributed here.
