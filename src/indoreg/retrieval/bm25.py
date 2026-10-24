@@ -6,6 +6,7 @@ whether the document title is indexed together with the chunk text.
 
 import heapq
 import math
+from array import array
 from collections import Counter
 from collections.abc import Callable, Sequence
 
@@ -32,7 +33,8 @@ class BM25Retriever:
         self.tokenizer = tokenizer
         self.index_title = index_title
         self._ids: list[str] = []
-        self._postings: dict[str, list[tuple[int, int]]] = {}
+        # term -> flat [chunk index, tf, chunk index, tf, ...]; compact for 700k+ chunks
+        self._postings: dict[str, array[int]] = {}
         self._len: list[int] = []
         self._idf: dict[str, float] = {}
         self._avgdl = 0.0
@@ -47,12 +49,12 @@ class BM25Retriever:
             )
             self._len.append(sum(tf.values()))
             for t, f in tf.items():
-                self._postings.setdefault(t, []).append((i, f))
+                self._postings.setdefault(t, array("I")).extend((i, f))
         n = len(chunks)
         self._avgdl = sum(self._len) / n if n else 0.0
         self._idf = {
-            t: math.log(1 + (n - len(p) + 0.5) / (len(p) + 0.5))
-            for t, p in self._postings.items()
+            t: math.log(1 + (n - d + 0.5) / (d + 0.5))
+            for t, d in ((t, len(p) // 2) for t, p in self._postings.items())
         }
 
     def search(self, query: str, top_k: int) -> list[RetrievalResult]:
@@ -61,7 +63,8 @@ class BM25Retriever:
         scores: dict[int, float] = {}
         for t in terms:
             idf = self._idf[t]
-            for i, f in self._postings[t]:
+            p = self._postings[t]
+            for i, f in zip(p[::2], p[1::2], strict=True):
                 norm = self.k1 * (1 - self.b + self.b * self._len[i] / self._avgdl)
                 scores[i] = scores.get(i, 0.0) + idf * f * (self.k1 + 1) / (f + norm)
         top = heapq.nsmallest(
