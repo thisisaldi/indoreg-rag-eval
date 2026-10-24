@@ -15,3 +15,4 @@ data/models/
 reports/results/*-unverified.*
 
 data/external/
+data/chunks-full/

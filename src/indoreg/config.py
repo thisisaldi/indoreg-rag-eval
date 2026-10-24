@@ -163,6 +163,17 @@ class EvalConfig(_Strict):
         return self
 
 
+class ExternalCorpusConfig(_Strict):
+    """Article rows from a third-party SQLite dump added to the PDF corpus (ADR-020)."""
+
+    db: Path
+    sha256: str
+    source_url: str  # cited for every external chunk; the dump has no per-row URL
+    base_chunks: Path  # PDF-derived article chunks the external rows join
+    min_chars: PositiveInt  # rows shorter than this are dropped as extraction junk
+    types: dict[str, str] = Field(min_length=1)  # dump regulation_type -> doc_id prefix
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_prefix="INDOREG_", env_nested_delimiter="__", extra="forbid", frozen=True
@@ -174,6 +185,7 @@ class Settings(BaseSettings):
     retrieval: RetrievalConfig
     search: SearchConfig
     eval: EvalConfig
+    external: ExternalCorpusConfig | None = None
 
     @model_validator(mode="after")
     def _retriever_names_exist(self) -> "Settings":
