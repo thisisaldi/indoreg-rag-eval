@@ -4,6 +4,7 @@ Variants come from config: the tokenizer ("basic" or "id", see preprocess.py) an
 whether the document title is indexed together with the chunk text.
 """
 
+import heapq
 import math
 from collections import Counter
 from collections.abc import Callable, Sequence
@@ -31,42 +32,44 @@ class BM25Retriever:
         self.tokenizer = tokenizer
         self.index_title = index_title
         self._ids: list[str] = []
-        self._tf: list[Counter[str]] = []
+        self._postings: dict[str, list[tuple[int, int]]] = {}
         self._len: list[int] = []
         self._idf: dict[str, float] = {}
         self._avgdl = 0.0
 
     def build(self, chunks: Sequence[Chunk]) -> None:
         self._ids = [c.chunk_id for c in chunks]
-        self._tf = [
-            Counter(
+        self._postings = {}
+        self._len = []
+        for i, c in enumerate(chunks):
+            tf = Counter(
                 self.tokenizer(f"{c.title}\n{c.text}" if self.index_title else c.text)
             )
-            for c in chunks
-        ]
-        self._len = [sum(tf.values()) for tf in self._tf]
+            self._len.append(sum(tf.values()))
+            for t, f in tf.items():
+                self._postings.setdefault(t, []).append((i, f))
         n = len(chunks)
         self._avgdl = sum(self._len) / n if n else 0.0
-        df: Counter[str] = Counter()
-        for tf in self._tf:
-            df.update(tf.keys())
-        self._idf = {t: math.log(1 + (n - d + 0.5) / (d + 0.5)) for t, d in df.items()}
+        self._idf = {
+            t: math.log(1 + (n - len(p) + 0.5) / (len(p) + 0.5))
+            for t, p in self._postings.items()
+        }
 
     def search(self, query: str, top_k: int) -> list[RetrievalResult]:
-        # ponytail: scores every chunk per query; fine below ~10k chunks (ADR-003).
-        terms = [t for t in set(self.tokenizer(query)) if t in self._idf]
-        scored: list[tuple[float, str]] = []
-        for i, tf in enumerate(self._tf):
-            norm = self.k1 * (1 - self.b + self.b * self._len[i] / self._avgdl)
-            s = sum(
-                self._idf[t] * tf[t] * (self.k1 + 1) / (tf[t] + norm)
-                for t in terms
-                if t in tf
-            )
-            if s > 0:
-                scored.append((s, self._ids[i]))
-        scored.sort(key=lambda x: (-x[0], x[1]))  # stable tie-break on chunk_id
+        # Inverted index: only chunks sharing a query term are scored.
+        terms = sorted(t for t in set(self.tokenizer(query)) if t in self._idf)
+        scores: dict[int, float] = {}
+        for t in terms:
+            idf = self._idf[t]
+            for i, f in self._postings[t]:
+                norm = self.k1 * (1 - self.b + self.b * self._len[i] / self._avgdl)
+                scores[i] = scores.get(i, 0.0) + idf * f * (self.k1 + 1) / (f + norm)
+        top = heapq.nsmallest(
+            top_k,
+            ((s, self._ids[i]) for i, s in scores.items() if s > 0),
+            key=lambda x: (-x[0], x[1]),  # stable tie-break on chunk_id
+        )
         return [
             RetrievalResult(chunk_id=cid, score=s, rank=r)
-            for r, (s, cid) in enumerate(scored[:top_k], 1)
+            for r, (s, cid) in enumerate(top, 1)
         ]

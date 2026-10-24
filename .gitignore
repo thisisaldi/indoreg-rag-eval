@@ -13,3 +13,5 @@ data/chunks/*
 !data/chunks/article.jsonl
 data/models/
 reports/results/*-unverified.*
+
+data/external/
