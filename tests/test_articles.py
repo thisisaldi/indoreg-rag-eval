@@ -96,3 +96,19 @@ def test_section_heading_ends_the_previous_article() -> None:
     assert body["3"] == "Pasal 3\nIsi pasal tiga.\n"
     assert "BAB I lagi." in body["4"]  # not a heading: text follows on the line
     assert [s.chapter for s in seg.spans] == [None, None, "BAB II", "BAB II"]
+
+
+def test_clean_pages_fixes_ayat_digits_and_drops_garbled_letterhead() -> None:
+    pages = [
+        "REPI.JBLIK INDONESIA\n(l)\n(2lData Pribadi\nl2l Data lain\n"
+        "dimaksud pada ayat (l) huruf a\nPasal 20 ayat (21 tetap\nisi\nisi\nisi\nisi"
+    ]
+    texts = [ln.text for ln in clean_pages(pages)]
+    assert "REPI.JBLIK INDONESIA" not in texts
+    assert texts[:4] == [
+        "(1)",
+        "(2) Data Pribadi",
+        "(2) Data lain",
+        "dimaksud pada ayat (1) huruf a",
+    ]
+    assert "Pasal 20 ayat (21 tetap" in texts  # ambiguous with ayat 21: untouched

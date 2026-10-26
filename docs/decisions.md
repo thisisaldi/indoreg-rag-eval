@@ -143,6 +143,14 @@ Format: one entry per decision. Status is Accepted, Proposed, or Superseded. Add
 
 ---
 
+## ADR-021: Conservative cleanup of OCR text-layer noise
+- Status: Accepted (26 Oct 2026, Aldi chose option A; T-38)
+- Context: The text layer of the image-based PDFs (UU 27/2022, PP 71/2019) reads ayat markers as letters ("(l)", "l2l", "(2lData") and leaks the garbled page letterhead ("REPI.JBLIK INDONESIA") into articles. Some lines are missing from the layer itself and cannot be recovered without re-OCR from page images.
+- Decision: In `clean_pages`: fix only unambiguous ayat misreads ("(l)", "(I)", "l<d>l" or "(<d>l" at line start) and drop letterhead lines within edit distance 6 of "REPUBLIK INDONESIA" in the first 6 lines of a page; exact lines are dropped only when the text has 3 or more of them (running header). Lines ending in a comma (signature) and single title lines stay. Words with stray punctuation ("ker.rangan") and "(21" are left alone: guessing risks changing legal text.
+- Consequences: Processed text, spans and `data/chunks/article.jsonl` change; article counts stay 273 and no span is lost. Labels are untouched. Results in `reports/results/` and the README predate this change until the eval is rerun (dense could not run on this laptop, see the progress log). Missing lines need a re-OCR, which is a new dependency and needs approval.
+
+---
+
 ## Template
 
 ```

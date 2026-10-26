@@ -19,6 +19,12 @@ CATCH = re.compile(r"\.\s\.(?:\s\.)?\s*$")
 PAGENUM = re.compile(r"[-–—]\s*[0-9OlI]{1,3}\s*[-–—]")
 TOKEN = re.compile(r"([0-9OlITSB](?: ?[0-9OlITSB]){0,3})([A-Z])?(?![A-Za-z0-9])")
 PURE_NUM = re.compile(r"^([0-9OlITSB](?: ?[0-9OlITSB]){0,3})([A-Z])?$")
+LETTERHEAD = "REPUBLIK INDONESIA"
+LETTERHEAD_MIN_PAGES = 3
+LETTERHEAD_TOLERANCE = 6  # edit distance; OCR garbles it differently per page
+# Ayat markers misread as letters: "(l)", "(I)", "l2l Data", "(2lData".
+AYAT_ONE = re.compile(r"\([lI]\)")
+AYAT_LINE = re.compile(r"^(?:l(\d)l|\((\d)l(?=[A-Z]))\s*")
 PENJ = re.compile(r"PENJE.{0,3}ASAN")
 PDP = re.compile(r"(?i)PASAL\s*DEMI\s*PASAL")
 # Chapter heading, tolerant of "BABVIII", lowercase OCR ("BAB xII") and l/1 read
@@ -108,8 +114,24 @@ def lev(a: str, b: str) -> int:
     return prev[-1]
 
 
+def _fix_ayat(line: str) -> str:
+    line = AYAT_ONE.sub("(1)", line)
+    return AYAT_LINE.sub(lambda m: f"({m.group(1) or m.group(2)}) ", line)
+
+
+def _letterhead(line: str) -> bool:
+    """A garbled "REPUBLIK INDONESIA". Exact lines are real titles or signatures
+    (a trailing comma is the signature line) and left to the repeated-line rule."""
+    if line.upper() == LETTERHEAD or line.endswith(","):
+        return False
+    return (
+        abs(len(line) - len(LETTERHEAD)) <= LETTERHEAD_TOLERANCE
+        and lev(line.upper(), LETTERHEAD) <= LETTERHEAD_TOLERANCE
+    )
+
+
 def clean_pages(pages: list[str]) -> list[Line]:
-    """Drop stamps, page-bottom catchwords and repeated header/footer lines only."""
+    """Drop stamps, catchwords, repeated and garbled header lines; fix ayat digits."""
     plines = [[ln.strip() for ln in t.splitlines() if ln.strip()] for t in pages]
 
     def zone(i: int, k: int) -> bool:
@@ -130,13 +152,19 @@ def clean_pages(pages: list[str]) -> list[Line]:
     # A running header must repeat on at least 2 pages; on a 1-page text every
     # line would otherwise count as "repeated" and be dropped.
     repeated = {k for k, c in seen.items() if c >= 2 and c > len(pages) / 2}
+    # Scanned pages repeat the letterhead on only some pages once the OCR garbles
+    # the rest, so the usual majority rule misses it; a single title line does not.
+    if seen[LETTERHEAD] >= LETTERHEAD_MIN_PAGES:
+        repeated.add(LETTERHEAD)
     out: list[Line] = []
     for i, ls in enumerate(plines):
         for k, ln in enumerate(ls):
             noise = STAMP.match(ln) or CATCH.search(ln)
             if noise or (zone(i, k) and key(ln) in repeated):
                 continue
-            out.append(Line(i + 1, ln))
+            if k < HEADER_ZONE and _letterhead(ln):
+                continue
+            out.append(Line(i + 1, _fix_ayat(ln)))
     return out
 
 

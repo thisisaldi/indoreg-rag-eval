@@ -313,6 +313,14 @@ Links: ADR-020, ADR-013
 - [x] Rerun the eval on the big corpus and compare with the 4-document run: `reports/results/20261024T094427Z-5415577` and `.vs-ed9dbfc.md`; displaced-result check in `.displacement.txt`
 - Acceptance: results with CIs against the 4-document run, cause of the drop investigated, deployed API unchanged. Dev hybrid/article nDCG@10 -0.174 [-0.28, -0.07]; 1 of 127 displacing chunks is a near-duplicate of a labeled article. Not done: labels for dump documents, status for dump documents, serving the big corpus.
 
+### [ ] T-38 OCR text cleanup (added 26 Oct 2026, Aldi)
+Links: ADR-021, ADR-010
+- [x] Fix ayat digit misreads and drop garbled letterhead lines in `clean_pages`; test in `tests/test_articles.py`
+- [x] `make ingest`: 273 articles, same missing/unresolved counts per document; native-text documents' text unchanged
+- [x] Rerun the eval and compare with `20261023T074949Z-ed9dbfc` (the 4-document baseline): `reports/results/20261026T054352Z-f7cf5a2` and `.vs-ed9dbfc.md`. No difference is established on dev or test (all nDCG@10 CIs include 0). The run was on a dirty tree (uncommitted changes), so rerun after commit before citing it. The first attempt failed with out of memory in the dense encoder; the second worked
+- [ ] Redeploy only after the rerun (article chunks are committed for Vercel, ADR-019)
+- Not done: lines missing from the text layer (needs re-OCR, new dependency, ask first).
+
 ## Progress log
 
 | Date | Done | Blockers | Next |
@@ -344,3 +352,4 @@ Links: ADR-020, ADR-013
 | 23 Oct 2026 | Local environment: Windows Application Control started blocking Python's `_ctypes` (import ctypes fails), so `huggingface_hub` and the dense path no longer run on Aldi's laptop; the read-only model test fails locally for that reason only, all other tests pass. T-35 close-out pushed with Aldi's OK, relying on CI (Linux). | Aldi: check Windows Security protection history; local dense runs need WSL or the block lifted. | CI result for this push. |
 | 23 Oct 2026 | T-33: resume bullets and talking points; portfolio brief for the site's agent. | None. | T-32 demo (Aldi records), T-34 audit. |
 | 24 Oct 2026 | T-37: big-corpus stress test from the external dump `Azzindani/ID_REG_DB_2511` (national level, 95,446 chunks, ADR-020); BM25 inverted index; resumable dense encoding; `make ingest-full eval-full`. Results `reports/results/20261024T094427Z-5415577`: every retriever drops (dev hybrid nDCG@10 -0.174 [-0.28, -0.07]), mostly distractors rather than missing labels. | Dump ends about 2017 and has no status or source URL per document; big corpus not served (too big for Vercel Hobby). | Decide whether to label dump documents or serve the big corpus elsewhere. |
+| 26 Oct 2026 | T-38: ayat and letterhead cleanup (ADR-021), tests, ingest rerun (273 articles, counts unchanged), eval rerun `reports/results/20261026T054352Z-f7cf5a2`: no established change vs ed9dbfc. | Run was on a dirty tree. Missing lines need re-OCR. | Aldi: commit, then rerun on the clean commit; decide redeploy and re-OCR. |
